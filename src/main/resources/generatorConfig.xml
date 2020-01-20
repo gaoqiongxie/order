@@ -3,23 +3,21 @@
  PUBLIC " -//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 <generatorConfiguration>
+	<!-- 加载配置文件 -->
+ 	<properties resource="core.properties"/>
 	<classPathEntry
 		location="/D:/mvn/repository/mysql/mysql-connector-java/5.1.30/mysql-connector-java-5.1.30.jar" />
 	
 	<context id="XHTables" targetRuntime="MyBatis3">
-		<commentGenerator type="generator.MyCommentGenerator">
-			<!-- <property name="suppressDate" value="false" />
-			注释
-			<property name="suppressAllComments" value="true" />
-			是否显示数据库字段名备注
-            <property name="addRemarkComments" value="false" /> -->
-		</commentGenerator>
+		<!-- 自定义备注 -->
+		<commentGenerator type="generator.MyCommentGenerator"></commentGenerator>
 		
 		<!-- mysql数据库连接 -->
-		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
-			connectionURL="jdbc:mysql://172.16.85.126:3306/xw" userId="ydhx"
-			password="123456" />
-			
+		<jdbcConnection driverClass="${mysql.driver}"
+			connectionURL="${mysql.url}" userId="${mysql.username}"
+			password="${mysql.password}" />
+		
+		<!-- 自定义类型转换 -->	
 		<javaTypeResolver type="generator.MyJavaTypeResolver">
 		    <property name="forceBigDecimals" value="false"></property>
 		</javaTypeResolver>
@@ -46,12 +44,14 @@
 			type="XMLMAPPER">
 			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator>
+		
 		<!-- 需要生成的实体类对应的表名，多个实体类复制多份该配置即可 -->
 		<table tableName="order_detail" domainObjectName="OrderDetail"
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
-			selectByExampleQueryId="false">
+			selectByExampleQueryId="false" >
 		</table>
-
+		
+		
 	</context>
 </generatorConfiguration>
