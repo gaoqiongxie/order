@@ -46,10 +46,8 @@
 		</javaClientGenerator>
 		
 		<!-- 需要生成的实体类对应的表名，多个实体类复制多份该配置即可 -->
-		<table tableName="order_detail" domainObjectName="OrderDetail"
-			enableCountByExample="false" enableUpdateByExample="false"
-			enableDeleteByExample="false" enableSelectByExample="false"
-			selectByExampleQueryId="false" >
+		<table tableName="order_detail" domainObjectName="OrderDetail" enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" >
 		</table>
 		
 		
