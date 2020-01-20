@@ -7,12 +7,12 @@
 		location="/D:/mvn/repository/mysql/mysql-connector-java/5.1.30/mysql-connector-java-5.1.30.jar" />
 	
 	<context id="XHTables" targetRuntime="MyBatis3">
-		<commentGenerator>
-			<property name="suppressDate" value="false" />
-			<!-- 注释 -->
+		<commentGenerator type="generator.MyCommentGenerator">
+			<!-- <property name="suppressDate" value="false" />
+			注释
 			<property name="suppressAllComments" value="true" />
-			<!-- 是否显示数据库字段名备注 -->
-            <property name="addRemarkComments" value="false" />
+			是否显示数据库字段名备注
+            <property name="addRemarkComments" value="false" /> -->
 		</commentGenerator>
 		
 		<!-- mysql数据库连接 -->

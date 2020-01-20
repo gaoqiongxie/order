@@ -1675,4 +1675,1678 @@
       total_advance = #{totalAdvance,jdbcType=DECIMAL}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <resultMap id="BaseResultMap" type="com.order.entity.OrderDetail">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="erp_billdtl_id" jdbcType="INTEGER" property="erpBilldtlId" />
+    <result column="erp_id" jdbcType="INTEGER" property="erpId" />
+    <result column="order_id" jdbcType="INTEGER" property="orderId" />
+    <result column="line_number" jdbcType="INTEGER" property="lineNumber" />
+    <result column="order_no" jdbcType="VARCHAR" property="orderNo" />
+    <result column="item_type" jdbcType="INTEGER" property="itemType" />
+    <result column="item_id" jdbcType="INTEGER" property="itemId" />
+    <result column="item_no" jdbcType="VARCHAR" property="itemNo" />
+    <result column="item_name" jdbcType="VARCHAR" property="itemName" />
+    <result column="item_type_code" jdbcType="VARCHAR" property="itemTypeCode" />
+    <result column="item_type_name" jdbcType="VARCHAR" property="itemTypeName" />
+    <result column="item_model" jdbcType="VARCHAR" property="itemModel" />
+    <result column="item_brand" jdbcType="VARCHAR" property="itemBrand" />
+    <result column="item_brand_name" jdbcType="VARCHAR" property="itemBrandName" />
+    <result column="item_quantity" jdbcType="DECIMAL" property="itemQuantity" />
+    <result column="item_unit" jdbcType="INTEGER" property="itemUnit" />
+    <result column="approach_date" jdbcType="TIMESTAMP" property="approachDate" />
+    <result column="lease_term" jdbcType="DECIMAL" property="leaseTerm" />
+    <result column="lease_unit" jdbcType="TINYINT" property="leaseUnit" />
+    <result column="settle_method" jdbcType="INTEGER" property="settleMethod" />
+    <result column="deposit_unit_price" jdbcType="DECIMAL" property="depositUnitPrice" />
+    <result column="price_mode" jdbcType="TINYINT" property="priceMode" />
+    <result column="standard_rent" jdbcType="DECIMAL" property="standardRent" />
+    <result column="discount_rate" jdbcType="DECIMAL" property="discountRate" />
+    <result column="lease_term_price" jdbcType="DECIMAL" property="leaseTermPrice" />
+    <result column="step_price" jdbcType="VARCHAR" property="stepPrice" />
+    <result column="step_price_data" jdbcType="VARCHAR" property="stepPriceData" />
+    <result column="additional_clause" jdbcType="VARCHAR" property="additionalClause" />
+    <result column="additional_clause_data" jdbcType="VARCHAR" property="additionalClauseData" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="dtl_no" jdbcType="INTEGER" property="dtlNo" />
+    <result column="material_conversion_rate" jdbcType="VARCHAR" property="materialConversionRate" />
+    <result column="material_conversion_rate_data" jdbcType="VARCHAR" property="materialConversionRateData" />
+    <result column="tracking_id" jdbcType="INTEGER" property="trackingId" />
+    <result column="credit_price" jdbcType="DECIMAL" property="creditPrice" />
+    <result column="define_item" jdbcType="VARCHAR" property="defineItem" />
+    <result column="standard_rent_amount" jdbcType="DECIMAL" property="standardRentAmount" />
+    <result column="discount_rent_amount" jdbcType="DECIMAL" property="discountRentAmount" />
+    <result column="standard_amount_id" jdbcType="INTEGER" property="standardAmountId" />
+    <result column="credit_price_id" jdbcType="INTEGER" property="creditPriceId" />
+    <result column="deposit_amount" jdbcType="DECIMAL" property="depositAmount" />
+    <result column="lease_term_price_unit" jdbcType="VARCHAR" property="leaseTermPriceUnit" />
+    <result column="standard_rent_unit" jdbcType="VARCHAR" property="standardRentUnit" />
+    <result column="deposit_unit" jdbcType="VARCHAR" property="depositUnit" />
+    <result column="credit_price_unit" jdbcType="VARCHAR" property="creditPriceUnit" />
+    <result column="init_data" jdbcType="VARCHAR" property="initData" />
+    <result column="init_data_time" jdbcType="DATE" property="initDataTime" />
+    <result column="rantal_price" jdbcType="DECIMAL" property="rantalPrice" />
+    <result column="rantal_price_unit" jdbcType="VARCHAR" property="rantalPriceUnit" />
+    <result column="original_quantity" jdbcType="DECIMAL" property="originalQuantity" />
+    <result column="waring_message" jdbcType="VARCHAR" property="waringMessage" />
+    <result column="dtl_chkChange" jdbcType="BIT" property="dtlChkchange" />
+    <result column="inner_settle_standard_amount" jdbcType="DECIMAL" property="innerSettleStandardAmount" />
+    <result column="inner_settle_discount" jdbcType="DECIMAL" property="innerSettleDiscount" />
+    <result column="sign_item_id" jdbcType="INTEGER" property="signItemId" />
+    <result column="min_lease_cycle" jdbcType="DECIMAL" property="minLeaseCycle" />
+    <result column="min_rent_amount" jdbcType="DECIMAL" property="minRentAmount" />
+    <result column="source_dtlId" jdbcType="DECIMAL" property="sourceDtlid" />
+    <result column="step_price_desc" jdbcType="VARCHAR" property="stepPriceDesc" />
+    <result column="has_step_price" jdbcType="BIT" property="hasStepPrice" />
+    <result column="supplement_quantity" jdbcType="DECIMAL" property="supplementQuantity" />
+    <result column="supplement_lease_term" jdbcType="DECIMAL" property="supplementLeaseTerm" />
+    <result column="supplement_lease_price" jdbcType="DECIMAL" property="supplementLeasePrice" />
+    <result column="delivery_date_end" jdbcType="DATE" property="deliveryDateEnd" />
+    <result column="advance_price" jdbcType="DECIMAL" property="advancePrice" />
+    <result column="advance_price_unit" jdbcType="VARCHAR" property="advancePriceUnit" />
+    <result column="total_advance" jdbcType="DECIMAL" property="totalAdvance" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, erp_billdtl_id, erp_id, order_id, line_number, order_no, item_type, item_id, 
+    item_no, item_name, item_type_code, item_type_name, item_model, item_brand, item_brand_name, 
+    item_quantity, item_unit, approach_date, lease_term, lease_unit, settle_method, deposit_unit_price, 
+    price_mode, standard_rent, discount_rate, lease_term_price, step_price, step_price_data, 
+    additional_clause, additional_clause_data, remark, dtl_no, material_conversion_rate, 
+    material_conversion_rate_data, tracking_id, credit_price, define_item, standard_rent_amount, 
+    discount_rent_amount, standard_amount_id, credit_price_id, deposit_amount, lease_term_price_unit, 
+    standard_rent_unit, deposit_unit, credit_price_unit, init_data, init_data_time, rantal_price, 
+    rantal_price_unit, original_quantity, waring_message, dtl_chkChange, inner_settle_standard_amount, 
+    inner_settle_discount, sign_item_id, min_lease_cycle, min_rent_amount, source_dtlId, 
+    step_price_desc, has_step_price, supplement_quantity, supplement_lease_term, supplement_lease_price, 
+    delivery_date_end, advance_price, advance_price_unit, total_advance
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from order_detail
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from order_detail
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.order.entity.OrderDetail">
+    insert into order_detail (id, erp_billdtl_id, erp_id, 
+      order_id, line_number, order_no, 
+      item_type, item_id, item_no, 
+      item_name, item_type_code, item_type_name, 
+      item_model, item_brand, item_brand_name, 
+      item_quantity, item_unit, approach_date, 
+      lease_term, lease_unit, settle_method, 
+      deposit_unit_price, price_mode, standard_rent, 
+      discount_rate, lease_term_price, step_price, 
+      step_price_data, additional_clause, additional_clause_data, 
+      remark, dtl_no, material_conversion_rate, 
+      material_conversion_rate_data, tracking_id, 
+      credit_price, define_item, standard_rent_amount, 
+      discount_rent_amount, standard_amount_id, credit_price_id, 
+      deposit_amount, lease_term_price_unit, standard_rent_unit, 
+      deposit_unit, credit_price_unit, init_data, 
+      init_data_time, rantal_price, rantal_price_unit, 
+      original_quantity, waring_message, dtl_chkChange, 
+      inner_settle_standard_amount, inner_settle_discount, 
+      sign_item_id, min_lease_cycle, min_rent_amount, 
+      source_dtlId, step_price_desc, has_step_price, 
+      supplement_quantity, supplement_lease_term, 
+      supplement_lease_price, delivery_date_end, advance_price, 
+      advance_price_unit, total_advance)
+    values (#{id,jdbcType=INTEGER}, #{erpBilldtlId,jdbcType=INTEGER}, #{erpId,jdbcType=INTEGER}, 
+      #{orderId,jdbcType=INTEGER}, #{lineNumber,jdbcType=INTEGER}, #{orderNo,jdbcType=VARCHAR}, 
+      #{itemType,jdbcType=INTEGER}, #{itemId,jdbcType=INTEGER}, #{itemNo,jdbcType=VARCHAR}, 
+      #{itemName,jdbcType=VARCHAR}, #{itemTypeCode,jdbcType=VARCHAR}, #{itemTypeName,jdbcType=VARCHAR}, 
+      #{itemModel,jdbcType=VARCHAR}, #{itemBrand,jdbcType=VARCHAR}, #{itemBrandName,jdbcType=VARCHAR}, 
+      #{itemQuantity,jdbcType=DECIMAL}, #{itemUnit,jdbcType=INTEGER}, #{approachDate,jdbcType=TIMESTAMP}, 
+      #{leaseTerm,jdbcType=DECIMAL}, #{leaseUnit,jdbcType=TINYINT}, #{settleMethod,jdbcType=INTEGER}, 
+      #{depositUnitPrice,jdbcType=DECIMAL}, #{priceMode,jdbcType=TINYINT}, #{standardRent,jdbcType=DECIMAL}, 
+      #{discountRate,jdbcType=DECIMAL}, #{leaseTermPrice,jdbcType=DECIMAL}, #{stepPrice,jdbcType=VARCHAR}, 
+      #{stepPriceData,jdbcType=VARCHAR}, #{additionalClause,jdbcType=VARCHAR}, #{additionalClauseData,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{dtlNo,jdbcType=INTEGER}, #{materialConversionRate,jdbcType=VARCHAR}, 
+      #{materialConversionRateData,jdbcType=VARCHAR}, #{trackingId,jdbcType=INTEGER}, 
+      #{creditPrice,jdbcType=DECIMAL}, #{defineItem,jdbcType=VARCHAR}, #{standardRentAmount,jdbcType=DECIMAL}, 
+      #{discountRentAmount,jdbcType=DECIMAL}, #{standardAmountId,jdbcType=INTEGER}, #{creditPriceId,jdbcType=INTEGER}, 
+      #{depositAmount,jdbcType=DECIMAL}, #{leaseTermPriceUnit,jdbcType=VARCHAR}, #{standardRentUnit,jdbcType=VARCHAR}, 
+      #{depositUnit,jdbcType=VARCHAR}, #{creditPriceUnit,jdbcType=VARCHAR}, #{initData,jdbcType=VARCHAR}, 
+      #{initDataTime,jdbcType=DATE}, #{rantalPrice,jdbcType=DECIMAL}, #{rantalPriceUnit,jdbcType=VARCHAR}, 
+      #{originalQuantity,jdbcType=DECIMAL}, #{waringMessage,jdbcType=VARCHAR}, #{dtlChkchange,jdbcType=BIT}, 
+      #{innerSettleStandardAmount,jdbcType=DECIMAL}, #{innerSettleDiscount,jdbcType=DECIMAL}, 
+      #{signItemId,jdbcType=INTEGER}, #{minLeaseCycle,jdbcType=DECIMAL}, #{minRentAmount,jdbcType=DECIMAL}, 
+      #{sourceDtlid,jdbcType=DECIMAL}, #{stepPriceDesc,jdbcType=VARCHAR}, #{hasStepPrice,jdbcType=BIT}, 
+      #{supplementQuantity,jdbcType=DECIMAL}, #{supplementLeaseTerm,jdbcType=DECIMAL}, 
+      #{supplementLeasePrice,jdbcType=DECIMAL}, #{deliveryDateEnd,jdbcType=DATE}, #{advancePrice,jdbcType=DECIMAL}, 
+      #{advancePriceUnit,jdbcType=VARCHAR}, #{totalAdvance,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.order.entity.OrderDetail">
+    insert into order_detail
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="erpBilldtlId != null">
+        erp_billdtl_id,
+      </if>
+      <if test="erpId != null">
+        erp_id,
+      </if>
+      <if test="orderId != null">
+        order_id,
+      </if>
+      <if test="lineNumber != null">
+        line_number,
+      </if>
+      <if test="orderNo != null">
+        order_no,
+      </if>
+      <if test="itemType != null">
+        item_type,
+      </if>
+      <if test="itemId != null">
+        item_id,
+      </if>
+      <if test="itemNo != null">
+        item_no,
+      </if>
+      <if test="itemName != null">
+        item_name,
+      </if>
+      <if test="itemTypeCode != null">
+        item_type_code,
+      </if>
+      <if test="itemTypeName != null">
+        item_type_name,
+      </if>
+      <if test="itemModel != null">
+        item_model,
+      </if>
+      <if test="itemBrand != null">
+        item_brand,
+      </if>
+      <if test="itemBrandName != null">
+        item_brand_name,
+      </if>
+      <if test="itemQuantity != null">
+        item_quantity,
+      </if>
+      <if test="itemUnit != null">
+        item_unit,
+      </if>
+      <if test="approachDate != null">
+        approach_date,
+      </if>
+      <if test="leaseTerm != null">
+        lease_term,
+      </if>
+      <if test="leaseUnit != null">
+        lease_unit,
+      </if>
+      <if test="settleMethod != null">
+        settle_method,
+      </if>
+      <if test="depositUnitPrice != null">
+        deposit_unit_price,
+      </if>
+      <if test="priceMode != null">
+        price_mode,
+      </if>
+      <if test="standardRent != null">
+        standard_rent,
+      </if>
+      <if test="discountRate != null">
+        discount_rate,
+      </if>
+      <if test="leaseTermPrice != null">
+        lease_term_price,
+      </if>
+      <if test="stepPrice != null">
+        step_price,
+      </if>
+      <if test="stepPriceData != null">
+        step_price_data,
+      </if>
+      <if test="additionalClause != null">
+        additional_clause,
+      </if>
+      <if test="additionalClauseData != null">
+        additional_clause_data,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="dtlNo != null">
+        dtl_no,
+      </if>
+      <if test="materialConversionRate != null">
+        material_conversion_rate,
+      </if>
+      <if test="materialConversionRateData != null">
+        material_conversion_rate_data,
+      </if>
+      <if test="trackingId != null">
+        tracking_id,
+      </if>
+      <if test="creditPrice != null">
+        credit_price,
+      </if>
+      <if test="defineItem != null">
+        define_item,
+      </if>
+      <if test="standardRentAmount != null">
+        standard_rent_amount,
+      </if>
+      <if test="discountRentAmount != null">
+        discount_rent_amount,
+      </if>
+      <if test="standardAmountId != null">
+        standard_amount_id,
+      </if>
+      <if test="creditPriceId != null">
+        credit_price_id,
+      </if>
+      <if test="depositAmount != null">
+        deposit_amount,
+      </if>
+      <if test="leaseTermPriceUnit != null">
+        lease_term_price_unit,
+      </if>
+      <if test="standardRentUnit != null">
+        standard_rent_unit,
+      </if>
+      <if test="depositUnit != null">
+        deposit_unit,
+      </if>
+      <if test="creditPriceUnit != null">
+        credit_price_unit,
+      </if>
+      <if test="initData != null">
+        init_data,
+      </if>
+      <if test="initDataTime != null">
+        init_data_time,
+      </if>
+      <if test="rantalPrice != null">
+        rantal_price,
+      </if>
+      <if test="rantalPriceUnit != null">
+        rantal_price_unit,
+      </if>
+      <if test="originalQuantity != null">
+        original_quantity,
+      </if>
+      <if test="waringMessage != null">
+        waring_message,
+      </if>
+      <if test="dtlChkchange != null">
+        dtl_chkChange,
+      </if>
+      <if test="innerSettleStandardAmount != null">
+        inner_settle_standard_amount,
+      </if>
+      <if test="innerSettleDiscount != null">
+        inner_settle_discount,
+      </if>
+      <if test="signItemId != null">
+        sign_item_id,
+      </if>
+      <if test="minLeaseCycle != null">
+        min_lease_cycle,
+      </if>
+      <if test="minRentAmount != null">
+        min_rent_amount,
+      </if>
+      <if test="sourceDtlid != null">
+        source_dtlId,
+      </if>
+      <if test="stepPriceDesc != null">
+        step_price_desc,
+      </if>
+      <if test="hasStepPrice != null">
+        has_step_price,
+      </if>
+      <if test="supplementQuantity != null">
+        supplement_quantity,
+      </if>
+      <if test="supplementLeaseTerm != null">
+        supplement_lease_term,
+      </if>
+      <if test="supplementLeasePrice != null">
+        supplement_lease_price,
+      </if>
+      <if test="deliveryDateEnd != null">
+        delivery_date_end,
+      </if>
+      <if test="advancePrice != null">
+        advance_price,
+      </if>
+      <if test="advancePriceUnit != null">
+        advance_price_unit,
+      </if>
+      <if test="totalAdvance != null">
+        total_advance,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="erpBilldtlId != null">
+        #{erpBilldtlId,jdbcType=INTEGER},
+      </if>
+      <if test="erpId != null">
+        #{erpId,jdbcType=INTEGER},
+      </if>
+      <if test="orderId != null">
+        #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="lineNumber != null">
+        #{lineNumber,jdbcType=INTEGER},
+      </if>
+      <if test="orderNo != null">
+        #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="itemType != null">
+        #{itemType,jdbcType=INTEGER},
+      </if>
+      <if test="itemId != null">
+        #{itemId,jdbcType=INTEGER},
+      </if>
+      <if test="itemNo != null">
+        #{itemNo,jdbcType=VARCHAR},
+      </if>
+      <if test="itemName != null">
+        #{itemName,jdbcType=VARCHAR},
+      </if>
+      <if test="itemTypeCode != null">
+        #{itemTypeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="itemTypeName != null">
+        #{itemTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="itemModel != null">
+        #{itemModel,jdbcType=VARCHAR},
+      </if>
+      <if test="itemBrand != null">
+        #{itemBrand,jdbcType=VARCHAR},
+      </if>
+      <if test="itemBrandName != null">
+        #{itemBrandName,jdbcType=VARCHAR},
+      </if>
+      <if test="itemQuantity != null">
+        #{itemQuantity,jdbcType=DECIMAL},
+      </if>
+      <if test="itemUnit != null">
+        #{itemUnit,jdbcType=INTEGER},
+      </if>
+      <if test="approachDate != null">
+        #{approachDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="leaseTerm != null">
+        #{leaseTerm,jdbcType=DECIMAL},
+      </if>
+      <if test="leaseUnit != null">
+        #{leaseUnit,jdbcType=TINYINT},
+      </if>
+      <if test="settleMethod != null">
+        #{settleMethod,jdbcType=INTEGER},
+      </if>
+      <if test="depositUnitPrice != null">
+        #{depositUnitPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="priceMode != null">
+        #{priceMode,jdbcType=TINYINT},
+      </if>
+      <if test="standardRent != null">
+        #{standardRent,jdbcType=DECIMAL},
+      </if>
+      <if test="discountRate != null">
+        #{discountRate,jdbcType=DECIMAL},
+      </if>
+      <if test="leaseTermPrice != null">
+        #{leaseTermPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="stepPrice != null">
+        #{stepPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="stepPriceData != null">
+        #{stepPriceData,jdbcType=VARCHAR},
+      </if>
+      <if test="additionalClause != null">
+        #{additionalClause,jdbcType=VARCHAR},
+      </if>
+      <if test="additionalClauseData != null">
+        #{additionalClauseData,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="dtlNo != null">
+        #{dtlNo,jdbcType=INTEGER},
+      </if>
+      <if test="materialConversionRate != null">
+        #{materialConversionRate,jdbcType=VARCHAR},
+      </if>
+      <if test="materialConversionRateData != null">
+        #{materialConversionRateData,jdbcType=VARCHAR},
+      </if>
+      <if test="trackingId != null">
+        #{trackingId,jdbcType=INTEGER},
+      </if>
+      <if test="creditPrice != null">
+        #{creditPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="defineItem != null">
+        #{defineItem,jdbcType=VARCHAR},
+      </if>
+      <if test="standardRentAmount != null">
+        #{standardRentAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="discountRentAmount != null">
+        #{discountRentAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="standardAmountId != null">
+        #{standardAmountId,jdbcType=INTEGER},
+      </if>
+      <if test="creditPriceId != null">
+        #{creditPriceId,jdbcType=INTEGER},
+      </if>
+      <if test="depositAmount != null">
+        #{depositAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="leaseTermPriceUnit != null">
+        #{leaseTermPriceUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="standardRentUnit != null">
+        #{standardRentUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="depositUnit != null">
+        #{depositUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="creditPriceUnit != null">
+        #{creditPriceUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="initData != null">
+        #{initData,jdbcType=VARCHAR},
+      </if>
+      <if test="initDataTime != null">
+        #{initDataTime,jdbcType=DATE},
+      </if>
+      <if test="rantalPrice != null">
+        #{rantalPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="rantalPriceUnit != null">
+        #{rantalPriceUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="originalQuantity != null">
+        #{originalQuantity,jdbcType=DECIMAL},
+      </if>
+      <if test="waringMessage != null">
+        #{waringMessage,jdbcType=VARCHAR},
+      </if>
+      <if test="dtlChkchange != null">
+        #{dtlChkchange,jdbcType=BIT},
+      </if>
+      <if test="innerSettleStandardAmount != null">
+        #{innerSettleStandardAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="innerSettleDiscount != null">
+        #{innerSettleDiscount,jdbcType=DECIMAL},
+      </if>
+      <if test="signItemId != null">
+        #{signItemId,jdbcType=INTEGER},
+      </if>
+      <if test="minLeaseCycle != null">
+        #{minLeaseCycle,jdbcType=DECIMAL},
+      </if>
+      <if test="minRentAmount != null">
+        #{minRentAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="sourceDtlid != null">
+        #{sourceDtlid,jdbcType=DECIMAL},
+      </if>
+      <if test="stepPriceDesc != null">
+        #{stepPriceDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="hasStepPrice != null">
+        #{hasStepPrice,jdbcType=BIT},
+      </if>
+      <if test="supplementQuantity != null">
+        #{supplementQuantity,jdbcType=DECIMAL},
+      </if>
+      <if test="supplementLeaseTerm != null">
+        #{supplementLeaseTerm,jdbcType=DECIMAL},
+      </if>
+      <if test="supplementLeasePrice != null">
+        #{supplementLeasePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="deliveryDateEnd != null">
+        #{deliveryDateEnd,jdbcType=DATE},
+      </if>
+      <if test="advancePrice != null">
+        #{advancePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="advancePriceUnit != null">
+        #{advancePriceUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="totalAdvance != null">
+        #{totalAdvance,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.order.entity.OrderDetail">
+    update order_detail
+    <set>
+      <if test="erpBilldtlId != null">
+        erp_billdtl_id = #{erpBilldtlId,jdbcType=INTEGER},
+      </if>
+      <if test="erpId != null">
+        erp_id = #{erpId,jdbcType=INTEGER},
+      </if>
+      <if test="orderId != null">
+        order_id = #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="lineNumber != null">
+        line_number = #{lineNumber,jdbcType=INTEGER},
+      </if>
+      <if test="orderNo != null">
+        order_no = #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="itemType != null">
+        item_type = #{itemType,jdbcType=INTEGER},
+      </if>
+      <if test="itemId != null">
+        item_id = #{itemId,jdbcType=INTEGER},
+      </if>
+      <if test="itemNo != null">
+        item_no = #{itemNo,jdbcType=VARCHAR},
+      </if>
+      <if test="itemName != null">
+        item_name = #{itemName,jdbcType=VARCHAR},
+      </if>
+      <if test="itemTypeCode != null">
+        item_type_code = #{itemTypeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="itemTypeName != null">
+        item_type_name = #{itemTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="itemModel != null">
+        item_model = #{itemModel,jdbcType=VARCHAR},
+      </if>
+      <if test="itemBrand != null">
+        item_brand = #{itemBrand,jdbcType=VARCHAR},
+      </if>
+      <if test="itemBrandName != null">
+        item_brand_name = #{itemBrandName,jdbcType=VARCHAR},
+      </if>
+      <if test="itemQuantity != null">
+        item_quantity = #{itemQuantity,jdbcType=DECIMAL},
+      </if>
+      <if test="itemUnit != null">
+        item_unit = #{itemUnit,jdbcType=INTEGER},
+      </if>
+      <if test="approachDate != null">
+        approach_date = #{approachDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="leaseTerm != null">
+        lease_term = #{leaseTerm,jdbcType=DECIMAL},
+      </if>
+      <if test="leaseUnit != null">
+        lease_unit = #{leaseUnit,jdbcType=TINYINT},
+      </if>
+      <if test="settleMethod != null">
+        settle_method = #{settleMethod,jdbcType=INTEGER},
+      </if>
+      <if test="depositUnitPrice != null">
+        deposit_unit_price = #{depositUnitPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="priceMode != null">
+        price_mode = #{priceMode,jdbcType=TINYINT},
+      </if>
+      <if test="standardRent != null">
+        standard_rent = #{standardRent,jdbcType=DECIMAL},
+      </if>
+      <if test="discountRate != null">
+        discount_rate = #{discountRate,jdbcType=DECIMAL},
+      </if>
+      <if test="leaseTermPrice != null">
+        lease_term_price = #{leaseTermPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="stepPrice != null">
+        step_price = #{stepPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="stepPriceData != null">
+        step_price_data = #{stepPriceData,jdbcType=VARCHAR},
+      </if>
+      <if test="additionalClause != null">
+        additional_clause = #{additionalClause,jdbcType=VARCHAR},
+      </if>
+      <if test="additionalClauseData != null">
+        additional_clause_data = #{additionalClauseData,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="dtlNo != null">
+        dtl_no = #{dtlNo,jdbcType=INTEGER},
+      </if>
+      <if test="materialConversionRate != null">
+        material_conversion_rate = #{materialConversionRate,jdbcType=VARCHAR},
+      </if>
+      <if test="materialConversionRateData != null">
+        material_conversion_rate_data = #{materialConversionRateData,jdbcType=VARCHAR},
+      </if>
+      <if test="trackingId != null">
+        tracking_id = #{trackingId,jdbcType=INTEGER},
+      </if>
+      <if test="creditPrice != null">
+        credit_price = #{creditPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="defineItem != null">
+        define_item = #{defineItem,jdbcType=VARCHAR},
+      </if>
+      <if test="standardRentAmount != null">
+        standard_rent_amount = #{standardRentAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="discountRentAmount != null">
+        discount_rent_amount = #{discountRentAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="standardAmountId != null">
+        standard_amount_id = #{standardAmountId,jdbcType=INTEGER},
+      </if>
+      <if test="creditPriceId != null">
+        credit_price_id = #{creditPriceId,jdbcType=INTEGER},
+      </if>
+      <if test="depositAmount != null">
+        deposit_amount = #{depositAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="leaseTermPriceUnit != null">
+        lease_term_price_unit = #{leaseTermPriceUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="standardRentUnit != null">
+        standard_rent_unit = #{standardRentUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="depositUnit != null">
+        deposit_unit = #{depositUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="creditPriceUnit != null">
+        credit_price_unit = #{creditPriceUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="initData != null">
+        init_data = #{initData,jdbcType=VARCHAR},
+      </if>
+      <if test="initDataTime != null">
+        init_data_time = #{initDataTime,jdbcType=DATE},
+      </if>
+      <if test="rantalPrice != null">
+        rantal_price = #{rantalPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="rantalPriceUnit != null">
+        rantal_price_unit = #{rantalPriceUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="originalQuantity != null">
+        original_quantity = #{originalQuantity,jdbcType=DECIMAL},
+      </if>
+      <if test="waringMessage != null">
+        waring_message = #{waringMessage,jdbcType=VARCHAR},
+      </if>
+      <if test="dtlChkchange != null">
+        dtl_chkChange = #{dtlChkchange,jdbcType=BIT},
+      </if>
+      <if test="innerSettleStandardAmount != null">
+        inner_settle_standard_amount = #{innerSettleStandardAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="innerSettleDiscount != null">
+        inner_settle_discount = #{innerSettleDiscount,jdbcType=DECIMAL},
+      </if>
+      <if test="signItemId != null">
+        sign_item_id = #{signItemId,jdbcType=INTEGER},
+      </if>
+      <if test="minLeaseCycle != null">
+        min_lease_cycle = #{minLeaseCycle,jdbcType=DECIMAL},
+      </if>
+      <if test="minRentAmount != null">
+        min_rent_amount = #{minRentAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="sourceDtlid != null">
+        source_dtlId = #{sourceDtlid,jdbcType=DECIMAL},
+      </if>
+      <if test="stepPriceDesc != null">
+        step_price_desc = #{stepPriceDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="hasStepPrice != null">
+        has_step_price = #{hasStepPrice,jdbcType=BIT},
+      </if>
+      <if test="supplementQuantity != null">
+        supplement_quantity = #{supplementQuantity,jdbcType=DECIMAL},
+      </if>
+      <if test="supplementLeaseTerm != null">
+        supplement_lease_term = #{supplementLeaseTerm,jdbcType=DECIMAL},
+      </if>
+      <if test="supplementLeasePrice != null">
+        supplement_lease_price = #{supplementLeasePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="deliveryDateEnd != null">
+        delivery_date_end = #{deliveryDateEnd,jdbcType=DATE},
+      </if>
+      <if test="advancePrice != null">
+        advance_price = #{advancePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="advancePriceUnit != null">
+        advance_price_unit = #{advancePriceUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="totalAdvance != null">
+        total_advance = #{totalAdvance,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.order.entity.OrderDetail">
+    update order_detail
+    set erp_billdtl_id = #{erpBilldtlId,jdbcType=INTEGER},
+      erp_id = #{erpId,jdbcType=INTEGER},
+      order_id = #{orderId,jdbcType=INTEGER},
+      line_number = #{lineNumber,jdbcType=INTEGER},
+      order_no = #{orderNo,jdbcType=VARCHAR},
+      item_type = #{itemType,jdbcType=INTEGER},
+      item_id = #{itemId,jdbcType=INTEGER},
+      item_no = #{itemNo,jdbcType=VARCHAR},
+      item_name = #{itemName,jdbcType=VARCHAR},
+      item_type_code = #{itemTypeCode,jdbcType=VARCHAR},
+      item_type_name = #{itemTypeName,jdbcType=VARCHAR},
+      item_model = #{itemModel,jdbcType=VARCHAR},
+      item_brand = #{itemBrand,jdbcType=VARCHAR},
+      item_brand_name = #{itemBrandName,jdbcType=VARCHAR},
+      item_quantity = #{itemQuantity,jdbcType=DECIMAL},
+      item_unit = #{itemUnit,jdbcType=INTEGER},
+      approach_date = #{approachDate,jdbcType=TIMESTAMP},
+      lease_term = #{leaseTerm,jdbcType=DECIMAL},
+      lease_unit = #{leaseUnit,jdbcType=TINYINT},
+      settle_method = #{settleMethod,jdbcType=INTEGER},
+      deposit_unit_price = #{depositUnitPrice,jdbcType=DECIMAL},
+      price_mode = #{priceMode,jdbcType=TINYINT},
+      standard_rent = #{standardRent,jdbcType=DECIMAL},
+      discount_rate = #{discountRate,jdbcType=DECIMAL},
+      lease_term_price = #{leaseTermPrice,jdbcType=DECIMAL},
+      step_price = #{stepPrice,jdbcType=VARCHAR},
+      step_price_data = #{stepPriceData,jdbcType=VARCHAR},
+      additional_clause = #{additionalClause,jdbcType=VARCHAR},
+      additional_clause_data = #{additionalClauseData,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      dtl_no = #{dtlNo,jdbcType=INTEGER},
+      material_conversion_rate = #{materialConversionRate,jdbcType=VARCHAR},
+      material_conversion_rate_data = #{materialConversionRateData,jdbcType=VARCHAR},
+      tracking_id = #{trackingId,jdbcType=INTEGER},
+      credit_price = #{creditPrice,jdbcType=DECIMAL},
+      define_item = #{defineItem,jdbcType=VARCHAR},
+      standard_rent_amount = #{standardRentAmount,jdbcType=DECIMAL},
+      discount_rent_amount = #{discountRentAmount,jdbcType=DECIMAL},
+      standard_amount_id = #{standardAmountId,jdbcType=INTEGER},
+      credit_price_id = #{creditPriceId,jdbcType=INTEGER},
+      deposit_amount = #{depositAmount,jdbcType=DECIMAL},
+      lease_term_price_unit = #{leaseTermPriceUnit,jdbcType=VARCHAR},
+      standard_rent_unit = #{standardRentUnit,jdbcType=VARCHAR},
+      deposit_unit = #{depositUnit,jdbcType=VARCHAR},
+      credit_price_unit = #{creditPriceUnit,jdbcType=VARCHAR},
+      init_data = #{initData,jdbcType=VARCHAR},
+      init_data_time = #{initDataTime,jdbcType=DATE},
+      rantal_price = #{rantalPrice,jdbcType=DECIMAL},
+      rantal_price_unit = #{rantalPriceUnit,jdbcType=VARCHAR},
+      original_quantity = #{originalQuantity,jdbcType=DECIMAL},
+      waring_message = #{waringMessage,jdbcType=VARCHAR},
+      dtl_chkChange = #{dtlChkchange,jdbcType=BIT},
+      inner_settle_standard_amount = #{innerSettleStandardAmount,jdbcType=DECIMAL},
+      inner_settle_discount = #{innerSettleDiscount,jdbcType=DECIMAL},
+      sign_item_id = #{signItemId,jdbcType=INTEGER},
+      min_lease_cycle = #{minLeaseCycle,jdbcType=DECIMAL},
+      min_rent_amount = #{minRentAmount,jdbcType=DECIMAL},
+      source_dtlId = #{sourceDtlid,jdbcType=DECIMAL},
+      step_price_desc = #{stepPriceDesc,jdbcType=VARCHAR},
+      has_step_price = #{hasStepPrice,jdbcType=BIT},
+      supplement_quantity = #{supplementQuantity,jdbcType=DECIMAL},
+      supplement_lease_term = #{supplementLeaseTerm,jdbcType=DECIMAL},
+      supplement_lease_price = #{supplementLeasePrice,jdbcType=DECIMAL},
+      delivery_date_end = #{deliveryDateEnd,jdbcType=DATE},
+      advance_price = #{advancePrice,jdbcType=DECIMAL},
+      advance_price_unit = #{advancePriceUnit,jdbcType=VARCHAR},
+      total_advance = #{totalAdvance,jdbcType=DECIMAL}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.order.entity.OrderDetail">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="erp_billdtl_id" jdbcType="INTEGER" property="erpBilldtlId" />
+    <result column="erp_id" jdbcType="INTEGER" property="erpId" />
+    <result column="order_id" jdbcType="INTEGER" property="orderId" />
+    <result column="line_number" jdbcType="INTEGER" property="lineNumber" />
+    <result column="order_no" jdbcType="VARCHAR" property="orderNo" />
+    <result column="item_type" jdbcType="INTEGER" property="itemType" />
+    <result column="item_id" jdbcType="INTEGER" property="itemId" />
+    <result column="item_no" jdbcType="VARCHAR" property="itemNo" />
+    <result column="item_name" jdbcType="VARCHAR" property="itemName" />
+    <result column="item_type_code" jdbcType="VARCHAR" property="itemTypeCode" />
+    <result column="item_type_name" jdbcType="VARCHAR" property="itemTypeName" />
+    <result column="item_model" jdbcType="VARCHAR" property="itemModel" />
+    <result column="item_brand" jdbcType="VARCHAR" property="itemBrand" />
+    <result column="item_brand_name" jdbcType="VARCHAR" property="itemBrandName" />
+    <result column="item_quantity" jdbcType="DECIMAL" property="itemQuantity" />
+    <result column="item_unit" jdbcType="INTEGER" property="itemUnit" />
+    <result column="approach_date" jdbcType="TIMESTAMP" property="approachDate" />
+    <result column="lease_term" jdbcType="DECIMAL" property="leaseTerm" />
+    <result column="lease_unit" jdbcType="TINYINT" property="leaseUnit" />
+    <result column="settle_method" jdbcType="INTEGER" property="settleMethod" />
+    <result column="deposit_unit_price" jdbcType="DECIMAL" property="depositUnitPrice" />
+    <result column="price_mode" jdbcType="TINYINT" property="priceMode" />
+    <result column="standard_rent" jdbcType="DECIMAL" property="standardRent" />
+    <result column="discount_rate" jdbcType="DECIMAL" property="discountRate" />
+    <result column="lease_term_price" jdbcType="DECIMAL" property="leaseTermPrice" />
+    <result column="step_price" jdbcType="VARCHAR" property="stepPrice" />
+    <result column="step_price_data" jdbcType="VARCHAR" property="stepPriceData" />
+    <result column="additional_clause" jdbcType="VARCHAR" property="additionalClause" />
+    <result column="additional_clause_data" jdbcType="VARCHAR" property="additionalClauseData" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="dtl_no" jdbcType="INTEGER" property="dtlNo" />
+    <result column="material_conversion_rate" jdbcType="VARCHAR" property="materialConversionRate" />
+    <result column="material_conversion_rate_data" jdbcType="VARCHAR" property="materialConversionRateData" />
+    <result column="tracking_id" jdbcType="INTEGER" property="trackingId" />
+    <result column="credit_price" jdbcType="DECIMAL" property="creditPrice" />
+    <result column="define_item" jdbcType="VARCHAR" property="defineItem" />
+    <result column="standard_rent_amount" jdbcType="DECIMAL" property="standardRentAmount" />
+    <result column="discount_rent_amount" jdbcType="DECIMAL" property="discountRentAmount" />
+    <result column="standard_amount_id" jdbcType="INTEGER" property="standardAmountId" />
+    <result column="credit_price_id" jdbcType="INTEGER" property="creditPriceId" />
+    <result column="deposit_amount" jdbcType="DECIMAL" property="depositAmount" />
+    <result column="lease_term_price_unit" jdbcType="VARCHAR" property="leaseTermPriceUnit" />
+    <result column="standard_rent_unit" jdbcType="VARCHAR" property="standardRentUnit" />
+    <result column="deposit_unit" jdbcType="VARCHAR" property="depositUnit" />
+    <result column="credit_price_unit" jdbcType="VARCHAR" property="creditPriceUnit" />
+    <result column="init_data" jdbcType="VARCHAR" property="initData" />
+    <result column="init_data_time" jdbcType="DATE" property="initDataTime" />
+    <result column="rantal_price" jdbcType="DECIMAL" property="rantalPrice" />
+    <result column="rantal_price_unit" jdbcType="VARCHAR" property="rantalPriceUnit" />
+    <result column="original_quantity" jdbcType="DECIMAL" property="originalQuantity" />
+    <result column="waring_message" jdbcType="VARCHAR" property="waringMessage" />
+    <result column="dtl_chkChange" jdbcType="BIT" property="dtlChkchange" />
+    <result column="inner_settle_standard_amount" jdbcType="DECIMAL" property="innerSettleStandardAmount" />
+    <result column="inner_settle_discount" jdbcType="DECIMAL" property="innerSettleDiscount" />
+    <result column="sign_item_id" jdbcType="INTEGER" property="signItemId" />
+    <result column="min_lease_cycle" jdbcType="DECIMAL" property="minLeaseCycle" />
+    <result column="min_rent_amount" jdbcType="DECIMAL" property="minRentAmount" />
+    <result column="source_dtlId" jdbcType="DECIMAL" property="sourceDtlid" />
+    <result column="step_price_desc" jdbcType="VARCHAR" property="stepPriceDesc" />
+    <result column="has_step_price" jdbcType="BIT" property="hasStepPrice" />
+    <result column="supplement_quantity" jdbcType="DECIMAL" property="supplementQuantity" />
+    <result column="supplement_lease_term" jdbcType="DECIMAL" property="supplementLeaseTerm" />
+    <result column="supplement_lease_price" jdbcType="DECIMAL" property="supplementLeasePrice" />
+    <result column="delivery_date_end" jdbcType="DATE" property="deliveryDateEnd" />
+    <result column="advance_price" jdbcType="DECIMAL" property="advancePrice" />
+    <result column="advance_price_unit" jdbcType="VARCHAR" property="advancePriceUnit" />
+    <result column="total_advance" jdbcType="DECIMAL" property="totalAdvance" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, erp_billdtl_id, erp_id, order_id, line_number, order_no, item_type, item_id, 
+    item_no, item_name, item_type_code, item_type_name, item_model, item_brand, item_brand_name, 
+    item_quantity, item_unit, approach_date, lease_term, lease_unit, settle_method, deposit_unit_price, 
+    price_mode, standard_rent, discount_rate, lease_term_price, step_price, step_price_data, 
+    additional_clause, additional_clause_data, remark, dtl_no, material_conversion_rate, 
+    material_conversion_rate_data, tracking_id, credit_price, define_item, standard_rent_amount, 
+    discount_rent_amount, standard_amount_id, credit_price_id, deposit_amount, lease_term_price_unit, 
+    standard_rent_unit, deposit_unit, credit_price_unit, init_data, init_data_time, rantal_price, 
+    rantal_price_unit, original_quantity, waring_message, dtl_chkChange, inner_settle_standard_amount, 
+    inner_settle_discount, sign_item_id, min_lease_cycle, min_rent_amount, source_dtlId, 
+    step_price_desc, has_step_price, supplement_quantity, supplement_lease_term, supplement_lease_price, 
+    delivery_date_end, advance_price, advance_price_unit, total_advance
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from order_detail
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from order_detail
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.order.entity.OrderDetail">
+    insert into order_detail (id, erp_billdtl_id, erp_id, 
+      order_id, line_number, order_no, 
+      item_type, item_id, item_no, 
+      item_name, item_type_code, item_type_name, 
+      item_model, item_brand, item_brand_name, 
+      item_quantity, item_unit, approach_date, 
+      lease_term, lease_unit, settle_method, 
+      deposit_unit_price, price_mode, standard_rent, 
+      discount_rate, lease_term_price, step_price, 
+      step_price_data, additional_clause, additional_clause_data, 
+      remark, dtl_no, material_conversion_rate, 
+      material_conversion_rate_data, tracking_id, 
+      credit_price, define_item, standard_rent_amount, 
+      discount_rent_amount, standard_amount_id, credit_price_id, 
+      deposit_amount, lease_term_price_unit, standard_rent_unit, 
+      deposit_unit, credit_price_unit, init_data, 
+      init_data_time, rantal_price, rantal_price_unit, 
+      original_quantity, waring_message, dtl_chkChange, 
+      inner_settle_standard_amount, inner_settle_discount, 
+      sign_item_id, min_lease_cycle, min_rent_amount, 
+      source_dtlId, step_price_desc, has_step_price, 
+      supplement_quantity, supplement_lease_term, 
+      supplement_lease_price, delivery_date_end, advance_price, 
+      advance_price_unit, total_advance)
+    values (#{id,jdbcType=INTEGER}, #{erpBilldtlId,jdbcType=INTEGER}, #{erpId,jdbcType=INTEGER}, 
+      #{orderId,jdbcType=INTEGER}, #{lineNumber,jdbcType=INTEGER}, #{orderNo,jdbcType=VARCHAR}, 
+      #{itemType,jdbcType=INTEGER}, #{itemId,jdbcType=INTEGER}, #{itemNo,jdbcType=VARCHAR}, 
+      #{itemName,jdbcType=VARCHAR}, #{itemTypeCode,jdbcType=VARCHAR}, #{itemTypeName,jdbcType=VARCHAR}, 
+      #{itemModel,jdbcType=VARCHAR}, #{itemBrand,jdbcType=VARCHAR}, #{itemBrandName,jdbcType=VARCHAR}, 
+      #{itemQuantity,jdbcType=DECIMAL}, #{itemUnit,jdbcType=INTEGER}, #{approachDate,jdbcType=TIMESTAMP}, 
+      #{leaseTerm,jdbcType=DECIMAL}, #{leaseUnit,jdbcType=TINYINT}, #{settleMethod,jdbcType=INTEGER}, 
+      #{depositUnitPrice,jdbcType=DECIMAL}, #{priceMode,jdbcType=TINYINT}, #{standardRent,jdbcType=DECIMAL}, 
+      #{discountRate,jdbcType=DECIMAL}, #{leaseTermPrice,jdbcType=DECIMAL}, #{stepPrice,jdbcType=VARCHAR}, 
+      #{stepPriceData,jdbcType=VARCHAR}, #{additionalClause,jdbcType=VARCHAR}, #{additionalClauseData,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{dtlNo,jdbcType=INTEGER}, #{materialConversionRate,jdbcType=VARCHAR}, 
+      #{materialConversionRateData,jdbcType=VARCHAR}, #{trackingId,jdbcType=INTEGER}, 
+      #{creditPrice,jdbcType=DECIMAL}, #{defineItem,jdbcType=VARCHAR}, #{standardRentAmount,jdbcType=DECIMAL}, 
+      #{discountRentAmount,jdbcType=DECIMAL}, #{standardAmountId,jdbcType=INTEGER}, #{creditPriceId,jdbcType=INTEGER}, 
+      #{depositAmount,jdbcType=DECIMAL}, #{leaseTermPriceUnit,jdbcType=VARCHAR}, #{standardRentUnit,jdbcType=VARCHAR}, 
+      #{depositUnit,jdbcType=VARCHAR}, #{creditPriceUnit,jdbcType=VARCHAR}, #{initData,jdbcType=VARCHAR}, 
+      #{initDataTime,jdbcType=DATE}, #{rantalPrice,jdbcType=DECIMAL}, #{rantalPriceUnit,jdbcType=VARCHAR}, 
+      #{originalQuantity,jdbcType=DECIMAL}, #{waringMessage,jdbcType=VARCHAR}, #{dtlChkchange,jdbcType=BIT}, 
+      #{innerSettleStandardAmount,jdbcType=DECIMAL}, #{innerSettleDiscount,jdbcType=DECIMAL}, 
+      #{signItemId,jdbcType=INTEGER}, #{minLeaseCycle,jdbcType=DECIMAL}, #{minRentAmount,jdbcType=DECIMAL}, 
+      #{sourceDtlid,jdbcType=DECIMAL}, #{stepPriceDesc,jdbcType=VARCHAR}, #{hasStepPrice,jdbcType=BIT}, 
+      #{supplementQuantity,jdbcType=DECIMAL}, #{supplementLeaseTerm,jdbcType=DECIMAL}, 
+      #{supplementLeasePrice,jdbcType=DECIMAL}, #{deliveryDateEnd,jdbcType=DATE}, #{advancePrice,jdbcType=DECIMAL}, 
+      #{advancePriceUnit,jdbcType=VARCHAR}, #{totalAdvance,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.order.entity.OrderDetail">
+    insert into order_detail
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="erpBilldtlId != null">
+        erp_billdtl_id,
+      </if>
+      <if test="erpId != null">
+        erp_id,
+      </if>
+      <if test="orderId != null">
+        order_id,
+      </if>
+      <if test="lineNumber != null">
+        line_number,
+      </if>
+      <if test="orderNo != null">
+        order_no,
+      </if>
+      <if test="itemType != null">
+        item_type,
+      </if>
+      <if test="itemId != null">
+        item_id,
+      </if>
+      <if test="itemNo != null">
+        item_no,
+      </if>
+      <if test="itemName != null">
+        item_name,
+      </if>
+      <if test="itemTypeCode != null">
+        item_type_code,
+      </if>
+      <if test="itemTypeName != null">
+        item_type_name,
+      </if>
+      <if test="itemModel != null">
+        item_model,
+      </if>
+      <if test="itemBrand != null">
+        item_brand,
+      </if>
+      <if test="itemBrandName != null">
+        item_brand_name,
+      </if>
+      <if test="itemQuantity != null">
+        item_quantity,
+      </if>
+      <if test="itemUnit != null">
+        item_unit,
+      </if>
+      <if test="approachDate != null">
+        approach_date,
+      </if>
+      <if test="leaseTerm != null">
+        lease_term,
+      </if>
+      <if test="leaseUnit != null">
+        lease_unit,
+      </if>
+      <if test="settleMethod != null">
+        settle_method,
+      </if>
+      <if test="depositUnitPrice != null">
+        deposit_unit_price,
+      </if>
+      <if test="priceMode != null">
+        price_mode,
+      </if>
+      <if test="standardRent != null">
+        standard_rent,
+      </if>
+      <if test="discountRate != null">
+        discount_rate,
+      </if>
+      <if test="leaseTermPrice != null">
+        lease_term_price,
+      </if>
+      <if test="stepPrice != null">
+        step_price,
+      </if>
+      <if test="stepPriceData != null">
+        step_price_data,
+      </if>
+      <if test="additionalClause != null">
+        additional_clause,
+      </if>
+      <if test="additionalClauseData != null">
+        additional_clause_data,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="dtlNo != null">
+        dtl_no,
+      </if>
+      <if test="materialConversionRate != null">
+        material_conversion_rate,
+      </if>
+      <if test="materialConversionRateData != null">
+        material_conversion_rate_data,
+      </if>
+      <if test="trackingId != null">
+        tracking_id,
+      </if>
+      <if test="creditPrice != null">
+        credit_price,
+      </if>
+      <if test="defineItem != null">
+        define_item,
+      </if>
+      <if test="standardRentAmount != null">
+        standard_rent_amount,
+      </if>
+      <if test="discountRentAmount != null">
+        discount_rent_amount,
+      </if>
+      <if test="standardAmountId != null">
+        standard_amount_id,
+      </if>
+      <if test="creditPriceId != null">
+        credit_price_id,
+      </if>
+      <if test="depositAmount != null">
+        deposit_amount,
+      </if>
+      <if test="leaseTermPriceUnit != null">
+        lease_term_price_unit,
+      </if>
+      <if test="standardRentUnit != null">
+        standard_rent_unit,
+      </if>
+      <if test="depositUnit != null">
+        deposit_unit,
+      </if>
+      <if test="creditPriceUnit != null">
+        credit_price_unit,
+      </if>
+      <if test="initData != null">
+        init_data,
+      </if>
+      <if test="initDataTime != null">
+        init_data_time,
+      </if>
+      <if test="rantalPrice != null">
+        rantal_price,
+      </if>
+      <if test="rantalPriceUnit != null">
+        rantal_price_unit,
+      </if>
+      <if test="originalQuantity != null">
+        original_quantity,
+      </if>
+      <if test="waringMessage != null">
+        waring_message,
+      </if>
+      <if test="dtlChkchange != null">
+        dtl_chkChange,
+      </if>
+      <if test="innerSettleStandardAmount != null">
+        inner_settle_standard_amount,
+      </if>
+      <if test="innerSettleDiscount != null">
+        inner_settle_discount,
+      </if>
+      <if test="signItemId != null">
+        sign_item_id,
+      </if>
+      <if test="minLeaseCycle != null">
+        min_lease_cycle,
+      </if>
+      <if test="minRentAmount != null">
+        min_rent_amount,
+      </if>
+      <if test="sourceDtlid != null">
+        source_dtlId,
+      </if>
+      <if test="stepPriceDesc != null">
+        step_price_desc,
+      </if>
+      <if test="hasStepPrice != null">
+        has_step_price,
+      </if>
+      <if test="supplementQuantity != null">
+        supplement_quantity,
+      </if>
+      <if test="supplementLeaseTerm != null">
+        supplement_lease_term,
+      </if>
+      <if test="supplementLeasePrice != null">
+        supplement_lease_price,
+      </if>
+      <if test="deliveryDateEnd != null">
+        delivery_date_end,
+      </if>
+      <if test="advancePrice != null">
+        advance_price,
+      </if>
+      <if test="advancePriceUnit != null">
+        advance_price_unit,
+      </if>
+      <if test="totalAdvance != null">
+        total_advance,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="erpBilldtlId != null">
+        #{erpBilldtlId,jdbcType=INTEGER},
+      </if>
+      <if test="erpId != null">
+        #{erpId,jdbcType=INTEGER},
+      </if>
+      <if test="orderId != null">
+        #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="lineNumber != null">
+        #{lineNumber,jdbcType=INTEGER},
+      </if>
+      <if test="orderNo != null">
+        #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="itemType != null">
+        #{itemType,jdbcType=INTEGER},
+      </if>
+      <if test="itemId != null">
+        #{itemId,jdbcType=INTEGER},
+      </if>
+      <if test="itemNo != null">
+        #{itemNo,jdbcType=VARCHAR},
+      </if>
+      <if test="itemName != null">
+        #{itemName,jdbcType=VARCHAR},
+      </if>
+      <if test="itemTypeCode != null">
+        #{itemTypeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="itemTypeName != null">
+        #{itemTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="itemModel != null">
+        #{itemModel,jdbcType=VARCHAR},
+      </if>
+      <if test="itemBrand != null">
+        #{itemBrand,jdbcType=VARCHAR},
+      </if>
+      <if test="itemBrandName != null">
+        #{itemBrandName,jdbcType=VARCHAR},
+      </if>
+      <if test="itemQuantity != null">
+        #{itemQuantity,jdbcType=DECIMAL},
+      </if>
+      <if test="itemUnit != null">
+        #{itemUnit,jdbcType=INTEGER},
+      </if>
+      <if test="approachDate != null">
+        #{approachDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="leaseTerm != null">
+        #{leaseTerm,jdbcType=DECIMAL},
+      </if>
+      <if test="leaseUnit != null">
+        #{leaseUnit,jdbcType=TINYINT},
+      </if>
+      <if test="settleMethod != null">
+        #{settleMethod,jdbcType=INTEGER},
+      </if>
+      <if test="depositUnitPrice != null">
+        #{depositUnitPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="priceMode != null">
+        #{priceMode,jdbcType=TINYINT},
+      </if>
+      <if test="standardRent != null">
+        #{standardRent,jdbcType=DECIMAL},
+      </if>
+      <if test="discountRate != null">
+        #{discountRate,jdbcType=DECIMAL},
+      </if>
+      <if test="leaseTermPrice != null">
+        #{leaseTermPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="stepPrice != null">
+        #{stepPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="stepPriceData != null">
+        #{stepPriceData,jdbcType=VARCHAR},
+      </if>
+      <if test="additionalClause != null">
+        #{additionalClause,jdbcType=VARCHAR},
+      </if>
+      <if test="additionalClauseData != null">
+        #{additionalClauseData,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="dtlNo != null">
+        #{dtlNo,jdbcType=INTEGER},
+      </if>
+      <if test="materialConversionRate != null">
+        #{materialConversionRate,jdbcType=VARCHAR},
+      </if>
+      <if test="materialConversionRateData != null">
+        #{materialConversionRateData,jdbcType=VARCHAR},
+      </if>
+      <if test="trackingId != null">
+        #{trackingId,jdbcType=INTEGER},
+      </if>
+      <if test="creditPrice != null">
+        #{creditPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="defineItem != null">
+        #{defineItem,jdbcType=VARCHAR},
+      </if>
+      <if test="standardRentAmount != null">
+        #{standardRentAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="discountRentAmount != null">
+        #{discountRentAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="standardAmountId != null">
+        #{standardAmountId,jdbcType=INTEGER},
+      </if>
+      <if test="creditPriceId != null">
+        #{creditPriceId,jdbcType=INTEGER},
+      </if>
+      <if test="depositAmount != null">
+        #{depositAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="leaseTermPriceUnit != null">
+        #{leaseTermPriceUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="standardRentUnit != null">
+        #{standardRentUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="depositUnit != null">
+        #{depositUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="creditPriceUnit != null">
+        #{creditPriceUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="initData != null">
+        #{initData,jdbcType=VARCHAR},
+      </if>
+      <if test="initDataTime != null">
+        #{initDataTime,jdbcType=DATE},
+      </if>
+      <if test="rantalPrice != null">
+        #{rantalPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="rantalPriceUnit != null">
+        #{rantalPriceUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="originalQuantity != null">
+        #{originalQuantity,jdbcType=DECIMAL},
+      </if>
+      <if test="waringMessage != null">
+        #{waringMessage,jdbcType=VARCHAR},
+      </if>
+      <if test="dtlChkchange != null">
+        #{dtlChkchange,jdbcType=BIT},
+      </if>
+      <if test="innerSettleStandardAmount != null">
+        #{innerSettleStandardAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="innerSettleDiscount != null">
+        #{innerSettleDiscount,jdbcType=DECIMAL},
+      </if>
+      <if test="signItemId != null">
+        #{signItemId,jdbcType=INTEGER},
+      </if>
+      <if test="minLeaseCycle != null">
+        #{minLeaseCycle,jdbcType=DECIMAL},
+      </if>
+      <if test="minRentAmount != null">
+        #{minRentAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="sourceDtlid != null">
+        #{sourceDtlid,jdbcType=DECIMAL},
+      </if>
+      <if test="stepPriceDesc != null">
+        #{stepPriceDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="hasStepPrice != null">
+        #{hasStepPrice,jdbcType=BIT},
+      </if>
+      <if test="supplementQuantity != null">
+        #{supplementQuantity,jdbcType=DECIMAL},
+      </if>
+      <if test="supplementLeaseTerm != null">
+        #{supplementLeaseTerm,jdbcType=DECIMAL},
+      </if>
+      <if test="supplementLeasePrice != null">
+        #{supplementLeasePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="deliveryDateEnd != null">
+        #{deliveryDateEnd,jdbcType=DATE},
+      </if>
+      <if test="advancePrice != null">
+        #{advancePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="advancePriceUnit != null">
+        #{advancePriceUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="totalAdvance != null">
+        #{totalAdvance,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.order.entity.OrderDetail">
+    update order_detail
+    <set>
+      <if test="erpBilldtlId != null">
+        erp_billdtl_id = #{erpBilldtlId,jdbcType=INTEGER},
+      </if>
+      <if test="erpId != null">
+        erp_id = #{erpId,jdbcType=INTEGER},
+      </if>
+      <if test="orderId != null">
+        order_id = #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="lineNumber != null">
+        line_number = #{lineNumber,jdbcType=INTEGER},
+      </if>
+      <if test="orderNo != null">
+        order_no = #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="itemType != null">
+        item_type = #{itemType,jdbcType=INTEGER},
+      </if>
+      <if test="itemId != null">
+        item_id = #{itemId,jdbcType=INTEGER},
+      </if>
+      <if test="itemNo != null">
+        item_no = #{itemNo,jdbcType=VARCHAR},
+      </if>
+      <if test="itemName != null">
+        item_name = #{itemName,jdbcType=VARCHAR},
+      </if>
+      <if test="itemTypeCode != null">
+        item_type_code = #{itemTypeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="itemTypeName != null">
+        item_type_name = #{itemTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="itemModel != null">
+        item_model = #{itemModel,jdbcType=VARCHAR},
+      </if>
+      <if test="itemBrand != null">
+        item_brand = #{itemBrand,jdbcType=VARCHAR},
+      </if>
+      <if test="itemBrandName != null">
+        item_brand_name = #{itemBrandName,jdbcType=VARCHAR},
+      </if>
+      <if test="itemQuantity != null">
+        item_quantity = #{itemQuantity,jdbcType=DECIMAL},
+      </if>
+      <if test="itemUnit != null">
+        item_unit = #{itemUnit,jdbcType=INTEGER},
+      </if>
+      <if test="approachDate != null">
+        approach_date = #{approachDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="leaseTerm != null">
+        lease_term = #{leaseTerm,jdbcType=DECIMAL},
+      </if>
+      <if test="leaseUnit != null">
+        lease_unit = #{leaseUnit,jdbcType=TINYINT},
+      </if>
+      <if test="settleMethod != null">
+        settle_method = #{settleMethod,jdbcType=INTEGER},
+      </if>
+      <if test="depositUnitPrice != null">
+        deposit_unit_price = #{depositUnitPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="priceMode != null">
+        price_mode = #{priceMode,jdbcType=TINYINT},
+      </if>
+      <if test="standardRent != null">
+        standard_rent = #{standardRent,jdbcType=DECIMAL},
+      </if>
+      <if test="discountRate != null">
+        discount_rate = #{discountRate,jdbcType=DECIMAL},
+      </if>
+      <if test="leaseTermPrice != null">
+        lease_term_price = #{leaseTermPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="stepPrice != null">
+        step_price = #{stepPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="stepPriceData != null">
+        step_price_data = #{stepPriceData,jdbcType=VARCHAR},
+      </if>
+      <if test="additionalClause != null">
+        additional_clause = #{additionalClause,jdbcType=VARCHAR},
+      </if>
+      <if test="additionalClauseData != null">
+        additional_clause_data = #{additionalClauseData,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="dtlNo != null">
+        dtl_no = #{dtlNo,jdbcType=INTEGER},
+      </if>
+      <if test="materialConversionRate != null">
+        material_conversion_rate = #{materialConversionRate,jdbcType=VARCHAR},
+      </if>
+      <if test="materialConversionRateData != null">
+        material_conversion_rate_data = #{materialConversionRateData,jdbcType=VARCHAR},
+      </if>
+      <if test="trackingId != null">
+        tracking_id = #{trackingId,jdbcType=INTEGER},
+      </if>
+      <if test="creditPrice != null">
+        credit_price = #{creditPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="defineItem != null">
+        define_item = #{defineItem,jdbcType=VARCHAR},
+      </if>
+      <if test="standardRentAmount != null">
+        standard_rent_amount = #{standardRentAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="discountRentAmount != null">
+        discount_rent_amount = #{discountRentAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="standardAmountId != null">
+        standard_amount_id = #{standardAmountId,jdbcType=INTEGER},
+      </if>
+      <if test="creditPriceId != null">
+        credit_price_id = #{creditPriceId,jdbcType=INTEGER},
+      </if>
+      <if test="depositAmount != null">
+        deposit_amount = #{depositAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="leaseTermPriceUnit != null">
+        lease_term_price_unit = #{leaseTermPriceUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="standardRentUnit != null">
+        standard_rent_unit = #{standardRentUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="depositUnit != null">
+        deposit_unit = #{depositUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="creditPriceUnit != null">
+        credit_price_unit = #{creditPriceUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="initData != null">
+        init_data = #{initData,jdbcType=VARCHAR},
+      </if>
+      <if test="initDataTime != null">
+        init_data_time = #{initDataTime,jdbcType=DATE},
+      </if>
+      <if test="rantalPrice != null">
+        rantal_price = #{rantalPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="rantalPriceUnit != null">
+        rantal_price_unit = #{rantalPriceUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="originalQuantity != null">
+        original_quantity = #{originalQuantity,jdbcType=DECIMAL},
+      </if>
+      <if test="waringMessage != null">
+        waring_message = #{waringMessage,jdbcType=VARCHAR},
+      </if>
+      <if test="dtlChkchange != null">
+        dtl_chkChange = #{dtlChkchange,jdbcType=BIT},
+      </if>
+      <if test="innerSettleStandardAmount != null">
+        inner_settle_standard_amount = #{innerSettleStandardAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="innerSettleDiscount != null">
+        inner_settle_discount = #{innerSettleDiscount,jdbcType=DECIMAL},
+      </if>
+      <if test="signItemId != null">
+        sign_item_id = #{signItemId,jdbcType=INTEGER},
+      </if>
+      <if test="minLeaseCycle != null">
+        min_lease_cycle = #{minLeaseCycle,jdbcType=DECIMAL},
+      </if>
+      <if test="minRentAmount != null">
+        min_rent_amount = #{minRentAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="sourceDtlid != null">
+        source_dtlId = #{sourceDtlid,jdbcType=DECIMAL},
+      </if>
+      <if test="stepPriceDesc != null">
+        step_price_desc = #{stepPriceDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="hasStepPrice != null">
+        has_step_price = #{hasStepPrice,jdbcType=BIT},
+      </if>
+      <if test="supplementQuantity != null">
+        supplement_quantity = #{supplementQuantity,jdbcType=DECIMAL},
+      </if>
+      <if test="supplementLeaseTerm != null">
+        supplement_lease_term = #{supplementLeaseTerm,jdbcType=DECIMAL},
+      </if>
+      <if test="supplementLeasePrice != null">
+        supplement_lease_price = #{supplementLeasePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="deliveryDateEnd != null">
+        delivery_date_end = #{deliveryDateEnd,jdbcType=DATE},
+      </if>
+      <if test="advancePrice != null">
+        advance_price = #{advancePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="advancePriceUnit != null">
+        advance_price_unit = #{advancePriceUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="totalAdvance != null">
+        total_advance = #{totalAdvance,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.order.entity.OrderDetail">
+    update order_detail
+    set erp_billdtl_id = #{erpBilldtlId,jdbcType=INTEGER},
+      erp_id = #{erpId,jdbcType=INTEGER},
+      order_id = #{orderId,jdbcType=INTEGER},
+      line_number = #{lineNumber,jdbcType=INTEGER},
+      order_no = #{orderNo,jdbcType=VARCHAR},
+      item_type = #{itemType,jdbcType=INTEGER},
+      item_id = #{itemId,jdbcType=INTEGER},
+      item_no = #{itemNo,jdbcType=VARCHAR},
+      item_name = #{itemName,jdbcType=VARCHAR},
+      item_type_code = #{itemTypeCode,jdbcType=VARCHAR},
+      item_type_name = #{itemTypeName,jdbcType=VARCHAR},
+      item_model = #{itemModel,jdbcType=VARCHAR},
+      item_brand = #{itemBrand,jdbcType=VARCHAR},
+      item_brand_name = #{itemBrandName,jdbcType=VARCHAR},
+      item_quantity = #{itemQuantity,jdbcType=DECIMAL},
+      item_unit = #{itemUnit,jdbcType=INTEGER},
+      approach_date = #{approachDate,jdbcType=TIMESTAMP},
+      lease_term = #{leaseTerm,jdbcType=DECIMAL},
+      lease_unit = #{leaseUnit,jdbcType=TINYINT},
+      settle_method = #{settleMethod,jdbcType=INTEGER},
+      deposit_unit_price = #{depositUnitPrice,jdbcType=DECIMAL},
+      price_mode = #{priceMode,jdbcType=TINYINT},
+      standard_rent = #{standardRent,jdbcType=DECIMAL},
+      discount_rate = #{discountRate,jdbcType=DECIMAL},
+      lease_term_price = #{leaseTermPrice,jdbcType=DECIMAL},
+      step_price = #{stepPrice,jdbcType=VARCHAR},
+      step_price_data = #{stepPriceData,jdbcType=VARCHAR},
+      additional_clause = #{additionalClause,jdbcType=VARCHAR},
+      additional_clause_data = #{additionalClauseData,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      dtl_no = #{dtlNo,jdbcType=INTEGER},
+      material_conversion_rate = #{materialConversionRate,jdbcType=VARCHAR},
+      material_conversion_rate_data = #{materialConversionRateData,jdbcType=VARCHAR},
+      tracking_id = #{trackingId,jdbcType=INTEGER},
+      credit_price = #{creditPrice,jdbcType=DECIMAL},
+      define_item = #{defineItem,jdbcType=VARCHAR},
+      standard_rent_amount = #{standardRentAmount,jdbcType=DECIMAL},
+      discount_rent_amount = #{discountRentAmount,jdbcType=DECIMAL},
+      standard_amount_id = #{standardAmountId,jdbcType=INTEGER},
+      credit_price_id = #{creditPriceId,jdbcType=INTEGER},
+      deposit_amount = #{depositAmount,jdbcType=DECIMAL},
+      lease_term_price_unit = #{leaseTermPriceUnit,jdbcType=VARCHAR},
+      standard_rent_unit = #{standardRentUnit,jdbcType=VARCHAR},
+      deposit_unit = #{depositUnit,jdbcType=VARCHAR},
+      credit_price_unit = #{creditPriceUnit,jdbcType=VARCHAR},
+      init_data = #{initData,jdbcType=VARCHAR},
+      init_data_time = #{initDataTime,jdbcType=DATE},
+      rantal_price = #{rantalPrice,jdbcType=DECIMAL},
+      rantal_price_unit = #{rantalPriceUnit,jdbcType=VARCHAR},
+      original_quantity = #{originalQuantity,jdbcType=DECIMAL},
+      waring_message = #{waringMessage,jdbcType=VARCHAR},
+      dtl_chkChange = #{dtlChkchange,jdbcType=BIT},
+      inner_settle_standard_amount = #{innerSettleStandardAmount,jdbcType=DECIMAL},
+      inner_settle_discount = #{innerSettleDiscount,jdbcType=DECIMAL},
+      sign_item_id = #{signItemId,jdbcType=INTEGER},
+      min_lease_cycle = #{minLeaseCycle,jdbcType=DECIMAL},
+      min_rent_amount = #{minRentAmount,jdbcType=DECIMAL},
+      source_dtlId = #{sourceDtlid,jdbcType=DECIMAL},
+      step_price_desc = #{stepPriceDesc,jdbcType=VARCHAR},
+      has_step_price = #{hasStepPrice,jdbcType=BIT},
+      supplement_quantity = #{supplementQuantity,jdbcType=DECIMAL},
+      supplement_lease_term = #{supplementLeaseTerm,jdbcType=DECIMAL},
+      supplement_lease_price = #{supplementLeasePrice,jdbcType=DECIMAL},
+      delivery_date_end = #{deliveryDateEnd,jdbcType=DATE},
+      advance_price = #{advancePrice,jdbcType=DECIMAL},
+      advance_price_unit = #{advancePriceUnit,jdbcType=VARCHAR},
+      total_advance = #{totalAdvance,jdbcType=DECIMAL}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
 </mapper>
