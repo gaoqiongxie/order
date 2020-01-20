@@ -1,0 +1,3 @@
+逆向生成 mybatis-generator:generate
+跳过test mvn clean package -Dmaven.test.skip=true
+
