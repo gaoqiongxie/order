@@ -37,6 +37,7 @@ public class ExcelUtil {
 			sb.append("id int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',");
 			sb.append("\n\t");
 			StringBuilder indexStr = new StringBuilder();
+			StringBuilder uniqueStr = new StringBuilder();
 			for (int rIndex = 3; rIndex <= lastRowIndex; rIndex++) { // 遍历行 从第3行开始
 				Row row = sheet.getRow(rIndex);
 				logger.info("sheet: " + sheet.getSheetName() + " rIndex:" + rIndex);
@@ -67,7 +68,10 @@ public class ExcelUtil {
 									sb.append(" DEFAULT ''");
 								}
 							} else if (!cell.toString().isEmpty()) {//有默认值
-								sb.append(" NOT NULL DEFAULT '").append(cell.toString()).append("'");
+								//解决数值类型有小数点问题
+								String o = 0==cell.getCellType()?cell.toString().replace(".0", ""):cell.toString();
+								
+								sb.append(" NOT NULL DEFAULT '").append(o).append("'");
 							} else if ("datetime".equals(type)/* ||"date".equals(type) */) {
 								sb.append(" DEFAULT NULL");
 							}else if(type.contains("varchar")&&cell.toString().isEmpty()) {
@@ -77,8 +81,13 @@ public class ExcelUtil {
 							break;
 						case 3:// Index
 							if (("I").equals(cell.toString())) {
-								indexStr.append(" KEY `").append(field).append("` (`").append(field).append("`),")
-										.append("\n\t");
+								if(!indexStr.toString().isEmpty()) {
+									indexStr.append(",").append("\n\t");
+								}
+								indexStr.append("KEY `").append(field).append("` (`").append(field).append("`)");
+							}else if(("U").equals(cell.toString())) {
+								//UNIQUE KEY unq_orderid(`order_id`)
+								uniqueStr.append("UNIQUE KEY `").append("unq_").append(field).append("` (`").append(field).append("`)");
 							}
 							break;
 
@@ -100,18 +109,20 @@ public class ExcelUtil {
 			}
 			//加主键
 			sb.append("PRIMARY KEY (`id`)")/* .append(" USING BTREE ") */;
-
+			//加唯一索引
+			if (!uniqueStr.toString().isEmpty()) {
+				sb.append(",");
+				sb.append("\n\t");
+				sb.append(uniqueStr);
+			}
 			//加索引
 			if (!indexStr.toString().isEmpty()) {
 				sb.append(",");
 				sb.append("\n\t");
-				String indexs = indexStr.deleteCharAt(indexStr.lastIndexOf(",")).toString();
-				sb.append(indexs);
-				sb.append("\n");
-			} else {
-				sb.append("\n");
-			}
-
+//				String indexs = indexStr.deleteCharAt(indexStr.lastIndexOf(",")).toString();
+				sb.append(indexStr);
+			} 
+			sb.append("\n");
 			sb.append(") ENGINE=InnoDB COMMENT='").append(tableNameDesc).append("';");
 			sb.append("\n");
 			logger.info(sb);

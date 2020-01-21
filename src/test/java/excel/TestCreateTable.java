@@ -12,7 +12,7 @@ public class TestCreateTable {
 	@Test
 	public void testCreateTable() {
 		try {
-			ExcelUtil.createTable("D://work/需求/20200107/数据库_order.xlsx", 
+			ExcelUtil.createTable("D://work/需求/20200107/数据库_orderv2.xlsx", 
 					"D://work/需求/20200107/order_DDL.sql");
 		} catch (Exception e) {
 			e.printStackTrace();
