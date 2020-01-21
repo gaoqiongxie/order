@@ -67,9 +67,9 @@ public class ExcelUtil {
 							} else if ("timestamp".equals(type)/* ||"date".equals(type) */) {
 								sb.append(" NULL DEFAULT NULL");
 							} else {
-								// if(type.contains("varchar")) {
-								sb.append(" DEFAULT NULL");
-								// }
+								 if(type.contains("varchar")&&cell.toString().isEmpty()) {
+									 sb.append(" NOT NULL DEFAULT ''");
+								 }
 
 							}
 							break;
