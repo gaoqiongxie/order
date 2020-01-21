@@ -34,7 +34,7 @@ public class ExcelUtil {
 			sb.append("\n");
 			sb.append("CREATE TABLE ").append(tableName).append(" ( ");
 			sb.append("\n\t");
-			sb.append("id int(11) NOT NULL AUTO_INCREMENT,");
+			sb.append("id int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',");
 			sb.append("\n\t");
 			StringBuilder indexStr = new StringBuilder();
 			for (int rIndex = 3; rIndex <= lastRowIndex; rIndex++) { // 遍历行 从第3行开始
@@ -59,18 +59,20 @@ public class ExcelUtil {
 							String s = cell.toString().toLowerCase();
 							sb.append(s);
 							break;
-						case 2:// NOT NULL
-							if (("*").equals(cell.toString())) {
+						case 2:// NOT NULL DEFAULT
+							if (("*").equals(cell.toString())) {//原定义非空
 								sb.append(" NOT NULL");
-							} else if (!cell.toString().isEmpty()) {
+								if(type.contains("varchar")) {
+									//字符串非空默认 ''
+									sb.append(" DEFAULT ''");
+								}
+							} else if (!cell.toString().isEmpty()) {//有默认值
 								sb.append(" NOT NULL DEFAULT '").append(cell.toString()).append("'");
-							} else if ("timestamp".equals(type)/* ||"date".equals(type) */) {
-								sb.append(" NULL DEFAULT NULL");
-							} else {
-								 if(type.contains("varchar")&&cell.toString().isEmpty()) {
-									 sb.append(" NOT NULL DEFAULT ''");
-								 }
-
+							} else if ("datetime".equals(type)/* ||"date".equals(type) */) {
+								sb.append(" DEFAULT NULL");
+							}else if(type.contains("varchar")&&cell.toString().isEmpty()) {
+								//字符串空则 NOT NULL DEFAULT ''
+								sb.append(" NOT NULL DEFAULT ''");
 							}
 							break;
 						case 3:// Index
@@ -110,7 +112,7 @@ public class ExcelUtil {
 				sb.append("\n");
 			}
 
-			sb.append(") ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='").append(tableNameDesc).append("';");
+			sb.append(") ENGINE=InnoDB COMMENT='").append(tableNameDesc).append("';");
 			sb.append("\n");
 			logger.info(sb);
 			toSQL(sb, toPath);

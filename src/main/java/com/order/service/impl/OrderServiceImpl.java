@@ -8,16 +8,16 @@ import com.order.dao.OrderDetailMapper;
 import com.order.entity.OrderDetail;
 import com.order.service.OrderService;
 
-@Component("orderService")
 @Service
+@Component("orderService")
 public class OrderServiceImpl implements OrderService {
 
 	@Autowired
 	OrderDetailMapper orderDetailMapper;
-
+	
 	@Override
-	public OrderDetail getOrderDetail(Integer id) {
-		OrderDetail orderDetail = orderDetailMapper.selectByPrimaryKey(id);
-		return orderDetail;
+	public OrderDetail getOrderDetail(int id) {
+		return orderDetailMapper.selectByPrimaryKey(id);
 	}
+
 }

@@ -4,5 +4,6 @@ import com.order.entity.OrderDetail;
 
 public interface OrderService {
 
-	public OrderDetail getOrderDetail(Integer id);
+	OrderDetail getOrderDetail(int i);
+
 }
