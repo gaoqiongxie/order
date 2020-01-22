@@ -18,4 +18,14 @@ public class TestCreateTable {
 			e.printStackTrace();
 		}
 	}
+	
+	@Test
+	public void testCreateTableBySheetName() {
+		try {
+			ExcelUtil.createTable("D://work/需求/20200107/数据库_orderv2.xlsx", 
+					"D://work/需求/20200107/order_DDL_","order_contact");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }
