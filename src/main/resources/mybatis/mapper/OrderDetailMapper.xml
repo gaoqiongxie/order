@@ -767,4 +767,79 @@
       total_advance = #{totalAdvance,jdbcType=DECIMAL}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  
+  <select id="listOrderDetail" parameterType="java.util.HashMap" resultMap="BaseResultMap">
+	select 
+	  r.billdtlid as erpBilldtlId, 
+	  r.billid as erpId,  
+	  row_number() over(partition by r.billid order by r.billid)  as line_number,
+	  ro.no as orderNo, 
+	  
+	  r.dtl_ItemType  as itemType,
+	  r.dtl_ItemID  as itemId,
+	  m.code  as itemNo,
+	  r.dtl_ItemDescr  as itemName,
+	  b1.code as itemTypeCode,
+	  b1.name as itemTypeName,
+	  m.EquSpec  as itemModel,
+	  
+	  b.code  as itemBrand,
+	  b.name  as itemBrandName,
+	  
+	  r.dtl_ItemQty  as itemQuantity,
+	  r.dtl_itemuom as itemUnit,
+	  r.dtl_DeliveryDate  as approachDate,
+	  r.dtl_leaseTerm  as leaseTerm,
+	  r.dtl_LeaseUnit  as leaseUnit,
+	  r.dtl_SettleModel  as settleMethod,
+	  r.dtl_DepositPrice  as depositUnitPrice,
+	  r.dtl_PriceMode  as priceMode,
+	  r.dtl_StdPrice  as standardRent,
+	  r.dtl_Discount  as discountRate,
+	  r.dtl_Price  as leaseTermPrice,
+	  r.dtl_Notes  as remark,
+	  r.dtl_No  as dtlNo,
+	  r.dtl_MatConvRate  as materialConversionRate,
+	  r.SrcDtlID  as trackingId,
+	  r.dtl_CreditPrice  as creditPrice,
+	  r.dtl_SelectItem  as defineItem,
+	  r.dtl_StdAmount  as standardRentAmount,
+	  r.Dtl_DIscountAmount  as discountRentAmount,
+	  r.dtl_StdPrice_DtlID  as standardAmountId,
+	  r.dtl_CreditPrice_DtlID  as creditPriceId,
+	  r.dtl_DepositAmt  as depositAmount,
+	  r.dtl_PriceUnit  as leaseTermPriceUnit,
+	  r.dtl_StdPriceUnit  as standardRentUnit,
+	  r.dtl_DepositPriceUnit  as depositUnit,
+	  r.dtl_CreditPriceUnit  as creditPriceUnit,
+	  r.DTL_INIT_DATA  as initData,
+	  r.DTL_INIT_DATA1  as initDataTime,
+	  r.dtl_DirectPrice  as rantalPrice,
+	  r.dtl_DirectPriceUnit  as rantalPriceUnit,
+	  r.dtl_OringalQty  as originalQuantity,
+	  r.dtl_messAge  as waringMessage,
+	  r.dtl_chkChange  as dtlChkchange,
+	  r.dtl_IntStdPrice  as innerSettleStandardAmount,
+	  r.dtl_IntDiscount  as innerSettleDiscount,
+	  r.dtl_SignItemID  as signItemId,
+	  r.dtl_MinLease  as minLeaseCycle,
+	  r.dtl_MinRentAmount  as minRentAmount,
+	  r.dtl_sourceDtlID  as sourceDtlid,
+	  r.dtl_isStepPrice  as hasStepPrice,
+	  r.Dtl_SupplementQty  as supplementQuantity,
+	  r.dtl_SupplementTime  as supplementLeaseTerm,
+	  r.dtl_SupplementPrice  as supplementLeasePrice,
+	  r.dtl_DdeliveryDate  as deliveryDateEnd,
+	  r.dtl_AdvancePrice  as advancePrice,
+	  r.dtl_AdvancePriceUnit  as advancePriceUnit,
+	  r.chengji  as totalAdvance
+	from SCM_HX03_RO_Dtl r
+	left join scm_hx03_rohead ro on r.billid=ro.billid
+	left join CP_HX01_EquModel m on r.dtl_ItemID = m.id
+	left join CP_HX01_EquModel  b on m.parentid=b.id
+	left join CP_HX01_EquModel  b1 on b.parentid=b1.id
+	where ro.billdate>to_date('2019-01-01','yyyy-MM-dd') and dtl_ItemType=11
+	and dtl_ItemDescr like '201%'
+	and  rownum &lt;=10
+  </select>
 </mapper>

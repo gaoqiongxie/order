@@ -1,8 +1,10 @@
 package com.order.dao;
 
+import java.util.List;
+import java.util.Map;
+
 import com.order.entity.OrderDetail;
 
-//@DataSourceType(value = DataSourceConstants.DATASOURCE_ORACLE)
 public interface OrderDetailMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -15,4 +17,9 @@ public interface OrderDetailMapper {
     int updateByPrimaryKeySelective(OrderDetail record);
 
     int updateByPrimaryKey(OrderDetail record);
+    
+    /**
+     * list order
+     */
+    List<OrderDetail> listOrderDetail(Map<String, Object> o);
 }

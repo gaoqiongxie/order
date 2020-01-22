@@ -6,4 +6,5 @@ public interface OrderService {
 
 	OrderDetail getOrderDetail(int i);
 
+	int sycn();
 }
