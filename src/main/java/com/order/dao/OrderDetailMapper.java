@@ -2,6 +2,7 @@ package com.order.dao;
 
 import com.order.entity.OrderDetail;
 
+//@DataSourceType(value = DataSourceConstants.DATASOURCE_ORACLE)
 public interface OrderDetailMapper {
     int deleteByPrimaryKey(Integer id);
 

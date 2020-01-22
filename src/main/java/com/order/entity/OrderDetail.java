@@ -5,7 +5,7 @@ import java.util.Date;
 
 public class OrderDetail {
     /**
-     * 
+     * 主键
      */
     private Integer id;
 
@@ -135,26 +135,6 @@ public class OrderDetail {
     private BigDecimal leaseTermPrice;
 
     /**
-     * 阶段价格
-     */
-    private String stepPrice;
-
-    /**
-     * 阶段价格数据
-     */
-    private String stepPriceData;
-
-    /**
-     * 附加条款
-     */
-    private String additionalClause;
-
-    /**
-     * 附加条款数据
-     */
-    private String additionalClauseData;
-
-    /**
      * 备注
      */
     private String remark;
@@ -168,11 +148,6 @@ public class OrderDetail {
      * 材料换算率
      */
     private String materialConversionRate;
-
-    /**
-     * 材料换算率数据
-     */
-    private String materialConversionRateData;
 
     /**
      * 跟踪号
@@ -300,11 +275,6 @@ public class OrderDetail {
     private BigDecimal sourceDtlid;
 
     /**
-     * 阶段价格(文字)
-     */
-    private String stepPriceDesc;
-
-    /**
      * 是否有阶段价格，取值为空，字段值取值。
      */
     private Boolean hasStepPrice;
@@ -345,16 +315,16 @@ public class OrderDetail {
     private BigDecimal totalAdvance;
 
     /**
-     * 
-     * @return id 
+     * 主键
+     * @return id 主键
      */
     public Integer getId() {
         return id;
     }
 
     /**
-     * 
-     * @param id 
+     * 主键
+     * @param id 主键
      */
     public void setId(Integer id) {
         this.id = id;
@@ -761,70 +731,6 @@ public class OrderDetail {
     }
 
     /**
-     * 阶段价格
-     * @return step_price 阶段价格
-     */
-    public String getStepPrice() {
-        return stepPrice;
-    }
-
-    /**
-     * 阶段价格
-     * @param stepPrice 阶段价格
-     */
-    public void setStepPrice(String stepPrice) {
-        this.stepPrice = stepPrice == null ? null : stepPrice.trim();
-    }
-
-    /**
-     * 阶段价格数据
-     * @return step_price_data 阶段价格数据
-     */
-    public String getStepPriceData() {
-        return stepPriceData;
-    }
-
-    /**
-     * 阶段价格数据
-     * @param stepPriceData 阶段价格数据
-     */
-    public void setStepPriceData(String stepPriceData) {
-        this.stepPriceData = stepPriceData == null ? null : stepPriceData.trim();
-    }
-
-    /**
-     * 附加条款
-     * @return additional_clause 附加条款
-     */
-    public String getAdditionalClause() {
-        return additionalClause;
-    }
-
-    /**
-     * 附加条款
-     * @param additionalClause 附加条款
-     */
-    public void setAdditionalClause(String additionalClause) {
-        this.additionalClause = additionalClause == null ? null : additionalClause.trim();
-    }
-
-    /**
-     * 附加条款数据
-     * @return additional_clause_data 附加条款数据
-     */
-    public String getAdditionalClauseData() {
-        return additionalClauseData;
-    }
-
-    /**
-     * 附加条款数据
-     * @param additionalClauseData 附加条款数据
-     */
-    public void setAdditionalClauseData(String additionalClauseData) {
-        this.additionalClauseData = additionalClauseData == null ? null : additionalClauseData.trim();
-    }
-
-    /**
      * 备注
      * @return remark 备注
      */
@@ -870,22 +776,6 @@ public class OrderDetail {
      */
     public void setMaterialConversionRate(String materialConversionRate) {
         this.materialConversionRate = materialConversionRate == null ? null : materialConversionRate.trim();
-    }
-
-    /**
-     * 材料换算率数据
-     * @return material_conversion_rate_data 材料换算率数据
-     */
-    public String getMaterialConversionRateData() {
-        return materialConversionRateData;
-    }
-
-    /**
-     * 材料换算率数据
-     * @param materialConversionRateData 材料换算率数据
-     */
-    public void setMaterialConversionRateData(String materialConversionRateData) {
-        this.materialConversionRateData = materialConversionRateData == null ? null : materialConversionRateData.trim();
     }
 
     /**
@@ -1286,22 +1176,6 @@ public class OrderDetail {
      */
     public void setSourceDtlid(BigDecimal sourceDtlid) {
         this.sourceDtlid = sourceDtlid;
-    }
-
-    /**
-     * 阶段价格(文字)
-     * @return step_price_desc 阶段价格(文字)
-     */
-    public String getStepPriceDesc() {
-        return stepPriceDesc;
-    }
-
-    /**
-     * 阶段价格(文字)
-     * @param stepPriceDesc 阶段价格(文字)
-     */
-    public void setStepPriceDesc(String stepPriceDesc) {
-        this.stepPriceDesc = stepPriceDesc == null ? null : stepPriceDesc.trim();
     }
 
     /**

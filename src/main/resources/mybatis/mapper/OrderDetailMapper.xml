@@ -28,14 +28,9 @@
     <result column="standard_rent" jdbcType="DECIMAL" property="standardRent" />
     <result column="discount_rate" jdbcType="DECIMAL" property="discountRate" />
     <result column="lease_term_price" jdbcType="DECIMAL" property="leaseTermPrice" />
-    <result column="step_price" jdbcType="VARCHAR" property="stepPrice" />
-    <result column="step_price_data" jdbcType="VARCHAR" property="stepPriceData" />
-    <result column="additional_clause" jdbcType="VARCHAR" property="additionalClause" />
-    <result column="additional_clause_data" jdbcType="VARCHAR" property="additionalClauseData" />
     <result column="remark" jdbcType="VARCHAR" property="remark" />
     <result column="dtl_no" jdbcType="INTEGER" property="dtlNo" />
     <result column="material_conversion_rate" jdbcType="VARCHAR" property="materialConversionRate" />
-    <result column="material_conversion_rate_data" jdbcType="VARCHAR" property="materialConversionRateData" />
     <result column="tracking_id" jdbcType="INTEGER" property="trackingId" />
     <result column="credit_price" jdbcType="DECIMAL" property="creditPrice" />
     <result column="define_item" jdbcType="VARCHAR" property="defineItem" />
@@ -61,7 +56,6 @@
     <result column="min_lease_cycle" jdbcType="DECIMAL" property="minLeaseCycle" />
     <result column="min_rent_amount" jdbcType="DECIMAL" property="minRentAmount" />
     <result column="source_dtlId" jdbcType="DECIMAL" property="sourceDtlid" />
-    <result column="step_price_desc" jdbcType="VARCHAR" property="stepPriceDesc" />
     <result column="has_step_price" jdbcType="BIT" property="hasStepPrice" />
     <result column="supplement_quantity" jdbcType="DECIMAL" property="supplementQuantity" />
     <result column="supplement_lease_term" jdbcType="DECIMAL" property="supplementLeaseTerm" />
@@ -75,15 +69,14 @@
     id, erp_billdtl_id, erp_id, order_id, line_number, order_no, item_type, item_id, 
     item_no, item_name, item_type_code, item_type_name, item_model, item_brand, item_brand_name, 
     item_quantity, item_unit, approach_date, lease_term, lease_unit, settle_method, deposit_unit_price, 
-    price_mode, standard_rent, discount_rate, lease_term_price, step_price, step_price_data, 
-    additional_clause, additional_clause_data, remark, dtl_no, material_conversion_rate, 
-    material_conversion_rate_data, tracking_id, credit_price, define_item, standard_rent_amount, 
-    discount_rent_amount, standard_amount_id, credit_price_id, deposit_amount, lease_term_price_unit, 
-    standard_rent_unit, deposit_unit, credit_price_unit, init_data, init_data_time, rantal_price, 
-    rantal_price_unit, original_quantity, waring_message, dtl_chkChange, inner_settle_standard_amount, 
-    inner_settle_discount, sign_item_id, min_lease_cycle, min_rent_amount, source_dtlId, 
-    step_price_desc, has_step_price, supplement_quantity, supplement_lease_term, supplement_lease_price, 
-    delivery_date_end, advance_price, advance_price_unit, total_advance
+    price_mode, standard_rent, discount_rate, lease_term_price, remark, dtl_no, material_conversion_rate, 
+    tracking_id, credit_price, define_item, standard_rent_amount, discount_rent_amount, 
+    standard_amount_id, credit_price_id, deposit_amount, lease_term_price_unit, standard_rent_unit, 
+    deposit_unit, credit_price_unit, init_data, init_data_time, rantal_price, rantal_price_unit, 
+    original_quantity, waring_message, dtl_chkChange, inner_settle_standard_amount, inner_settle_discount, 
+    sign_item_id, min_lease_cycle, min_rent_amount, source_dtlId, has_step_price, supplement_quantity, 
+    supplement_lease_term, supplement_lease_price, delivery_date_end, advance_price, 
+    advance_price_unit, total_advance
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -104,10 +97,8 @@
       item_quantity, item_unit, approach_date, 
       lease_term, lease_unit, settle_method, 
       deposit_unit_price, price_mode, standard_rent, 
-      discount_rate, lease_term_price, step_price, 
-      step_price_data, additional_clause, additional_clause_data, 
-      remark, dtl_no, material_conversion_rate, 
-      material_conversion_rate_data, tracking_id, 
+      discount_rate, lease_term_price, remark, 
+      dtl_no, material_conversion_rate, tracking_id, 
       credit_price, define_item, standard_rent_amount, 
       discount_rent_amount, standard_amount_id, credit_price_id, 
       deposit_amount, lease_term_price_unit, standard_rent_unit, 
@@ -116,10 +107,10 @@
       original_quantity, waring_message, dtl_chkChange, 
       inner_settle_standard_amount, inner_settle_discount, 
       sign_item_id, min_lease_cycle, min_rent_amount, 
-      source_dtlId, step_price_desc, has_step_price, 
-      supplement_quantity, supplement_lease_term, 
-      supplement_lease_price, delivery_date_end, advance_price, 
-      advance_price_unit, total_advance)
+      source_dtlId, has_step_price, supplement_quantity, 
+      supplement_lease_term, supplement_lease_price, 
+      delivery_date_end, advance_price, advance_price_unit, 
+      total_advance)
     values (#{id,jdbcType=INTEGER}, #{erpBilldtlId,jdbcType=INTEGER}, #{erpId,jdbcType=INTEGER}, 
       #{orderId,jdbcType=INTEGER}, #{lineNumber,jdbcType=INTEGER}, #{orderNo,jdbcType=VARCHAR}, 
       #{itemType,jdbcType=INTEGER}, #{itemId,jdbcType=INTEGER}, #{itemNo,jdbcType=VARCHAR}, 
@@ -128,10 +119,8 @@
       #{itemQuantity,jdbcType=DECIMAL}, #{itemUnit,jdbcType=INTEGER}, #{approachDate,jdbcType=TIMESTAMP}, 
       #{leaseTerm,jdbcType=DECIMAL}, #{leaseUnit,jdbcType=TINYINT}, #{settleMethod,jdbcType=INTEGER}, 
       #{depositUnitPrice,jdbcType=DECIMAL}, #{priceMode,jdbcType=TINYINT}, #{standardRent,jdbcType=DECIMAL}, 
-      #{discountRate,jdbcType=DECIMAL}, #{leaseTermPrice,jdbcType=DECIMAL}, #{stepPrice,jdbcType=VARCHAR}, 
-      #{stepPriceData,jdbcType=VARCHAR}, #{additionalClause,jdbcType=VARCHAR}, #{additionalClauseData,jdbcType=VARCHAR}, 
-      #{remark,jdbcType=VARCHAR}, #{dtlNo,jdbcType=INTEGER}, #{materialConversionRate,jdbcType=VARCHAR}, 
-      #{materialConversionRateData,jdbcType=VARCHAR}, #{trackingId,jdbcType=INTEGER}, 
+      #{discountRate,jdbcType=DECIMAL}, #{leaseTermPrice,jdbcType=DECIMAL}, #{remark,jdbcType=VARCHAR}, 
+      #{dtlNo,jdbcType=INTEGER}, #{materialConversionRate,jdbcType=VARCHAR}, #{trackingId,jdbcType=INTEGER}, 
       #{creditPrice,jdbcType=DECIMAL}, #{defineItem,jdbcType=VARCHAR}, #{standardRentAmount,jdbcType=DECIMAL}, 
       #{discountRentAmount,jdbcType=DECIMAL}, #{standardAmountId,jdbcType=INTEGER}, #{creditPriceId,jdbcType=INTEGER}, 
       #{depositAmount,jdbcType=DECIMAL}, #{leaseTermPriceUnit,jdbcType=VARCHAR}, #{standardRentUnit,jdbcType=VARCHAR}, 
@@ -140,10 +129,10 @@
       #{originalQuantity,jdbcType=DECIMAL}, #{waringMessage,jdbcType=VARCHAR}, #{dtlChkchange,jdbcType=BIT}, 
       #{innerSettleStandardAmount,jdbcType=DECIMAL}, #{innerSettleDiscount,jdbcType=DECIMAL}, 
       #{signItemId,jdbcType=INTEGER}, #{minLeaseCycle,jdbcType=DECIMAL}, #{minRentAmount,jdbcType=DECIMAL}, 
-      #{sourceDtlid,jdbcType=DECIMAL}, #{stepPriceDesc,jdbcType=VARCHAR}, #{hasStepPrice,jdbcType=BIT}, 
-      #{supplementQuantity,jdbcType=DECIMAL}, #{supplementLeaseTerm,jdbcType=DECIMAL}, 
-      #{supplementLeasePrice,jdbcType=DECIMAL}, #{deliveryDateEnd,jdbcType=DATE}, #{advancePrice,jdbcType=DECIMAL}, 
-      #{advancePriceUnit,jdbcType=VARCHAR}, #{totalAdvance,jdbcType=DECIMAL})
+      #{sourceDtlid,jdbcType=DECIMAL}, #{hasStepPrice,jdbcType=BIT}, #{supplementQuantity,jdbcType=DECIMAL}, 
+      #{supplementLeaseTerm,jdbcType=DECIMAL}, #{supplementLeasePrice,jdbcType=DECIMAL}, 
+      #{deliveryDateEnd,jdbcType=DATE}, #{advancePrice,jdbcType=DECIMAL}, #{advancePriceUnit,jdbcType=VARCHAR}, 
+      #{totalAdvance,jdbcType=DECIMAL})
   </insert>
   <insert id="insertSelective" parameterType="com.order.entity.OrderDetail">
     insert into order_detail
@@ -226,18 +215,6 @@
       <if test="leaseTermPrice != null">
         lease_term_price,
       </if>
-      <if test="stepPrice != null">
-        step_price,
-      </if>
-      <if test="stepPriceData != null">
-        step_price_data,
-      </if>
-      <if test="additionalClause != null">
-        additional_clause,
-      </if>
-      <if test="additionalClauseData != null">
-        additional_clause_data,
-      </if>
       <if test="remark != null">
         remark,
       </if>
@@ -246,9 +223,6 @@
       </if>
       <if test="materialConversionRate != null">
         material_conversion_rate,
-      </if>
-      <if test="materialConversionRateData != null">
-        material_conversion_rate_data,
       </if>
       <if test="trackingId != null">
         tracking_id,
@@ -324,9 +298,6 @@
       </if>
       <if test="sourceDtlid != null">
         source_dtlId,
-      </if>
-      <if test="stepPriceDesc != null">
-        step_price_desc,
       </if>
       <if test="hasStepPrice != null">
         has_step_price,
@@ -432,18 +403,6 @@
       <if test="leaseTermPrice != null">
         #{leaseTermPrice,jdbcType=DECIMAL},
       </if>
-      <if test="stepPrice != null">
-        #{stepPrice,jdbcType=VARCHAR},
-      </if>
-      <if test="stepPriceData != null">
-        #{stepPriceData,jdbcType=VARCHAR},
-      </if>
-      <if test="additionalClause != null">
-        #{additionalClause,jdbcType=VARCHAR},
-      </if>
-      <if test="additionalClauseData != null">
-        #{additionalClauseData,jdbcType=VARCHAR},
-      </if>
       <if test="remark != null">
         #{remark,jdbcType=VARCHAR},
       </if>
@@ -452,9 +411,6 @@
       </if>
       <if test="materialConversionRate != null">
         #{materialConversionRate,jdbcType=VARCHAR},
-      </if>
-      <if test="materialConversionRateData != null">
-        #{materialConversionRateData,jdbcType=VARCHAR},
       </if>
       <if test="trackingId != null">
         #{trackingId,jdbcType=INTEGER},
@@ -530,9 +486,6 @@
       </if>
       <if test="sourceDtlid != null">
         #{sourceDtlid,jdbcType=DECIMAL},
-      </if>
-      <if test="stepPriceDesc != null">
-        #{stepPriceDesc,jdbcType=VARCHAR},
       </if>
       <if test="hasStepPrice != null">
         #{hasStepPrice,jdbcType=BIT},
@@ -638,18 +591,6 @@
       <if test="leaseTermPrice != null">
         lease_term_price = #{leaseTermPrice,jdbcType=DECIMAL},
       </if>
-      <if test="stepPrice != null">
-        step_price = #{stepPrice,jdbcType=VARCHAR},
-      </if>
-      <if test="stepPriceData != null">
-        step_price_data = #{stepPriceData,jdbcType=VARCHAR},
-      </if>
-      <if test="additionalClause != null">
-        additional_clause = #{additionalClause,jdbcType=VARCHAR},
-      </if>
-      <if test="additionalClauseData != null">
-        additional_clause_data = #{additionalClauseData,jdbcType=VARCHAR},
-      </if>
       <if test="remark != null">
         remark = #{remark,jdbcType=VARCHAR},
       </if>
@@ -658,9 +599,6 @@
       </if>
       <if test="materialConversionRate != null">
         material_conversion_rate = #{materialConversionRate,jdbcType=VARCHAR},
-      </if>
-      <if test="materialConversionRateData != null">
-        material_conversion_rate_data = #{materialConversionRateData,jdbcType=VARCHAR},
       </if>
       <if test="trackingId != null">
         tracking_id = #{trackingId,jdbcType=INTEGER},
@@ -737,9 +675,6 @@
       <if test="sourceDtlid != null">
         source_dtlId = #{sourceDtlid,jdbcType=DECIMAL},
       </if>
-      <if test="stepPriceDesc != null">
-        step_price_desc = #{stepPriceDesc,jdbcType=VARCHAR},
-      </if>
       <if test="hasStepPrice != null">
         has_step_price = #{hasStepPrice,jdbcType=BIT},
       </if>
@@ -794,14 +729,9 @@
       standard_rent = #{standardRent,jdbcType=DECIMAL},
       discount_rate = #{discountRate,jdbcType=DECIMAL},
       lease_term_price = #{leaseTermPrice,jdbcType=DECIMAL},
-      step_price = #{stepPrice,jdbcType=VARCHAR},
-      step_price_data = #{stepPriceData,jdbcType=VARCHAR},
-      additional_clause = #{additionalClause,jdbcType=VARCHAR},
-      additional_clause_data = #{additionalClauseData,jdbcType=VARCHAR},
       remark = #{remark,jdbcType=VARCHAR},
       dtl_no = #{dtlNo,jdbcType=INTEGER},
       material_conversion_rate = #{materialConversionRate,jdbcType=VARCHAR},
-      material_conversion_rate_data = #{materialConversionRateData,jdbcType=VARCHAR},
       tracking_id = #{trackingId,jdbcType=INTEGER},
       credit_price = #{creditPrice,jdbcType=DECIMAL},
       define_item = #{defineItem,jdbcType=VARCHAR},
@@ -827,7 +757,6 @@
       min_lease_cycle = #{minLeaseCycle,jdbcType=DECIMAL},
       min_rent_amount = #{minRentAmount,jdbcType=DECIMAL},
       source_dtlId = #{sourceDtlid,jdbcType=DECIMAL},
-      step_price_desc = #{stepPriceDesc,jdbcType=VARCHAR},
       has_step_price = #{hasStepPrice,jdbcType=BIT},
       supplement_quantity = #{supplementQuantity,jdbcType=DECIMAL},
       supplement_lease_term = #{supplementLeaseTerm,jdbcType=DECIMAL},
