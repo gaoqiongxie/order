@@ -58,7 +58,7 @@
     </bean>
     
     <!--多数据源配置-->
-    <bean id="multipleDataSource" class="com.order.base.MultipleDataSource">
+    <bean id="multipleDataSource" class="com.base.MultipleDataSource">
         <property name="defaultTargetDataSource" ref="dataSource" />
         <property name="targetDataSources">
             <map key-type = "java.lang.String">

@@ -1,4 +1,4 @@
-package com.order.base;
+package com.base;
 
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 

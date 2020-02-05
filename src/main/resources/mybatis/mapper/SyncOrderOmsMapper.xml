@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.order.dao.SyncOrderOmsDao">
+ 
+ <resultMap type="com.oms.model.po.OrderBasePO" id="OrderBasePOResultMap">
+		<id column="id" property="id" />
+		<result column="approval_shop_name" property="approvalShopName"/>
+		<result column="approval_shop_number" property="approvalShopNumber"/>
+		<result column="arrival_logistics_arrangement" property="arrivalLogisticsArrangement"/>
+		<result column="attach_business" property="attachBusiness"/>
+		<result column="bottom_line_changes" property="bottomLineChanges"/>
+		<result column="business_model" property="businessModel"/>
+		<result column="check_contract_recovery_status" property="checkContractRecoveryStatus"/>
+		<result column="company_name" property="companyName"/>
+		<result column="company_number" property="companyNumber"/>
+		<result column="connect_salesman_name" property="connectSalesmanName"/>
+		<result column="connect_salesman_number" property="connectSalesmanNumber"/>
+		<result column="connect_shop_name" property="connectShopName"/>
+		<result column="connect_shop_number" property="connectShopNumber"/>
+		<result column="construction_end_date" property="constructionEndDate"/>
+		<result column="construction_period" property="constructionPeriod"/>
+		<result column="contract_amount" property="contractAmount"/>
+		<result column="contract_cus_name" property="contractCusName"/>
+		<result column="contract_cus_number" property="contractCusNumber"/>
+		<result column="contract_price_coefficient" property="contractPriceCoefficient"/>
+		<result column="contract_recovery_status" property="contractRecoveryStatus"/>
+		<result column="contract_version" property="contractVersion"/>
+		<result column="contribute_rate" property="contributeRate"/>
+		<result column="credit_cus_name" property="creditCusName"/>
+		<result column="credit_cus_number" property="creditCusNumber"/>
+		<result column="deposit_payable" property="depositPayable"/>
+		<result column="division_name" property="divisionName"/>
+		<result column="division_number" property="divisionNumber"/>
+		<result column="down_payment_ratio" property="downPaymentRatio"/>
+		<result column="engineering_mode" property="engineeringMode"/>
+		<result column="estimate_finished_date" property="estimateFinishedDate"/>
+		<result column="exit_logistics_arrangements" property="exitLogisticsArrangements"/>
+		<result column="fuel_bearer" property="fuelBearer"/>
+		<result column="fuel_provider" property="fuelProvider"/>
+		<result column="handover_premise" property="handoverPremise"/>
+		<result column="internal_approval_notes" property="internalApprovalNotes"/>
+		<result column="labor_service" property="laborService"/>
+		<result column="leasing_method" property="leasingMethod"/>
+		<result column="leasing_purpose" property="leasingPurpose"/>
+		<result column="lessee_cus_name" property="lesseeCusName"/>
+		<result column="lessee_cus_number" property="lesseeCusNumber"/>
+		<result column="no" property="no"/>
+		<result column="order_date" property="orderDate"/>
+		<result column="erp_id" property="erpId"/>
+		<result column="payment_desc" property="paymentDesc"/>
+		<result column="payment_method" property="paymentMethod"/>
+		<result column="payment_term_day" property="paymentTermDay"/>
+		<result column="performance_bond" property="performanceBond"/>
+		<result column="prepayment_payable" property="prepaymentPayable"/>
+		<result column="product_class_name" property="productClassName"/>
+		<result column="product_class_number" property="productClassNumber"/>
+		<result column="project_class_name" property="projectClassName"/>
+		<result column="project_class_number" property="projectClassNumber"/>
+		<result column="project_name" property="projectName"/>
+		<result column="related_main_contract" property="relatedMainContract"/>
+		<result column="related_main_contract_no" property="relatedMainContractNo"/>
+		<result column="salesman_name" property="salesmanName"/>
+		<result column="salesman_number" property="salesmanNumber"/>
+		<result column="settlement_date" property="settlementDate"/>
+		<result column="shop_name" property="shopName"/>
+		<result column="shop_number" property="shopNumber"/>
+		<result column="show_cus_notes" property="showCusNotes"/>
+		<result column="status" property="status"/>
+		<result column="trans_regional" property="transRegional"/>
+		<result column="unit_basic_business_model" property="unitBasicBusinessModel"/>
+		<result column="overdue" property="overdue"/>
+	</resultMap>
+
+	<sql id="orders">
+		<if test="orders != null  and orders != '' ">order by ${orders}</if>
+	</sql>
+	
+	<sql id="limits">
+		<if test="dataLimit != null">limit ${dataLimit}</if>
+	</sql>
+	
+	<sql id="order_base_all_column_fields">
+		 id,approval_shop_name,approval_shop_number,arrival_logistics_arrangement,attach_business,bottom_line_changes,business_model,check_contract_recovery_status,company_name,company_number,connect_salesman_name,connect_salesman_number,connect_shop_name,connect_shop_number,construction_end_date,construction_period,contract_amount,contract_cus_name,contract_cus_number,contract_price_coefficient,contract_recovery_status,contract_version,contribute_rate,credit_cus_name,credit_cus_number,deposit_payable,division_name,division_number,down_payment_ratio,engineering_mode,estimate_finished_date,exit_logistics_arrangements,fuel_bearer,fuel_provider,handover_premise,internal_approval_notes,labor_service,leasing_method,leasing_purpose,lessee_cus_name,lessee_cus_number,no,order_date,erp_id,payment_desc,payment_method,payment_term_day,performance_bond,prepayment_payable,product_class_name,product_class_number,project_class_name,project_class_number,project_name,related_main_contract,related_main_contract_no,salesman_name,salesman_number,settlement_date,shop_name,shop_number,show_cus_notes,status,trans_regional,unit_basic_business_model,overdue
+	</sql>
+
+	<sql id="order_base_dynamic_where_fields">
+		<where>
+			<if test="approvalShopName != null  and approvalShopName != '' "> AND approval_shop_name=#{approvalShopName} </if>
+			<if test="approvalShopNumber != null  and approvalShopNumber != '' "> AND approval_shop_number=#{approvalShopNumber} </if>
+			<if test="arrivalLogisticsArrangement != null "> AND arrival_logistics_arrangement=#{arrivalLogisticsArrangement} </if>
+			<if test="attachBusiness != null "> AND attach_business=#{attachBusiness} </if>
+			<if test="bottomLineChanges != null "> AND bottom_line_changes=#{bottomLineChanges} </if>
+			<if test="businessModel != null "> AND business_model=#{businessModel} </if>
+			<if test="checkContractRecoveryStatus != null "> AND check_contract_recovery_status=#{checkContractRecoveryStatus} </if>
+			<if test="companyName != null  and companyName != '' "> AND company_name=#{companyName} </if>
+			<if test="companyNumber != null  and companyNumber != '' "> AND company_number=#{companyNumber} </if>
+			<if test="connectSalesmanName != null  and connectSalesmanName != '' "> AND connect_salesman_name=#{connectSalesmanName} </if>
+			<if test="connectSalesmanNumber != null  and connectSalesmanNumber != '' "> AND connect_salesman_number=#{connectSalesmanNumber} </if>
+			<if test="connectShopName != null  and connectShopName != '' "> AND connect_shop_name=#{connectShopName} </if>
+			<if test="connectShopNumber != null  and connectShopNumber != '' "> AND connect_shop_number=#{connectShopNumber} </if>
+			<if test="constructionPeriod != null "> AND construction_period=#{constructionPeriod} </if>
+			<if test="contractAmount != null "> AND contract_amount=#{contractAmount} </if>
+			<if test="contractCusName != null  and contractCusName != '' "> AND contract_cus_name=#{contractCusName} </if>
+			<if test="contractCusNumber != null  and contractCusNumber != '' "> AND contract_cus_number=#{contractCusNumber} </if>
+			<if test="contractPriceCoefficient != null "> AND contract_price_coefficient=#{contractPriceCoefficient} </if>
+			<if test="contractRecoveryStatus != null "> AND contract_recovery_status=#{contractRecoveryStatus} </if>
+			<if test="contractVersion != null "> AND contract_version=#{contractVersion} </if>
+			<if test="contributeRate != null "> AND contribute_rate=#{contributeRate} </if>
+			<if test="creditCusName != null  and creditCusName != '' "> AND credit_cus_name=#{creditCusName} </if>
+			<if test="creditCusNumber != null  and creditCusNumber != '' "> AND credit_cus_number=#{creditCusNumber} </if>
+			<if test="depositPayable != null "> AND deposit_payable=#{depositPayable} </if>
+			<if test="divisionName != null  and divisionName != '' "> AND division_name=#{divisionName} </if>
+			<if test="divisionNumber != null  and divisionNumber != '' "> AND division_number=#{divisionNumber} </if>
+			<if test="downPaymentRatio != null "> AND down_payment_ratio=#{downPaymentRatio} </if>
+			<if test="engineeringMode != null "> AND engineering_mode=#{engineeringMode} </if>
+			<if test="exitLogisticsArrangements != null "> AND exit_logistics_arrangements=#{exitLogisticsArrangements} </if>
+			<if test="fuelBearer != null "> AND fuel_bearer=#{fuelBearer} </if>
+			<if test="fuelProvider != null "> AND fuel_provider=#{fuelProvider} </if>
+			<if test="handoverPremise != null  and handoverPremise != '' "> AND handover_premise=#{handoverPremise} </if>
+			<if test="internalApprovalNotes != null  and internalApprovalNotes != '' "> AND internal_approval_notes=#{internalApprovalNotes} </if>
+			<if test="laborService != null "> AND labor_service=#{laborService} </if>
+			<if test="leasingMethod != null "> AND leasing_method=#{leasingMethod} </if>
+			<if test="leasingPurpose != null  and leasingPurpose != '' "> AND leasing_purpose=#{leasingPurpose} </if>
+			<if test="lesseeCusName != null  and lesseeCusName != '' "> AND lessee_cus_name=#{lesseeCusName} </if>
+			<if test="lesseeCusNumber != null  and lesseeCusNumber != '' "> AND lessee_cus_number=#{lesseeCusNumber} </if>
+			<if test="no != null  and no != '' "> AND no=#{no} </if>
+			<if test="erpId != null "> AND erp_id=#{erpId} </if>
+			<if test="paymentDesc != null  and paymentDesc != '' "> AND payment_desc=#{paymentDesc} </if>
+			<if test="paymentMethod != null "> AND payment_method=#{paymentMethod} </if>
+			<if test="paymentTermDay != null "> AND payment_term_day=#{paymentTermDay} </if>
+			<if test="performanceBond != null "> AND performance_bond=#{performanceBond} </if>
+			<if test="prepaymentPayable != null "> AND prepayment_payable=#{prepaymentPayable} </if>
+			<if test="productClassName != null  and productClassName != '' "> AND product_class_name=#{productClassName} </if>
+			<if test="productClassNumber != null  and productClassNumber != '' "> AND product_class_number=#{productClassNumber} </if>
+			<if test="projectClassName != null  and projectClassName != '' "> AND project_class_name=#{projectClassName} </if>
+			<if test="projectClassNumber != null  and projectClassNumber != '' "> AND project_class_number=#{projectClassNumber} </if>
+			<if test="projectName != null  and projectName != '' "> AND project_name=#{projectName} </if>
+			<if test="relatedMainContract != null "> AND related_main_contract=#{relatedMainContract} </if>
+			<if test="relatedMainContractNo != null  and relatedMainContractNo != '' "> AND related_main_contract_no=#{relatedMainContractNo} </if>
+			<if test="salesmanName != null  and salesmanName != '' "> AND salesman_name=#{salesmanName} </if>
+			<if test="salesmanNumber != null  and salesmanNumber != '' "> AND salesman_number=#{salesmanNumber} </if>
+			<if test="settlementDate != null  and settlementDate != '' "> AND settlement_date=#{settlementDate} </if>
+			<if test="shopName != null  and shopName != '' "> AND shop_name=#{shopName} </if>
+			<if test="shopNumber != null  and shopNumber != '' "> AND shop_number=#{shopNumber} </if>
+			<if test="showCusNotes != null  and showCusNotes != '' "> AND show_cus_notes=#{showCusNotes} </if>
+			<if test="status != null "> AND status=#{status} </if>
+			<if test="transRegional != null "> AND trans_regional=#{transRegional} </if>
+			<if test="unitBasicBusinessModel != null "> AND unit_basic_business_model=#{unitBasicBusinessModel} </if>
+			<if test="overdue != null "> AND overdue=#{overdue} </if>
+		</where>
+	</sql>
+    <select id="findOrderBasePODynamic" resultMap="OrderBasePOResultMap" parameterType="java.util.Map">
+        SELECT
+        <include refid="order_base_all_column_fields" />
+        FROM
+  			order_base
+        <include refid="order_base_dynamic_where_fields" />
+        <include refid="orders" />
+        <include refid="limits" />
+    </select>
+ 
+	<update id="updateOrderBasePODynamic" parameterType="com.oms.model.po.OrderBasePO">
+		UPDATE order_base
+		<set>
+			<if test="approvalShopName != null  and approvalShopName != '' ">approval_shop_name=#{approvalShopName},</if>
+			<if test="approvalShopNumber != null  and approvalShopNumber != '' ">approval_shop_number=#{approvalShopNumber},</if>
+			<if test="arrivalLogisticsArrangement != null ">arrival_logistics_arrangement=#{arrivalLogisticsArrangement},</if>
+			<if test="attachBusiness != null ">attach_business=#{attachBusiness},</if>
+			<if test="bottomLineChanges != null ">bottom_line_changes=#{bottomLineChanges},</if>
+			<if test="businessModel != null ">business_model=#{businessModel},</if>
+			<if test="checkContractRecoveryStatus != null ">check_contract_recovery_status=#{checkContractRecoveryStatus},</if>
+			<if test="companyName != null  and companyName != '' ">company_name=#{companyName},</if>
+			<if test="companyNumber != null  and companyNumber != '' ">company_number=#{companyNumber},</if>
+			<if test="connectSalesmanName != null  and connectSalesmanName != '' ">connect_salesman_name=#{connectSalesmanName},</if>
+			<if test="connectSalesmanNumber != null  and connectSalesmanNumber != '' ">connect_salesman_number=#{connectSalesmanNumber},</if>
+			<if test="connectShopName != null  and connectShopName != '' ">connect_shop_name=#{connectShopName},</if>
+			<if test="connectShopNumber != null  and connectShopNumber != '' ">connect_shop_number=#{connectShopNumber},</if>
+			<if test="constructionEndDate != null ">construction_end_date=#{constructionEndDate},</if>
+			<if test="constructionPeriod != null ">construction_period=#{constructionPeriod},</if>
+			<if test="contractAmount != null ">contract_amount=#{contractAmount},</if>
+			<if test="contractCusName != null  and contractCusName != '' ">contract_cus_name=#{contractCusName},</if>
+			<if test="contractCusNumber != null  and contractCusNumber != '' ">contract_cus_number=#{contractCusNumber},</if>
+			<if test="contractPriceCoefficient != null ">contract_price_coefficient=#{contractPriceCoefficient},</if>
+			<if test="contractRecoveryStatus != null ">contract_recovery_status=#{contractRecoveryStatus},</if>
+			<if test="contractVersion != null ">contract_version=#{contractVersion},</if>
+			<if test="contributeRate != null ">contribute_rate=#{contributeRate},</if>
+			<if test="creditCusName != null  and creditCusName != '' ">credit_cus_name=#{creditCusName},</if>
+			<if test="creditCusNumber != null  and creditCusNumber != '' ">credit_cus_number=#{creditCusNumber},</if>
+			<if test="depositPayable != null ">deposit_payable=#{depositPayable},</if>
+			<if test="divisionName != null  and divisionName != '' ">division_name=#{divisionName},</if>
+			<if test="divisionNumber != null  and divisionNumber != '' ">division_number=#{divisionNumber},</if>
+			<if test="downPaymentRatio != null ">down_payment_ratio=#{downPaymentRatio},</if>
+			<if test="engineeringMode != null ">engineering_mode=#{engineeringMode},</if>
+			<if test="estimateFinishedDate != null ">estimate_finished_date=#{estimateFinishedDate},</if>
+			<if test="exitLogisticsArrangements != null ">exit_logistics_arrangements=#{exitLogisticsArrangements},</if>
+			<if test="fuelBearer != null ">fuel_bearer=#{fuelBearer},</if>
+			<if test="fuelProvider != null ">fuel_provider=#{fuelProvider},</if>
+			<if test="handoverPremise != null  and handoverPremise != '' ">handover_premise=#{handoverPremise},</if>
+			<if test="internalApprovalNotes != null  and internalApprovalNotes != '' ">internal_approval_notes=#{internalApprovalNotes},</if>
+			<if test="laborService != null ">labor_service=#{laborService},</if>
+			<if test="leasingMethod != null ">leasing_method=#{leasingMethod},</if>
+			<if test="leasingPurpose != null  and leasingPurpose != '' ">leasing_purpose=#{leasingPurpose},</if>
+			<if test="lesseeCusName != null  and lesseeCusName != '' ">lessee_cus_name=#{lesseeCusName},</if>
+			<if test="lesseeCusNumber != null  and lesseeCusNumber != '' ">lessee_cus_number=#{lesseeCusNumber},</if>
+			<if test="no != null  and no != '' ">no=#{no},</if>
+			<if test="orderDate != null ">order_date=#{orderDate},</if>
+			<if test="erpId != null ">erp_id=#{erpId},</if>
+			<if test="paymentDesc != null  and paymentDesc != '' ">payment_desc=#{paymentDesc},</if>
+			<if test="paymentMethod != null ">payment_method=#{paymentMethod},</if>
+			<if test="paymentTermDay != null ">payment_term_day=#{paymentTermDay},</if>
+			<if test="performanceBond != null ">performance_bond=#{performanceBond},</if>
+			<if test="prepaymentPayable != null ">prepayment_payable=#{prepaymentPayable},</if>
+			<if test="productClassName != null  and productClassName != '' ">product_class_name=#{productClassName},</if>
+			<if test="productClassNumber != null  and productClassNumber != '' ">product_class_number=#{productClassNumber},</if>
+			<if test="projectClassName != null  and projectClassName != '' ">project_class_name=#{projectClassName},</if>
+			<if test="projectClassNumber != null  and projectClassNumber != '' ">project_class_number=#{projectClassNumber},</if>
+			<if test="projectName != null  and projectName != '' ">project_name=#{projectName},</if>
+			<if test="relatedMainContract != null ">related_main_contract=#{relatedMainContract},</if>
+			<if test="relatedMainContractNo != null  and relatedMainContractNo != '' ">related_main_contract_no=#{relatedMainContractNo},</if>
+			<if test="salesmanName != null  and salesmanName != '' ">salesman_name=#{salesmanName},</if>
+			<if test="salesmanNumber != null  and salesmanNumber != '' ">salesman_number=#{salesmanNumber},</if>
+			<if test="settlementDate != null  and settlementDate != '' ">settlement_date=#{settlementDate},</if>
+			<if test="shopName != null  and shopName != '' ">shop_name=#{shopName},</if>
+			<if test="shopNumber != null  and shopNumber != '' ">shop_number=#{shopNumber},</if>
+			<if test="showCusNotes != null  and showCusNotes != '' ">show_cus_notes=#{showCusNotes},</if>
+			<if test="status != null ">status=#{status},</if>
+			<if test="transRegional != null ">trans_regional=#{transRegional},</if>
+			<if test="unitBasicBusinessModel != null ">unit_basic_business_model=#{unitBasicBusinessModel},</if>
+			<if test="overdue != null ">overdue=#{overdue},</if>
+		</set>
+		WHERE id = #{id}
+	</update>
+	
+	<insert id="insertOrderRentDTO" parameterType="com.oms.model.po.OrderBasePO" useGeneratedKeys="true" keyProperty="id" >
+        <selectKey resultType="long" keyProperty="id" order="AFTER">
+            SELECT LAST_INSERT_ID() AS id
+        </selectKey>
+        INSERT INTO order_base(
+                    id,
+                    approval_shop_name,
+                    approval_shop_number,
+                    arrival_logistics_arrangement,
+                    attach_business,
+                    bottom_line_changes,
+                    business_model,
+                    check_contract_recovery_status,
+                    company_name,
+                    company_number,
+                    connect_salesman_name,
+                    connect_salesman_number,
+                    connect_shop_name,
+                    connect_shop_number,
+                    construction_end_date,
+                    construction_period,
+                    contract_amount,
+                    contract_cus_name,
+                    contract_cus_number,
+                    contract_price_coefficient,
+                    contract_recovery_status,
+                    contract_version,
+                    contribute_rate,
+                    credit_cus_name,
+                    credit_cus_number,
+                    deposit_payable,
+                    division_name,
+                    division_number,
+                    down_payment_ratio,
+                    engineering_mode,
+                    estimate_finished_date,
+                    exit_logistics_arrangements,
+                    fuel_bearer,
+                    fuel_provider,
+                    handover_premise,
+                    internal_approval_notes,
+                    labor_service,
+                    leasing_method,
+                    leasing_purpose,
+                    lessee_cus_name,
+                    lessee_cus_number,
+                    no,
+                    order_date,
+                    erp_id,
+                    payment_desc,
+                    payment_method,
+                    payment_term_day,
+                    performance_bond,
+                    prepayment_payable,
+                    product_class_name,
+                    product_class_number,
+                    project_class_name,
+                    project_class_number,
+                    project_name,
+                    related_main_contract,
+                    related_main_contract_no,
+                    salesman_name,
+                    salesman_number,
+                    settlement_date,
+                    shop_name,
+                    shop_number,
+                    show_cus_notes,
+                    status,
+                    trans_regional,
+                    unit_basic_business_model,
+                    overdue
+        )values(
+			#{id},
+			#{approvalShopName},
+			#{approvalShopNumber},
+			#{arrivalLogisticsArrangement},
+			#{attachBusiness},
+			#{bottomLineChanges},
+			#{businessModel},
+			#{checkContractRecoveryStatus},
+			#{companyName},
+			#{companyNumber},
+			#{connectSalesmanName},
+			#{connectSalesmanNumber},
+			#{connectShopName},
+			#{connectShopNumber},
+			#{constructionEndDate},
+			#{constructionPeriod},
+			#{contractAmount},
+			#{contractCusName},
+			#{contractCusNumber},
+			#{contractPriceCoefficient},
+			#{contractRecoveryStatus},
+			#{contractVersion},
+			#{contributeRate},
+			#{creditCusName},
+			#{creditCusNumber},
+			#{depositPayable},
+			#{divisionName},
+			#{divisionNumber},
+			#{downPaymentRatio},
+			#{engineeringMode},
+			#{estimateFinishedDate},
+			#{exitLogisticsArrangements},
+			#{fuelBearer},
+			#{fuelProvider},
+			#{handoverPremise},
+			#{internalApprovalNotes},
+			#{laborService},
+			#{leasingMethod},
+			#{leasingPurpose},
+			#{lesseeCusName},
+			#{lesseeCusNumber},
+			#{no},
+			#{orderDate},
+			#{erpId},
+			#{paymentDesc},
+			#{paymentMethod},
+			#{paymentTermDay},
+			#{performanceBond},
+			#{prepaymentPayable},
+			#{productClassName},
+			#{productClassNumber},
+			#{projectClassName},
+			#{projectClassNumber},
+			#{projectName},
+			#{relatedMainContract},
+			#{relatedMainContractNo},
+			#{salesmanName},
+			#{salesmanNumber},
+			#{settlementDate},
+			#{shopName},
+			#{shopNumber},
+			#{showCusNotes},
+			#{status},
+			#{transRegional},
+			#{unitBasicBusinessModel},
+			#{overdue}
+        )
+    </insert>
+ 
+</mapper>

@@ -1,0 +1,715 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.order.dao.SyncOrderErpDao">
+ 
+ 	<resultMap type="com.oms.model.po.OrderBasePO" id="OrderBasePOResultMap">
+		<id column="id" property="id" />
+		<result column="approval_shop_name" property="approvalShopName"/>
+		<result column="approval_shop_number" property="approvalShopNumber"/>
+		<result column="arrival_logistics_arrangement" property="arrivalLogisticsArrangement"/>
+		<result column="attach_business" property="attachBusiness"/>
+		<result column="bottom_line_changes" property="bottomLineChanges"/>
+		<result column="business_model" property="businessModel"/>
+		<result column="check_contract_recovery_status" property="checkContractRecoveryStatus"/>
+		<result column="company_name" property="companyName"/>
+		<result column="company_number" property="companyNumber"/>
+		<result column="connect_salesman_name" property="connectSalesmanName"/>
+		<result column="connect_salesman_number" property="connectSalesmanNumber"/>
+		<result column="connect_shop_name" property="connectShopName"/>
+		<result column="connect_shop_number" property="connectShopNumber"/>
+		<result column="construction_end_date" property="constructionEndDate"/>
+		<result column="construction_period" property="constructionPeriod"/>
+		<result column="contract_amount" property="contractAmount"/>
+		<result column="contract_cus_name" property="contractCusName"/>
+		<result column="contract_cus_number" property="contractCusNumber"/>
+		<result column="contract_price_coefficient" property="contractPriceCoefficient"/>
+		<result column="contract_recovery_status" property="contractRecoveryStatus"/>
+		<result column="contract_version" property="contractVersion"/>
+		<result column="contribute_rate" property="contributeRate"/>
+		<result column="credit_cus_name" property="creditCusName"/>
+		<result column="credit_cus_number" property="creditCusNumber"/>
+		<result column="deposit_payable" property="depositPayable"/>
+		<result column="division_name" property="divisionName"/>
+		<result column="division_number" property="divisionNumber"/>
+		<result column="down_payment_ratio" property="downPaymentRatio"/>
+		<result column="engineering_mode" property="engineeringMode"/>
+		<result column="estimate_finished_date" property="estimateFinishedDate"/>
+		<result column="exit_logistics_arrangements" property="exitLogisticsArrangements"/>
+		<result column="fuel_bearer" property="fuelBearer"/>
+		<result column="fuel_provider" property="fuelProvider"/>
+		<result column="handover_premise" property="handoverPremise"/>
+		<result column="internal_approval_notes" property="internalApprovalNotes"/>
+		<result column="labor_service" property="laborService"/>
+		<result column="leasing_method" property="leasingMethod"/>
+		<result column="leasing_purpose" property="leasingPurpose"/>
+		<result column="lessee_cus_name" property="lesseeCusName"/>
+		<result column="lessee_cus_number" property="lesseeCusNumber"/>
+		<result column="no" property="no"/>
+		<result column="order_date" property="orderDate"/>
+		<result column="erp_id" property="erpId"/>
+		<result column="payment_desc" property="paymentDesc"/>
+		<result column="payment_method" property="paymentMethod"/>
+		<result column="payment_term_day" property="paymentTermDay"/>
+		<result column="performance_bond" property="performanceBond"/>
+		<result column="prepayment_payable" property="prepaymentPayable"/>
+		<result column="product_class_name" property="productClassName"/>
+		<result column="product_class_number" property="productClassNumber"/>
+		<result column="project_class_name" property="projectClassName"/>
+		<result column="project_class_number" property="projectClassNumber"/>
+		<result column="project_name" property="projectName"/>
+		<result column="related_main_contract" property="relatedMainContract"/>
+		<result column="related_main_contract_no" property="relatedMainContractNo"/>
+		<result column="salesman_name" property="salesmanName"/>
+		<result column="salesman_number" property="salesmanNumber"/>
+		<result column="settlement_date" property="settlementDate"/>
+		<result column="shop_name" property="shopName"/>
+		<result column="shop_number" property="shopNumber"/>
+		<result column="show_cus_notes" property="showCusNotes"/>
+		<result column="status" property="status"/>
+		<result column="trans_regional" property="transRegional"/>
+		<result column="unit_basic_business_model" property="unitBasicBusinessModel"/>
+		<result column="overdue" property="overdue"/>
+	</resultMap>
+
+	<resultMap type="com.oms.model.po.OrderDetailPO" id="OrderDetailPOResultMap">
+		<id column="id" property="id" />
+		<result column="erp_billdtl_id" property="erpBilldtlId"/>
+		<result column="erp_id" property="erpId"/>
+		<result column="order_id" property="orderId"/>
+		<result column="line_number" property="lineNumber"/>
+		<result column="order_no" property="orderNo"/>
+		<result column="item_type" property="itemType"/>
+		<result column="item_id" property="itemId"/>
+		<result column="item_no" property="itemNo"/>
+		<result column="item_name" property="itemName"/>
+		<result column="item_type_code" property="itemTypeCode"/>
+		<result column="item_type_name" property="itemTypeName"/>
+		<result column="item_model" property="itemModel"/>
+		<result column="item_brand" property="itemBrand"/>
+		<result column="item_brand_name" property="itemBrandName"/>
+		<result column="item_quantity" property="itemQuantity"/>
+		<result column="item_unit" property="itemUnit"/>
+		<result column="approach_date" property="approachDate"/>
+		<result column="lease_term" property="leaseTerm"/>
+		<result column="lease_unit" property="leaseUnit"/>
+		<result column="settle_method" property="settleMethod"/>
+		<result column="deposit_unit_price" property="depositUnitPrice"/>
+		<result column="price_mode" property="priceMode"/>
+		<result column="standard_rent" property="standardRent"/>
+		<result column="discount_rate" property="discountRate"/>
+		<result column="lease_term_price" property="leaseTermPrice"/>
+		<result column="remark" property="remark"/>
+		<result column="dtl_no" property="dtlNo"/>
+		<result column="material_conversion_rate" property="materialConversionRate"/>
+		<result column="tracking_id" property="trackingId"/>
+		<result column="credit_price" property="creditPrice"/>
+		<result column="define_item" property="defineItem"/>
+		<result column="standard_rent_amount" property="standardRentAmount"/>
+		<result column="discount_rent_amount" property="discountRentAmount"/>
+		<result column="standard_amount_id" property="standardAmountId"/>
+		<result column="credit_price_id" property="creditPriceId"/>
+		<result column="deposit_amount" property="depositAmount"/>
+		<result column="lease_term_price_unit" property="leaseTermPriceUnit"/>
+		<result column="standard_rent_unit" property="standardRentUnit"/>
+		<result column="deposit_unit" property="depositUnit"/>
+		<result column="credit_price_unit" property="creditPriceUnit"/>
+		<result column="init_data" property="initData"/>
+		<result column="init_data_time" property="initDataTime"/>
+		<result column="rantal_price" property="rantalPrice"/>
+		<result column="rantal_price_unit" property="rantalPriceUnit"/>
+		<result column="original_quantity" property="originalQuantity"/>
+		<result column="waring_message" property="waringMessage"/>
+		<result column="dtl_chkChange" property="dtlChkChange"/>
+		<result column="inner_settle_standard_amount" property="innerSettleStandardAmount"/>
+		<result column="inner_settle_discount" property="innerSettleDiscount"/>
+		<result column="sign_item_id" property="signItemId"/>
+		<result column="min_lease_cycle" property="minLeaseCycle"/>
+		<result column="min_rent_amount" property="minRentAmount"/>
+		<result column="source_dtlId" property="sourceDtlId"/>
+		<result column="has_step_price" property="hasStepPrice"/>
+		<result column="supplement_quantity" property="supplementQuantity"/>
+		<result column="supplement_lease_term" property="supplementLeaseTerm"/>
+		<result column="supplement_lease_price" property="supplementLeasePrice"/>
+		<result column="delivery_date_end" property="deliveryDateEnd"/>
+		<result column="advance_price" property="advancePrice"/>
+		<result column="advance_price_unit" property="advancePriceUnit"/>
+		<result column="total_advance" property="totalAdvance"/>
+	</resultMap>
+	
+	<resultMap type="com.oms.model.po.OrderDetailDataPO" id="OrderDetailDataPOResultMap">
+		<id column="id" property="id" />
+		<result column="erp_billdtl_id" property="erpBilldtlId"/>
+		<result column="erp_id" property="erpId"/>
+		<result column="order_detail_id" property="orderDetailId"/>
+		<result column="order_id" property="orderId"/>
+		<result column="step_price" property="stepPrice"/>
+		<result column="step_price_data" property="stepPriceData"/>
+		<result column="additional_clause" property="additionalClause"/>
+		<result column="additional_clause_data" property="additionalClauseData"/>
+		<result column="material_conversion_rate_data" property="materialConversionRateData"/>
+		<result column="step_price_desc" property="stepPriceDesc"/>
+	</resultMap>
+	
+	<resultMap type="com.oms.model.po.OrderSparePartsDetailPO" id="OrderSparePartsDetailPOResultMap">
+		<id column="id" property="id" />
+		<result column="erp_billdtl_id" property="erpBilldtlId"/>
+		<result column="erp_id" property="erpId"/>
+		<result column="order_id" property="orderId"/>
+		<result column="line_number" property="lineNumber"/>
+		<result column="order_no" property="orderNo"/>
+		<result column="sp_code" property="spCode"/>
+		<result column="sp_name" property="spName"/>
+		<result column="sp_quantity" property="spQuantity"/>
+		<result column="remark" property="remark"/>
+		<result column="sp_no" property="spNo"/>
+		<result column="sp_amount" property="spAmount"/>
+	</resultMap>
+	
+	<resultMap type="com.oms.model.po.OrderContactPO" id="OrderContactPOResultMap">
+		<id column="id" property="id" />
+		<result column="erp_billdtl_id" property="erpBilldtlId"/>
+		<result column="erp_id" property="erpId"/>
+		<result column="order_id" property="orderId"/>
+		<result column="line_number" property="lineNumber"/>
+		<result column="order_no" property="orderNo"/>
+		<result column="contact_role" property="contactRole"/>
+		<result column="role_type" property="roleType"/>
+		<result column="contact_name" property="contactName"/>
+		<result column="contact_mobile" property="contactMobile"/>
+		<result column="id_type" property="idType"/>
+		<result column="id_number" property="idNumber"/>
+		<result column="id_card_front_url" property="idCardFrontUrl"/>
+		<result column="id_card_back_url" property="idCardBackUrl"/>
+		<result column="front_no" property="frontNo"/>
+		<result column="back_no" property="backNo"/>
+		<result column="expiry_date" property="expiryDate"/>
+		<result column="mobile_match_name" property="mobileMatchName"/>
+		<result column="back_no_copy" property="backNoCopy"/>
+		<result column="network_state" property="networkState"/>
+		<result column="postal_address" property="postalAddress"/>
+		<result column="postal_address_id" property="postalAddressId"/>
+		<result column="postal_address_area" property="postalAddressArea"/>
+		<result column="legal_person" property="legalPerson"/>
+		<result column="sign_empower_billId" property="signEmpowerBillId"/>
+		<result column="sign_empower_billDtlId" property="signEmpowerBillDtlId"/>
+		<result column="sign_empower_json" property="signEmpowerJson"/>
+		<result column="sign_empower_type" property="signEmpowerType"/>
+		<result column="open_sign_empower" property="openSignEmpower"/>
+	</resultMap>
+	
+	<resultMap type="com.oms.model.po.OrderCustomerCreditPO" id="OrderCustomerCreditPOResultMap">
+		<id column="id" property="id" />
+		<result column="erp_billdtl_id" property="erpBilldtlId"/>
+		<result column="erp_id" property="erpId"/>
+		<result column="order_id" property="orderId"/>
+		<result column="line_number" property="lineNumber"/>
+		<result column="order_no" property="orderNo"/>
+		<result column="biz_unit_code" property="bizUnitCode"/>
+		<result column="biz_unit_name" property="bizUnitName"/>
+		<result column="total_settle_amount" property="totalSettleAmount"/>
+		<result column="total_account_amount" property="totalAccountAmount"/>
+		<result column="customer_score" property="customerScore"/>
+		<result column="customer_after_level" property="customerAfterLevel"/>
+		<result column="customer_before_level" property="customerBeforeLevel"/>
+		<result column="customer_init_level" property="customerInitLevel"/>
+	</resultMap>
+	
+	<resultMap type="com.oms.model.po.OrderRiskManagementPO" id="OrderRiskManagementPOResultMap">
+		<id column="id" property="id" />
+		<result column="erp_billdtl_id" property="erpBilldtlId"/>
+		<result column="erp_id" property="erpId"/>
+		<result column="order_id" property="orderId"/>
+		<result column="line_number" property="lineNumber"/>
+		<result column="order_no" property="orderNo"/>
+		<result column="approval_rule_code" property="approvalRuleCode"/>
+		<result column="approval_rule_name" property="approvalRuleName"/>
+		<result column="mangage_requirement" property="mangageRequirement"/>
+		<result column="ri_shoponwer" property="riShoponwer"/>
+		<result column="ri_leasing_IG" property="riLeasingIG"/>
+		<result column="ri_Biz_manager" property="riBizManager"/>
+		<result column="ri_credit_post" property="riCreditPost"/>
+		<result column="ri_credit_review" property="riCreditReview"/>
+		<result column="ri_system_auto" property="riSystemAuto"/>
+		<result column="ri_isaffect_approval_flow" property="riIsaffectApprovalFlow"/>
+		<result column="ri_control_dimension" property="riControlDimension"/>
+		<result column="ri_unlimit" property="riUnlimit"/>
+		<result column="ri_result_check" property="riResultCheck"/>
+		<result column="ri_system_first_trial" property="riSystemFirstTrial"/>
+	</resultMap>
+	
+	<resultMap type="com.oms.model.po.OrderContactAntiFraudPO" id="OrderContactAntiFraudPOResultMap">
+		<id column="id" property="id" />
+		<result column="erp_billdtl_id" property="erpBilldtlId"/>
+		<result column="erp_id" property="erpId"/>
+		<result column="order_id" property="orderId"/>
+		<result column="line_number" property="lineNumber"/>
+		<result column="order_no" property="orderNo"/>
+		<result column="af_ID_number" property="afIDNumber"/>
+		<result column="af_contact_name" property="afContactName"/>
+		<result column="af_contact_mobile" property="afContactMobile"/>
+		<result column="sign_type_code" property="signTypeCode"/>
+		<result column="sign_type_name" property="signTypeName"/>
+		<result column="af_contact_type" property="afContactType"/>
+		<result column="af_uncollected_amount" property="afUncollectedAmount"/>
+		<result column="af_max_overdue_days" property="afMaxOverdueDays"/>
+		<result column="multiple_sign_reason" property="multipleSignReason"/>
+		<result column="af_manager" property="afManager"/>
+		<result column="af_IG" property="afIG"/>
+		<result column="af_credit" property="afCredit"/>
+		<result column="af_staff_code" property="afStaffCode"/>
+		<result column="af_staff_name" property="afStaffName"/>
+	</resultMap>
+	
+	<resultMap type="com.oms.model.po.OrderOtherCostPO" id="OrderOtherCostPOResultMap">
+		<id column="id" property="id" />
+		<result column="erp_billdtl_id" property="erpBilldtlId"/>
+		<result column="erp_id" property="erpId"/>
+		<result column="order_id" property="orderId"/>
+		<result column="line_number" property="lineNumber"/>
+		<result column="order_no" property="orderNo"/>
+		<result column="other_cost_type_code" property="otherCostTypeCode"/>
+		<result column="other_cost_type_name" property="otherCostTypeName"/>
+		<result column="remark" property="remark"/>
+		<result column="other_cost_dtlId" property="otherCostDtlId"/>
+		<result column="em_details_line_information" property="emDetailsLineInformation"/>
+		<result column="charge_rule" property="chargeRule"/>
+		<result column="other_cost_no" property="otherCostNo"/>
+		<result column="charge_rule_desc" property="chargeRuleDesc"/>
+		<result column="real_amount" property="realAmount"/>
+		<result column="standard_amount" property="standardAmount"/>
+		<result column="other_cost_explain" property="otherCostExplain"/>
+		<result column="other_cost_track_dtlId" property="otherCostTrackDtlId"/>
+		<result column="rule_type" property="ruleType"/>
+		<result column="oth_itemId" property="othItemId"/>
+		<result column="include_freight" property="includeFreight"/>
+	</resultMap>
+	
+	<resultMap type="com.oms.model.po.OrderPaySchedulePO" id="OrderPaySchedulePOResultMap">
+		<id column="id" property="id" />
+		<result column="erp_billdtl_id" property="erpBilldtlId"/>
+		<result column="erp_id" property="erpId"/>
+		<result column="order_id" property="orderId"/>
+		<result column="line_number" property="lineNumber"/>
+		<result column="order_no" property="orderNo"/>
+		<result column="pay_schedule_no" property="payScheduleNo"/>
+		<result column="pay_type" property="payType"/>
+		<result column="pay_proportion" property="payProportion"/>
+		<result column="pay_amount" property="payAmount"/>
+		<result column="pay_point" property="payPoint"/>
+		<result column="remark" property="remark"/>
+		<result column="pay_status_desc" property="payStatusDesc"/>
+		<result column="pay_status" property="payStatus"/>
+		<result column="pay_time" property="payTime"/>
+		<result column="pay_dtlId" property="payDtlId"/>
+	</resultMap>
+	
+	<resultMap type="com.oms.model.po.OrderCashCouponPO" id="OrderCashCouponPOResultMap">
+		<id column="id" property="id" />
+		<result column="erp_billdtl_id" property="erpBilldtlId"/>
+		<result column="erp_id" property="erpId"/>
+		<result column="order_id" property="orderId"/>
+		<result column="line_number" property="lineNumber"/>
+		<result column="order_no" property="orderNo"/>
+		<result column="cash_coupon_no" property="cashCouponNo"/>
+		<result column="cash_coupon_name" property="cashCouponName"/>
+		<result column="cash_coupon_amount" property="cashCouponAmount"/>
+		<result column="cash_dtlld" property="cashDtlld"/>
+		<result column="cash_coupon_over_amount" property="cashCouponOverAmount"/>
+	</resultMap>
+
+	<resultMap type="com.oms.model.po.OrderChangeInfoPO" id="OrderChangeInfoPOResultMap">
+		<id column="id" property="id" />
+		<result column="erp_billdtl_id" property="erpBilldtlId"/>
+		<result column="erp_id" property="erpId"/>
+		<result column="order_id" property="orderId"/>
+		<result column="line_number" property="lineNumber"/>
+		<result column="order_no" property="orderNo"/>
+		<result column="change_type" property="changeType"/>
+		<result column="change_before" property="changeBefore"/>
+		<result column="change_date" property="changeDate"/>
+		<result column="remark" property="remark"/>
+		<result column="update_user_code" property="updateUserCode"/>
+		<result column="update_user_name" property="updateUserName"/>
+		<result column="update_time" property="updateTime"/>
+		<result column="change_after" property="changeAfter"/>
+		<result column="change_review_status" property="changeReviewStatus"/>
+	</resultMap>
+	
+	<resultMap type="com.oms.model.po.OrderContractRecoverReviewStatusPO" id="OrderContractRecoverReviewStatusPOResultMap">
+		<id column="id" property="id" />
+		<result column="erp_billdtl_id" property="erpBilldtlId"/>
+		<result column="erp_id" property="erpId"/>
+		<result column="order_id" property="orderId"/>
+		<result column="line_number" property="lineNumber"/>
+		<result column="order_no" property="orderNo"/>
+		<result column="rrs_status" property="rrsStatus"/>
+		<result column="rrs_lose" property="rrsLose"/>
+		<result column="rrs_back_note" property="rrsBackNote"/>
+		<result column="update_user_code" property="updateUserCode"/>
+		<result column="update_user_name" property="updateUserName"/>
+		<result column="update_time" property="updateTime"/>
+	</resultMap>
+	
+	
+	
+	<sql id="order_base_all_column_fields">
+		 id,approval_shop_name,approval_shop_number,arrival_logistics_arrangement,attach_business,bottom_line_changes,business_model,check_contract_recovery_status,company_name,company_number,connect_salesman_name,connect_salesman_number,connect_shop_name,connect_shop_number,construction_end_date,construction_period,contract_amount,contract_cus_name,contract_cus_number,contract_price_coefficient,contract_recovery_status,contract_version,contribute_rate,credit_cus_name,credit_cus_number,deposit_payable,division_name,division_number,down_payment_ratio,engineering_mode,estimate_finished_date,exit_logistics_arrangements,fuel_bearer,fuel_provider,handover_premise,internal_approval_notes,labor_service,leasing_method,leasing_purpose,lessee_cus_name,lessee_cus_number,no,order_date,erp_id,payment_desc,payment_method,payment_term_day,performance_bond,prepayment_payable,product_class_name,product_class_number,project_class_name,project_class_number,project_name,related_main_contract,related_main_contract_no,salesman_name,salesman_number,settlement_date,shop_name,shop_number,show_cus_notes,status,trans_regional,unit_basic_business_model,overdue
+	</sql>
+ 
+	<select id="getOrderBaseByOrderId" resultMap="OrderBasePOResultMap">
+		select billid erp_id, no no, DELIVERYTRANSFERTYPE arrival_logistics_arrangement
+		from scm_hx03_rohead
+		where billid=#{orderId}
+	</select>
+	
+	<select id="listOrderDetailByOrderId" resultMap="OrderDetailPOResultMap">
+		select 
+		  r.billdtlid as erp_billdtl_id, 
+		  r.billid as erp_id,  
+		  row_number() over(partition by r.billid order by r.billdtlid)  as line_number,
+		  ro.no as order_no, 
+		  
+		  r.dtl_ItemType  as item_type,
+		  r.dtl_ItemID  as item_id,
+		  good.item_no  as item_no,
+		  r.dtl_ItemDescr  as item_name,
+		  good.item_type_code as item_type_code,
+		  good.item_type_name as item_type_name,
+		  good.item_model  as item_model,
+		  good.item_brand  as item_brand,
+		  good.item_brand_name  as item_brand_name,
+		  
+		  r.dtl_ItemQty  as item_quantity,
+		  r.dtl_itemuom as item_unit,
+		  r.dtl_DeliveryDate  as approach_date,
+		  r.dtl_leaseTerm  as lease_term,
+		  r.dtl_LeaseUnit  as lease_unit,
+		  r.dtl_SettleModel  as settle_method,
+		  r.dtl_DepositPrice  as deposit_unit_price,
+		  r.dtl_PriceMode  as price_mode,
+		  r.dtl_StdPrice  as standard_rent,
+		  r.dtl_Discount  as discount_rate,
+		  r.dtl_Price  as lease_term_price,
+		  r.dtl_Notes  as remark,
+		  r.dtl_No  as dtl_no,
+		  r.dtl_MatConvRate  as material_conversion_rate,
+		  r.SrcDtlID  as tracking_id,
+		  r.dtl_CreditPrice  as credit_price,
+		  r.dtl_SelectItem  as define_item,
+		  r.dtl_StdAmount  as standard_rent_amount,
+		  r.Dtl_DIscountAmount  as discount_rent_amount,
+		  r.dtl_StdPrice_DtlID  as standard_amount_id,
+		  r.dtl_CreditPrice_DtlID  as credit_price_id,
+		  r.dtl_DepositAmt  as deposit_amount,
+		  r.dtl_PriceUnit  as lease_term_price_unit,
+		  r.dtl_StdPriceUnit  as standard_rent_unit,
+		  r.dtl_DepositPriceUnit  as deposit_unit,
+		  r.dtl_CreditPriceUnit  as credit_price_unit,
+		  r.DTL_INIT_DATA  as init_data,
+		  r.DTL_INIT_DATA1  as init_data_time,
+		  r.dtl_DirectPrice  as rantal_price,
+		  r.dtl_DirectPriceUnit  as rantal_price_unit,
+		  r.dtl_OringalQty  as original_quantity,
+		  r.dtl_messAge  as waring_message,
+		  r.dtl_chkChange  as dtl_chkChange,
+		  r.dtl_IntStdPrice  as inner_settle_standard_amount,
+		  r.dtl_IntDiscount  as inner_settle_discount,
+		  r.dtl_SignItemID  as sign_item_id,
+		  r.dtl_MinLease  as min_lease_cycle,
+		  r.dtl_MinRentAmount  as min_rent_amount,
+		  r.dtl_sourceDtlID  as source_dtlId,
+		  r.dtl_isStepPrice  as has_step_price,
+		  r.Dtl_SupplementQty  as supplement_quantity,
+		  r.dtl_SupplementTime  as supplement_lease_term,
+		  r.dtl_SupplementPrice  as supplement_lease_price,
+		  r.dtl_DdeliveryDate  as delivery_date_end,
+		  r.dtl_AdvancePrice  as advance_price,
+		  r.dtl_AdvancePriceUnit  as advance_price_unit,
+		  r.chengji  as total_advance
+		from SCM_HX03_RO_Dtl r
+		left join scm_hx03_rohead ro on r.billid=ro.billid
+		left join (
+		  select   
+		      11 as goodType,
+		      m.id as id,
+		      m.code  as item_no,
+		      b1.code as item_type_code,
+		      b1.name as item_type_name,
+		      m.EquSpec  as item_model,  
+		      b.code  as item_brand,
+		      b.name  as item_brand_name
+		  from CP_HX01_EquModel m
+		      left join CP_HX01_EquModel  b on m.parentid=b.id
+		      left join CP_HX01_EquModel  b1 on b.parentid=b1.id
+		  union             
+		  select 	
+		    20 as goodType,
+		    m.id as id,
+		    m.code  as item_no,
+		    b1.code as item_type_code,
+		    b1.name as item_type_name,
+		    m.Spec  as item_model,
+		    b.code  as item_brand,
+		    b.name  as item_brand_name
+		  from CP_HX00_Material m 
+		  left join CP_HX00_Material  b on m.parentid=b.id
+		  left join CP_HX00_Material  b1 on b.parentid=b1.id
+		)good on good.id = r.dtl_ItemID and  dtl_ItemType=good.goodType
+		where r.billid=#{orderId}
+<!-- 		and ro.billdate>to_date('2019-01-01','yyyy-MM-dd')
+		and dtl_ItemDescr like '201%' -->
+	</select>
+	
+	<select id="listOrderDetailDataByOrderId" resultMap="OrderDetailDataPOResultMap">
+		select 
+		  r.billdtlid as erp_billdtl_id, 
+		  r.billid as erp_id,   
+		  r.dtl_StepPriceDescr  as step_price,
+		  r.dtl_StepPriceData  as step_price_data,
+		  r.dtl_Rules  as additional_clause,
+		  r.dtl_RulesData  as additional_clause_data,
+		  r.dtl_MatConvRateData  as material_conversion_rate_data,
+		  r.dtl_StepPriceDescr2  as step_price_desc
+		from SCM_HX03_RO_Dtl r
+		where r.billid=#{orderId}
+	</select>
+	
+	<select id="listOrderSparePartsDetailByOrderId" resultMap="OrderSparePartsDetailPOResultMap">
+		select 
+		  r.billdtlid as erp_billdtl_id, 
+		  r.billid as erp_id, 
+		  row_number() over(partition by r.billid order by r.billdtlid)  as line_number,
+		  ro.no as order_no, 
+		  r.SP_CODE  as sp_code,
+		  c.name  as sp_name,
+		  r.SP_QTY  as sp_quantity,
+		  r.SP_NOTES  as remark,
+		  r.SP_NO  as sp_no,
+		  r.SP_AMOUNT  as sp_amount
+		from SCM_HX03_RO_SP r
+		left join scm_hx03_rohead ro on r.billid=ro.billid
+		left join CP_HX00_SparePartHead c on r.SP_CODE=c.id
+		where r.billid=#{orderId}
+	</select>
+	
+	<select id="listOrderContactByOrderId" resultMap="OrderContactPOResultMap">
+		select 
+		  r.billdtlid as erp_billdtl_id, 
+		  r.billid as erp_id, 
+		  row_number() over(partition by r.billid order by r.billdtlid)  as line_number,
+		  ro.no as order_no, 
+		  r.CONTACTTYPE   as contact_role,
+		  r.ROLETYPE   as role_type,
+		  r.CONTACTNAME   as contact_name,
+		  r.CONTACTMOBILE   as contact_mobile,
+		  r.DOCTYPE   as ID_type,
+		  r.IDCARD   as ID_number,
+		  r.IDCARDFRONT   as ID_card_front_url,
+		  r.IDCARDBACK   as ID_card_back_url,
+		  r.FRONTNO   as frontNo,
+		  r.BACKNO   as backNo,
+		  r.EXPIRYDATE   as expiry_date,
+		  r.ISMATE   as mobile_match_name,
+		  r.BACKNO_COPY   as backNo_copy,
+		  r.STATE   as network_state,
+		  r.POSTALADDRESS   as postal_address,
+		  r.POSTALADDRESSID   as postal_address_id,
+		  r.POSTALADDRESSNAME   as postal_address_area,
+		  r.ISLEGALPERSON   as legal_person,
+		  r.SIGNEMPOWERBILLID   as sign_empower_billId,
+		  r.SIGNEMPOWERBILLDTLID   as sign_empower_billDtlId,
+		  r.SIGNEMPOWERJSON   as sign_empower_json,
+		  r.SIGNEMPOWERTYPE   as sign_empower_type,
+		  r.DAKAISHOUQUANSHU   as open_sign_empower
+		from SCM_HX03_ROContactNew r
+		left join scm_hx03_rohead ro on r.billid=ro.billid
+		where r.billid=#{orderId}
+	</select>
+	
+	<select id="listOrderCustomerCreditByOrderId" resultMap="OrderCustomerCreditPOResultMap">
+		select 
+		  r.billdtlid as erp_billdtl_id, 
+		  r.billid as erp_id, 
+		  row_number() over(partition by r.billid order by r.billdtlid)  as line_number,
+		  ro.no as order_no, 
+		  c.code as biz_unit_code,
+		  c.name as Biz_unit_name,
+		  r.d_totalsettleamount as total_settle_amount,
+		  r.d_totalaccountamount as total_account_amount,
+		  r.d_custgrade as customer_score,
+		  r.d_afterlevel as customer_after_level,
+		  r.d_beforelevel as customer_before_level,
+		  r.d_initlevel as customer_init_level
+		from SCM_HX03_RO13 r
+		left join scm_hx03_rohead ro on r.billid=ro.billid
+		left join CP_HX00_BizUnit c on r.d_biz_unit=c.id
+		where r.billid=#{orderId}
+	</select>
+	
+	<select id="listOrderRiskManagementByOrderId" resultMap="OrderRiskManagementPOResultMap">
+		select 
+		  r.billdtlid as erp_billdtl_id, 
+		  r.billid as erp_id, 
+		  row_number() over(partition by r.billid order by r.billdtlid)   as line_number,
+		  ro.no as order_no, 
+		  c.code as approval_rule_code,
+		  c.name as approval_rule_name,
+		  r.ri_rocondemand as mangage_requirement,
+		  r.ri_shoperapprove as ri_shoponwer,
+		  r.ri_shopmanage as ri_leasing_IG,
+		  r.ri_bizmanage as ri_Biz_manager,
+		  r.ri_creditapprove as ri_credit_post,
+		  r.ri_bizdirector as ri_credit_review,
+		  r.ri_selectcondition as ri_system_auto,
+		  r.ri_isaffectworkflow as ri_isaffect_approval_flow,
+		  r.ri_rocondesc as ri_control_dimension,
+		  r.ri_unlimit as ri_unlimit,
+		  r.ri_resultcheck as ri_result_check,
+		  r.ri_systemapprove as ri_system_first_trial
+		from SCM_HX03_RO_Risk r
+		left join scm_hx03_rohead ro on r.billid=ro.billid
+		left join CP_HX03_ROConDescribe c on r.ri_roconid=c.id
+		where r.billid=#{orderId}
+	</select>
+	
+	<select id="listOrderContactAntiFraudByOrderId" resultMap="OrderContactAntiFraudPOResultMap">
+		select
+		  r.billdtlid as erp_billdtl_id, 
+		  r.billid as erp_id, 
+		  row_number() over(partition by r.billid order by r.billdtlid)   as line_number,
+		  ro.no as order_no, 
+		  r.af_idcard as af_ID_number,
+		  r.af_contactname as af_contact_name,
+		  r.af_contactmobile  as af_contact_infomation,
+		  c.code as sign_type_code,
+		  c.name as sign_type_name,
+		  r.af_contacttype as af_contact_type,
+		  r.af_noreceive as af_uncollected_amount,
+		  r.af_overday as af_max_overdue_days,
+		  r.af_reason as multiple_sign_reason,
+		  r.af_manager as af_manager,
+		  r.af_ig as af_IG,
+		  r.af_credit as af_credit,
+		  case when r.af_satffid=-1 then '#' 
+		  else (select code from CP_HX00_Staff where id=r.af_satffid)
+		  end as af_staff_code,
+		  case when r.af_satffid=-1 then r.af_satffname 
+		  else (select name from CP_HX00_Staff where id=r.af_satffid)
+		  end as af_staff_name
+		from SCM_HX03_RO_AntiFraud r
+		left join scm_hx03_rohead ro on r.billid=ro.billid
+		left join CP_HX02_Customer c on r.af_contractor=c.id
+		where r.billid=#{orderId}
+	</select>
+	
+	<select id="listOrderOtherCostByOrderId" resultMap="OrderOtherCostPOResultMap">
+		select 
+		  r.billdtlid as erp_billdtl_id, 
+		  r.billid as erp_id,  
+		  row_number() over(partition by r.billid order by r.billdtlid)  as line_number,
+		  ro.no as order_no, 
+		  c.code as other_cost_type_code,
+		  c.name  as  other_cost_type_name,
+		  r.OTH_NOTES  as  remark,
+		  r.OTH_DTLID as  other_cost_dtlId,
+		  r.OTH_DTLDESCR as  em_details_line_information,
+		  r.OTH_CHARGERULS as  charge_rule,
+		  r.OTH_NO as  other_cost_no,
+		  r.OTH_CHARGERULSDESCR as  charge_rule_desc,
+		  r.REAL_AMOUNT as  real_amount,
+		  r.SD_AMOUNT as  standard_amount,
+		  r.EXPLAIN as  other_cost_explain,
+		  r.OTH_SRCDTLID as  other_cost_track_dtlId,
+		  r.RULETYPE as  rule_type,
+		  r.OTH_ITEMID as  oth_itemId,
+		  r.OTH_ISCHARGERULS as  include_freight
+		from SCM_HX03_RO_Charge r
+		left join scm_hx03_rohead ro on r.billid=ro.billid
+		left join CP_HX00_ChargeType c on r.OTH_CHARGETYPE=c.id
+		where r.billid=#{orderId}
+	</select>
+	
+	<select id="listOrderPaySchedulePOByOrderId" resultMap="OrderPaySchedulePOResultMap">
+		select 
+		  r.billdtlid as erp_billdtl_id, 
+		  r.billid as erp_id, 
+		  row_number() over(partition by r.billid order by r.billdtlid) as line_number,
+		  ro.no as order_no, 
+		  r.prj_no as pay_schedule_no,
+		  r.prj_chargetype as pay_type,
+		  r.prj_chargepercentage as pay_proportion,
+		  r.prj_chargeamount as pay_amount,
+		  r.prj_chargetimepoint as pay_point,
+		  r.prj_notes as remark,
+		  r.prj_stagestatuslink as pay_status_desc,
+		  r.prj_stagestatus as pay_status,
+		  r.prj_completetime as pay_time,
+		  r.prj_srcdtlid as pay_dtlId
+		from SCM_HX03_RO_Prj r
+		left join scm_hx03_rohead ro on r.billid=ro.billid
+		where r.billid=#{orderId}
+	</select>
+	
+	<select id="listOrderCashCouponPOByOrderId" resultMap="OrderCashCouponPOResultMap">
+		select 
+		  r.billdtlid as erp_billdtl_id, 
+		  r.billid as erp_id, 
+		  row_number() over(partition by r.billid order by r.billdtlid) as line_number,
+		  ro.no as order_no, 
+		  r.DC_COUPONNUMBER as cash_coupon_no,  
+		  r.DC_COUPONNAME as cash_coupon_name,
+		  r.DC_COUPONAMOUNT as cash_coupon_amount,
+		  r.DC_SOURCEDTLID as cash_dtlld,
+		  r.DC_COUPONOVERAMOUNT as cash_coupon_over_amount
+		from scm_hx03_ro_coupon r
+		left join scm_hx03_rohead ro on r.billid=ro.billid
+		where r.billid=#{orderId}
+	</select>
+	
+	<select id="listOrderChangeInfoPOByOrderId" resultMap="OrderChangeInfoPOResultMap">
+		select * from(
+			select r.billdtlid as erp_billdtl_id, r.billid as erp_id,  row_number() over(partition by r.billid order by r.billdtlid) as line_number,
+			  ro.no as order_no, 10 as change_type, r.rc_RO_NewStaffID as change_before, r.rc_ChangeDate as change_date,
+			  r.rc_notes as remark, o.code as update_user_code, o.name as update_user_name, r.ci_MenderTime as update_time,
+			  r.rc_RO_LasrStaffID as change_after, 1 as change_review_status
+			from SCM_HX03_RO_RC r
+			  left join SCM_HX03_ROHead ro on r.billid=ro.billid
+			  left join gp_operator o on r.rc_mender =o.id
+			union 
+			select r.billdtlid as erp_billdtl_id, r.billid as erp_id,  row_number() over(partition by r.billid order by r.billdtlid) as line_number,
+			  ro.no as order_no, 20 as change_type, r.CONNECT_NEWSTAFFID as change_before, r.ChangeConnectDate as change_date,
+			  r.NewNote as remark, o.code as update_user_code,  o.name as update_user_name, r.Change_MenderTime as update_time,
+			  r.LasrChangeStaffID as change_after, 2 as change_review_status
+			from scm_hx03_ro_rc2 r
+			  left join SCM_HX03_ROHead ro on r.billid=ro.billid
+			  left join gp_operator o on r.Change_Mender =o.id
+			union 
+			select r.billdtlid as erp_billdtl_id, r.billid as erp_id,  row_number() over(partition by r.billid order by r.billdtlid) as line_number,
+			 ro.no as order_no, 30 as change_type, r.cp_status as change_before, r.cp_changedate as change_date,
+			r.cp_notes as remark, o.code as update_user_code,  o.name as update_user_name, r.cp_mendertime as update_time,
+			 r.cp_laststatus as change_after, r.dtl_laststatus as change_review_status
+			from SCM_HX03_RO_CP r
+			  left join SCM_HX03_ROHead ro on r.billid=ro.billid
+			  left join gp_operator o on r.cp_mender =o.id
+		)a where erp_id = #{orderId}
+	</select>
+	
+	<select id="listOrderContractRecoverReviewStatusPOByOrderId" resultMap="OrderContractRecoverReviewStatusPOResultMap">
+		select 
+			r.billdtlid as erp_billdtl_id, 
+			r.billid as erp_id, 
+			row_number() over(partition by r.billid order by r.billdtlid) as line_number,
+			ro.no as order_no, 
+			r.FCP_STATUS as rrs_status, 
+			r.ISLOSE as rrs_lose,
+			r.FCP_NOTE as rrs_back_note,
+		  	o.code as update_user_code,
+			o.name as update_user_name,
+			FCP_MENDERTIME as update_time,
+			o.name
+		from SCM_HX03_RO_FCP r
+		left join gp_operator o on r.FCP_MENDER=o.id
+		left join scm_hx03_rohead ro on r.billid=ro.billid
+		where r.billid=#{orderId}
+	</select>
+</mapper>

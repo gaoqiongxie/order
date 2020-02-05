@@ -23,7 +23,7 @@ public class TestCreateTable {
 	public void testCreateTableBySheetName() {
 		try {
 			ExcelUtil.createTable("D://work/需求/20200107/数据库_orderv2.xlsx", 
-					"D://work/需求/20200107/order_DDL_","order_contact");
+					"D://work/需求/20200107/order_DDL_","order_base_risk");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
