@@ -73,18 +73,27 @@ public class OMSOrderRentServiceImpl implements OMSOrderRentService {
 	 * @param id 
 	 */
 	private void updateOrderData(OrderRentDTO orderRentDTO) {
-//		if(0==orderRentDTO.getId()) {
-//			//更新基础表，返回主键Id
-//			//TODO 基础表可以直接调用原始方法
-//			syncOrderOmsDao.insertOrderRentDTO(orderRentDTO.getOrderBasePO());
-//			logger.info("更新基础表，返回主键Id: "+ orderRentDTO.getOrderBasePO().getId());
-//			orderRentDTO.setId(orderRentDTO.getOrderBasePO().getId());
-//		}
+		if(0==orderRentDTO.getId()) {
+			//更新基础表，返回主键Id
+			//TODO 基础表可以直接调用原始方法
+			syncOrderOmsDao.insertOrderRentDTO(orderRentDTO.getOrderBasePO());
+			logger.info("更新基础表，返回主键Id: "+ orderRentDTO.getOrderBasePO().getId());
+			orderRentDTO.setId(orderRentDTO.getOrderBasePO().getId());
+		}
 		
 		//有则更新无则插入
-//		createOrUpdateData(orderRentDTO);
+		insertOrUpdateOrderData(orderRentDTO);
 	}
 	
+
+	/**
+	 * 更新其他表数据
+	 * @param orderRentDTO
+	 */
+	private void insertOrUpdateOrderData(OrderRentDTO orderRentDTO) {
+		if(null!=orderRentDTO.getOrderDetailPO())
+			syncOrderOmsDao.insertOrUpdateOrderDetailPO(orderRentDTO.getOrderDetailPO());
+	}
 
 	private OrderBasePO getOrderBaseByErpId(int erpId) {
 		Map<String, Object> map = new HashMap<String, Object>();

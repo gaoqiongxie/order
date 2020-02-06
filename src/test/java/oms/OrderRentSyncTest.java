@@ -1,5 +1,8 @@
 package oms;
 
+import java.lang.reflect.Field;
+import java.util.List;
+
 import org.apache.log4j.Logger;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -7,6 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.alibaba.fastjson.JSON;
+import com.base.BaseUtil;
+import com.oms.model.po.OrderDetailPO;
 import com.order.dao.SyncOrderErpDao;
 import com.order.dao.SyncOrderOmsDao;
 import com.order.service.ERPOrderRentService;
@@ -41,4 +47,30 @@ public class OrderRentSyncTest {
 		oMSOrderRentService.sync(id, orderStatus);
 	}
 
+	@Test
+	public void testInsertBatch() {
+		List<OrderDetailPO> orderDetialPOs = eRPOrderRentService.listOrderDetailByOrderId(178972191);
+		try {
+			for (OrderDetailPO orderDetailPO : orderDetialPOs) {
+				orderDetailPO.setOrderId(1);
+//				for (Field f : orderDetailPO.getClass().getDeclaredFields()) {
+//					f.setAccessible(true);
+//					String type = f.getGenericType().toString();
+//					if (f.get(orderDetailPO) == null && type.equals("class java.lang.String")){ //判断字段是否为空，并且对象属性中的基本都会转为对象类型来判断
+//						f.set(orderDetailPO, "");
+//						System.out.println(f.getName());
+//					}
+//				}
+				BaseUtil.objNullSetDefault(orderDetailPO);
+			}
+		} catch (SecurityException e) {
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			e.printStackTrace();
+		}
+		BaseUtil.objNullSetDefault(orderDetialPOs);
+		logger.info("testInsertBatch orderDetialPOs:"+JSON.toJSON(orderDetialPOs));
+
+//		syncOrderOmsDao.insertOrUpdateOrderDetailPO(orderDetialPOs);
+	}
 }

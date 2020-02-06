@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.oms.model.po.OrderBasePO;
+import com.oms.model.po.OrderDetailDataPO;
 import com.oms.model.po.OrderDetailPO;
 
 public interface SyncOrderOmsDao {
