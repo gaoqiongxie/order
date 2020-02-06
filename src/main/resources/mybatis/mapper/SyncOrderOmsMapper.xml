@@ -372,143 +372,204 @@
         )
     </insert>
     
-    <insert id="insertOrUpdateOrderDetailPO" parameterType="java.util.List">
-	    insert into order_detail
-		(
-			id,
-			erp_billdtl_id,
-			erp_id,
-			order_id,
-			line_number,
-			order_no,
-			item_type,
-			item_id,
-			item_no,
-			item_name,
-			item_type_code,
-			item_type_name,
-			item_model,
-			item_brand,
-			item_brand_name,
-			item_quantity,
-			item_unit,
-			approach_date,
-			lease_term,
-			lease_unit,
-			settle_method,
-			deposit_unit_price,
-			price_mode,
-			standard_rent,
-			discount_rate,
-			lease_term_price,
-			remark,
-			dtl_no,
-			material_conversion_rate,
-			tracking_id,
-			credit_price,
-			define_item,
-			standard_rent_amount,
-			discount_rent_amount,
-			standard_amount_id,
-			credit_price_id,
-			deposit_amount,
-			lease_term_price_unit,
-			standard_rent_unit,
-			deposit_unit,
-			credit_price_unit,
-			init_data,
-			init_data_time,
-			rantal_price,
-			rantal_price_unit,
-			original_quantity,
-			waring_message,
-			dtl_chkChange,
-			inner_settle_standard_amount,
-			inner_settle_discount,
-			sign_item_id,
-			min_lease_cycle,
-			min_rent_amount,
-			source_dtlId,
-			has_step_price,
-			supplement_quantity,
-			supplement_lease_term,
-			supplement_lease_price,
-			delivery_date_end,
-			advance_price,
-			advance_price_unit,
-			total_advance
-		)
-		values
-		<foreach collection="list" item="item" index="index"
-			separator=",">
-			(
-				#{item.id},
-				#{item.erpBilldtlId},
-				#{item.erpId},
-				#{item.orderId},
-				#{item.lineNumber},
-				#{item.orderNo},
-				#{item.itemType},
-				#{item.itemId},
-				#{item.itemNo},
-				#{item.itemName},
-				#{item.itemTypeCode},
-				#{item.itemTypeName},
-				#{item.itemModel},
-				#{item.itemBrand},
-				#{item.itemBrandName},
-				#{item.itemQuantity},
-				#{item.itemUnit},
-				#{item.approachDate},
-				#{item.leaseTerm},
-				#{item.leaseUnit},
-				#{item.settleMethod},
-				#{item.depositUnitPrice},
-				#{item.priceMode},
-				#{item.standardRent},
-				#{item.discountRate},
-				#{item.leaseTermPrice},
-				#{item.remark},
-				#{item.dtlNo},
-				#{item.materialConversionRate},
-				#{item.trackingId},
-				#{item.creditPrice},
-				#{item.defineItem},
-				#{item.standardRentAmount},
-				#{item.discountRentAmount},
-				#{item.standardAmountId},
-				#{item.creditPriceId},
-				#{item.depositAmount},
-				#{item.leaseTermPriceUnit},
-				#{item.standardRentUnit},
-				#{item.depositUnit},
-				#{item.creditPriceUnit},
-				#{item.initData},
-				#{item.initDataTime},
-				#{item.rantalPrice},
-				#{item.rantalPriceUnit},
-				#{item.originalQuantity},
-				#{item.waringMessage},
-				#{item.dtlChkChange},
-				#{item.innerSettleStandardAmount},
-				#{item.innerSettleDiscount},
-				#{item.signItemId},
-				#{item.minLeaseCycle},
-				#{item.minRentAmount},
-				#{item.sourceDtlId},
-				#{item.hasStepPrice},
-				#{item.supplementQuantity},
-				#{item.supplementLeaseTerm},
-				#{item.supplementLeasePrice},
-				#{item.deliveryDateEnd},
-				#{item.advancePrice},
-				#{item.advancePriceUnit},
-				#{item.totalAdvance}
-			)
-		</foreach>
-		ON DUPLICATE KEY UPDATE
-			id = VALUES(id),
-			erp_billdtl_id = VALUES(erp_billdtl_id)
-    </insert>
- 
+     <update id="updateOrderDetailPODynamic" parameterType="com.oms.model.po.OrderDetailPO">
+		UPDATE order_detail
+		<set>
+			<if test="erpBilldtlId != null ">erp_billdtl_id=#{erpBilldtlId},</if>
+			<if test="erpId != null ">erp_id=#{erpId},</if>
+			<if test="orderId != null ">order_id=#{orderId},</if>
+			<if test="lineNumber != null ">line_number=#{lineNumber},</if>
+			<if test="orderNo != null  and orderNo != '' ">order_no=#{orderNo},</if>
+			<if test="itemType != null ">item_type=#{itemType},</if>
+			<if test="itemId != null ">item_id=#{itemId},</if>
+			<if test="itemNo != null  and itemNo != '' ">item_no=#{itemNo},</if>
+			<if test="itemName != null  and itemName != '' ">item_name=#{itemName},</if>
+			<if test="itemTypeCode != null  and itemTypeCode != '' ">item_type_code=#{itemTypeCode},</if>
+			<if test="itemTypeName != null  and itemTypeName != '' ">item_type_name=#{itemTypeName},</if>
+			<if test="itemModel != null  and itemModel != '' ">item_model=#{itemModel},</if>
+			<if test="itemBrand != null  and itemBrand != '' ">item_brand=#{itemBrand},</if>
+			<if test="itemBrandName != null  and itemBrandName != '' ">item_brand_name=#{itemBrandName},</if>
+			<if test="itemQuantity != null ">item_quantity=#{itemQuantity},</if>
+			<if test="itemUnit != null ">item_unit=#{itemUnit},</if>
+			<if test="approachDate != null ">approach_date=#{approachDate},</if>
+			<if test="leaseTerm != null ">lease_term=#{leaseTerm},</if>
+			<if test="leaseUnit != null ">lease_unit=#{leaseUnit},</if>
+			<if test="settleMethod != null ">settle_method=#{settleMethod},</if>
+			<if test="depositUnitPrice != null ">deposit_unit_price=#{depositUnitPrice},</if>
+			<if test="priceMode != null ">price_mode=#{priceMode},</if>
+			<if test="standardRent != null ">standard_rent=#{standardRent},</if>
+			<if test="discountRate != null ">discount_rate=#{discountRate},</if>
+			<if test="leaseTermPrice != null ">lease_term_price=#{leaseTermPrice},</if>
+			<if test="remark != null  and remark != '' ">remark=#{remark},</if>
+			<if test="dtlNo != null ">dtl_no=#{dtlNo},</if>
+			<if test="materialConversionRate != null  and materialConversionRate != '' ">material_conversion_rate=#{materialConversionRate},</if>
+			<if test="trackingId != null ">tracking_id=#{trackingId},</if>
+			<if test="creditPrice != null ">credit_price=#{creditPrice},</if>
+			<if test="defineItem != null  and defineItem != '' ">define_item=#{defineItem},</if>
+			<if test="standardRentAmount != null ">standard_rent_amount=#{standardRentAmount},</if>
+			<if test="discountRentAmount != null ">discount_rent_amount=#{discountRentAmount},</if>
+			<if test="standardAmountId != null ">standard_amount_id=#{standardAmountId},</if>
+			<if test="creditPriceId != null ">credit_price_id=#{creditPriceId},</if>
+			<if test="depositAmount != null ">deposit_amount=#{depositAmount},</if>
+			<if test="leaseTermPriceUnit != null  and leaseTermPriceUnit != '' ">lease_term_price_unit=#{leaseTermPriceUnit},</if>
+			<if test="standardRentUnit != null  and standardRentUnit != '' ">standard_rent_unit=#{standardRentUnit},</if>
+			<if test="depositUnit != null  and depositUnit != '' ">deposit_unit=#{depositUnit},</if>
+			<if test="creditPriceUnit != null  and creditPriceUnit != '' ">credit_price_unit=#{creditPriceUnit},</if>
+			<if test="initData != null  and initData != '' ">init_data=#{initData},</if>
+			<if test="initDataTime != null ">init_data_time=#{initDataTime},</if>
+			<if test="rantalPrice != null ">rantal_price=#{rantalPrice},</if>
+			<if test="rantalPriceUnit != null  and rantalPriceUnit != '' ">rantal_price_unit=#{rantalPriceUnit},</if>
+			<if test="originalQuantity != null ">original_quantity=#{originalQuantity},</if>
+			<if test="waringMessage != null  and waringMessage != '' ">waring_message=#{waringMessage},</if>
+			<if test="dtlChkChange != null ">dtl_chkChange=#{dtlChkChange},</if>
+			<if test="innerSettleStandardAmount != null ">inner_settle_standard_amount=#{innerSettleStandardAmount},</if>
+			<if test="innerSettleDiscount != null ">inner_settle_discount=#{innerSettleDiscount},</if>
+			<if test="signItemId != null ">sign_item_id=#{signItemId},</if>
+			<if test="minLeaseCycle != null ">min_lease_cycle=#{minLeaseCycle},</if>
+			<if test="minRentAmount != null ">min_rent_amount=#{minRentAmount},</if>
+			<if test="sourceDtlId != null ">source_dtlId=#{sourceDtlId},</if>
+			<if test="hasStepPrice != null ">has_step_price=#{hasStepPrice},</if>
+			<if test="supplementQuantity != null ">supplement_quantity=#{supplementQuantity},</if>
+			<if test="supplementLeaseTerm != null ">supplement_lease_term=#{supplementLeaseTerm},</if>
+			<if test="supplementLeasePrice != null ">supplement_lease_price=#{supplementLeasePrice},</if>
+			<if test="deliveryDateEnd != null ">delivery_date_end=#{deliveryDateEnd},</if>
+			<if test="advancePrice != null ">advance_price=#{advancePrice},</if>
+			<if test="advancePriceUnit != null  and advancePriceUnit != '' ">advance_price_unit=#{advancePriceUnit},</if>
+			<if test="totalAdvance != null ">total_advance=#{totalAdvance},</if>
+		</set>
+		WHERE id = #{id}
+	</update>
+    
+    <insert id="insertOrderDetailPO" parameterType="com.oms.model.po.OrderDetailPO" useGeneratedKeys="true" keyProperty="id" >
+        <selectKey resultType="long" keyProperty="id" order="AFTER">
+            SELECT LAST_INSERT_ID() AS id
+        </selectKey>
+        INSERT INTO order_detail(
+            id,
+            erp_billdtl_id,
+            erp_id,
+            order_id,
+            line_number,
+            order_no,
+            item_type,
+            item_id,
+            item_no,
+            item_name,
+            item_type_code,
+            item_type_name,
+            item_model,
+            item_brand,
+            item_brand_name,
+            item_quantity,
+            item_unit,
+            approach_date,
+            lease_term,
+            lease_unit,
+            settle_method,
+            deposit_unit_price,
+            price_mode,
+            standard_rent,
+            discount_rate,
+            lease_term_price,
+            remark,
+            dtl_no,
+            material_conversion_rate,
+            tracking_id,
+            credit_price,
+            define_item,
+            standard_rent_amount,
+            discount_rent_amount,
+            standard_amount_id,
+            credit_price_id,
+            deposit_amount,
+            lease_term_price_unit,
+            standard_rent_unit,
+            deposit_unit,
+            credit_price_unit,
+            init_data,
+            init_data_time,
+            rantal_price,
+            rantal_price_unit,
+            original_quantity,
+            waring_message,
+            dtl_chkChange,
+            inner_settle_standard_amount,
+            inner_settle_discount,
+            sign_item_id,
+            min_lease_cycle,
+            min_rent_amount,
+            source_dtlId,
+            has_step_price,
+            supplement_quantity,
+            supplement_lease_term,
+            supplement_lease_price,
+            delivery_date_end,
+            advance_price,
+            advance_price_unit,
+            total_advance
+        )values(
+			#{id},
+			#{erpBilldtlId},
+			#{erpId},
+			#{orderId},
+			#{lineNumber},
+			#{orderNo},
+			#{itemType},
+			#{itemId},
+			#{itemNo},
+			#{itemName},
+			#{itemTypeCode},
+			#{itemTypeName},
+			#{itemModel},
+			#{itemBrand},
+			#{itemBrandName},
+			#{itemQuantity},
+			#{itemUnit},
+			#{approachDate},
+			#{leaseTerm},
+			#{leaseUnit},
+			#{settleMethod},
+			#{depositUnitPrice},
+			#{priceMode},
+			#{standardRent},
+			#{discountRate},
+			#{leaseTermPrice},
+			#{remark},
+			#{dtlNo},
+			#{materialConversionRate},
+			#{trackingId},
+			#{creditPrice},
+			#{defineItem},
+			#{standardRentAmount},
+			#{discountRentAmount},
+			#{standardAmountId},
+			#{creditPriceId},
+			#{depositAmount},
+			#{leaseTermPriceUnit},
+			#{standardRentUnit},
+			#{depositUnit},
+			#{creditPriceUnit},
+			#{initData},
+			#{initDataTime},
+			#{rantalPrice},
+			#{rantalPriceUnit},
+			#{originalQuantity},
+			#{waringMessage},
+			#{dtlChkChange},
+			#{innerSettleStandardAmount},
+			#{innerSettleDiscount},
+			#{signItemId},
+			#{minLeaseCycle},
+			#{minRentAmount},
+			#{sourceDtlId},
+			#{hasStepPrice},
+			#{supplementQuantity},
+			#{supplementLeaseTerm},
+			#{supplementLeasePrice},
+			#{deliveryDateEnd},
+			#{advancePrice},
+			#{advancePriceUnit},
+			#{totalAdvance}
+        )
+        </insert>
 </mapper>

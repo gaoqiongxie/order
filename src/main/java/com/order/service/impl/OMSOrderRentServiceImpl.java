@@ -1,6 +1,7 @@
 package com.order.service.impl;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
@@ -9,8 +10,10 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSON;
+import com.base.BaseUtil;
 import com.oms.model.dto.OrderRentDTO;
 import com.oms.model.po.OrderBasePO;
+import com.oms.model.po.OrderDetailPO;
 import com.order.dao.SyncOrderOmsDao;
 import com.order.service.ERPOrderRentService;
 import com.order.service.OMSOrderRentService;
@@ -51,6 +54,7 @@ public class OMSOrderRentServiceImpl implements OMSOrderRentService {
 		}
 		//根据 flag 进行OMS 数据库保存
 		if(existFlag) {
+			//更新
 			//判断orderStatus，删除或者已废弃，直接更新Mysql中订单主表状态为已删除
 			if(orderStatus==del_status||orderStatus==disuse_status) {
 				OrderBasePO basePO = new OrderBasePO();
@@ -62,38 +66,47 @@ public class OMSOrderRentServiceImpl implements OMSOrderRentService {
 				updateOrderData(orderRentERP);
 			}
 		}else {
-			updateOrderData(orderRentERP);
+			insertOrderData(orderRentERP);
 		}
 		return sucess_status;
 	}
 	
 	/**
-	 * TODO 全量更新表数据
-	 * @param orderRentERP
-	 * @param id 
+	 * 新增表数据
+	 * @param orderRentDTO
 	 */
-	private void updateOrderData(OrderRentDTO orderRentDTO) {
+	private void insertOrderData(OrderRentDTO orderRentDTO) {
 		if(0==orderRentDTO.getId()) {
 			//更新基础表，返回主键Id
-			//TODO 基础表可以直接调用原始方法
 			syncOrderOmsDao.insertOrderRentDTO(orderRentDTO.getOrderBasePO());
 			logger.info("更新基础表，返回主键Id: "+ orderRentDTO.getOrderBasePO().getId());
 			orderRentDTO.setId(orderRentDTO.getOrderBasePO().getId());
 		}
-		
-		//有则更新无则插入
-		insertOrUpdateOrderData(orderRentDTO);
+		if(null != orderRentDTO.getOrderDetailPO()) {
+			List<OrderDetailPO> orderDetialPOs = orderRentDTO.getOrderDetailPO();
+			for (OrderDetailPO orderDetailPO : orderDetialPOs) {
+				orderDetailPO.setOrderId(orderRentDTO.getId());
+				BaseUtil.objNullSetDefault(orderDetailPO);
+				syncOrderOmsDao.insertOrderDetailPO(orderDetailPO);
+			}
+		}
 	}
-	
 
 	/**
-	 * 更新其他表数据
+	 * TODO 全量更新表数据
 	 * @param orderRentDTO
 	 */
-	private void insertOrUpdateOrderData(OrderRentDTO orderRentDTO) {
-		if(null!=orderRentDTO.getOrderDetailPO())
-			syncOrderOmsDao.insertOrUpdateOrderDetailPO(orderRentDTO.getOrderDetailPO());
+	private void updateOrderData(OrderRentDTO orderRentDTO) {
+		//更新表数据
+		if(null != orderRentDTO.getOrderDetailPO()) {
+			List<OrderDetailPO> orderDetialPOs = orderRentDTO.getOrderDetailPO();
+			for (OrderDetailPO orderDetailPO : orderDetialPOs) {
+				orderDetailPO.setOrderId(orderRentDTO.getId());
+				syncOrderOmsDao.updateOrderDetailPODynamic(orderDetailPO);
+			}
+		}
 	}
+	
 
 	private OrderBasePO getOrderBaseByErpId(int erpId) {
 		Map<String, Object> map = new HashMap<String, Object>();

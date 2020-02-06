@@ -120,13 +120,4 @@ public class ERPOrderRentServiceImpl implements ERPOrderRentService {
 		return orderRentDTO;
 	}
 
-	@Override
-	public List<OrderDetailPO> listOrderDetailByOrderId(int orderId) {
-		List<OrderDetailPO> orderDetialPOs = syncOrderErpDao.listOrderDetailByOrderId(orderId);
-		logger.info("ERP QUERY 详细订单明细:"+(orderDetialPOs.isEmpty()?null:JSON.toJSON(orderDetialPOs)));
-		return orderDetialPOs;
-	}
-	
-	
-
 }
