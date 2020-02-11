@@ -1,5 +1,6 @@
 package com.order.service.impl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,7 +14,9 @@ import com.alibaba.fastjson.JSON;
 import com.base.BaseUtil;
 import com.oms.model.dto.OrderRentDTO;
 import com.oms.model.po.OrderBasePO;
+import com.oms.model.po.OrderDetailDataPO;
 import com.oms.model.po.OrderDetailPO;
+import com.oms.model.po.OrderOmsSyncPO;
 import com.order.dao.SyncOrderOmsDao;
 import com.order.service.ERPOrderRentService;
 import com.order.service.OMSOrderRentService;
@@ -28,9 +31,15 @@ public class OMSOrderRentServiceImpl implements OMSOrderRentService {
 	@Autowired
 	ERPOrderRentService eRPOrderRentService;
 	
-	private static final int del_status = 0;
-	private static final int disuse_status= 100;
-	private static final int sucess_status= 1;
+	private static final int order_base_del_status = -1;
+	private static final int order_base_disuse_status= 100;
+	private static final int resp_sucess_status= 1;
+	/** ERP订单变更同步状态 0-待抽取*/
+	private static final int sync_wait_status = 0;
+	/** ERP订单变更同步状态 1-已抽取*/
+	private static final int sync_done_status = 1;
+
+	
 
 	@Override
 	public int sync(int id, int orderStatus) {
@@ -56,7 +65,7 @@ public class OMSOrderRentServiceImpl implements OMSOrderRentService {
 		if(existFlag) {
 			//更新
 			//判断orderStatus，删除或者已废弃，直接更新Mysql中订单主表状态为已删除
-			if(orderStatus==del_status||orderStatus==disuse_status) {
+			if(orderStatus==order_base_del_status||orderStatus==order_base_disuse_status) {
 				OrderBasePO basePO = new OrderBasePO();
 				basePO.setStatus(orderStatus);
 				basePO.setId(orderBaseOMS.getId());
@@ -68,43 +77,104 @@ public class OMSOrderRentServiceImpl implements OMSOrderRentService {
 		}else {
 			insertOrderData(orderRentERP);
 		}
-		return sucess_status;
+//		order_oms_sync
+		insertSync(id, orderRentERP.getOrderBasePO().getNo());
+		
+		
+		return resp_sucess_status;
 	}
 	
+	/**
+	 * 同步信息记录
+	 * @param id
+	 * @param no
+	 */
+	private void insertSync(int id, String no) {
+		OrderOmsSyncPO orderOmsSyncPO = new OrderOmsSyncPO();
+		orderOmsSyncPO.setErpId(id);
+		orderOmsSyncPO.setNo(no);
+/*		if(null==syncOrderOmsDao.findOrderOmsSyncPO(orderOmsSyncPO)) {
+			orderOmsSyncPO.setStatus(sync_done_status);
+			orderOmsSyncPO.setRemark("");
+			syncOrderOmsDao.insertOrderOmsSyncPO(orderDetailPO);
+		}else {
+			orderOmsSyncPO.setStatus(sync_done_status);
+			syncOrderOmsDao.updateOrderOmsSyncPODynamic(orderDetailPO);
+		}*/
+	}
+
 	/**
 	 * 新增表数据
 	 * @param orderRentDTO
 	 */
 	private void insertOrderData(OrderRentDTO orderRentDTO) {
+		logger.info("新增表数据");
 		if(0==orderRentDTO.getId()) {
 			//更新基础表，返回主键Id
-			syncOrderOmsDao.insertOrderRentDTO(orderRentDTO.getOrderBasePO());
-			logger.info("更新基础表，返回主键Id: "+ orderRentDTO.getOrderBasePO().getId());
-			orderRentDTO.setId(orderRentDTO.getOrderBasePO().getId());
+//			syncOrderOmsDao.insertOrderRentDTO(orderRentDTO.getOrderBasePO());
+//			logger.info("更新基础表，返回主键Id: "+ orderRentDTO.getOrderBasePO().getId());
+//			orderId = orderRentDTO.getOrderBasePO().getId();
+//			orderRentDTO.setId(orderId);
+			orderRentDTO.setId(-1);
+			
 		}
-		if(null != orderRentDTO.getOrderDetailPO()) {
-			List<OrderDetailPO> orderDetialPOs = orderRentDTO.getOrderDetailPO();
-			for (OrderDetailPO orderDetailPO : orderDetialPOs) {
-				orderDetailPO.setOrderId(orderRentDTO.getId());
-				BaseUtil.objNullSetDefault(orderDetailPO);
-				syncOrderOmsDao.insertOrderDetailPO(orderDetailPO);
-			}
-		}
+		updateOrderData(orderRentDTO);
 	}
 
 	/**
 	 * TODO 全量更新表数据
+	 * 有则更新无则新增
 	 * @param orderRentDTO
 	 */
 	private void updateOrderData(OrderRentDTO orderRentDTO) {
 		//更新表数据
+		logger.info("全量更新表数据");
+		//order_base id
+		Integer orderId = orderRentDTO.getId();
 		if(null != orderRentDTO.getOrderDetailPO()) {
 			List<OrderDetailPO> orderDetialPOs = orderRentDTO.getOrderDetailPO();
+			OrderDetailPO detailPO = null;
 			for (OrderDetailPO orderDetailPO : orderDetialPOs) {
 				orderDetailPO.setOrderId(orderRentDTO.getId());
-				syncOrderOmsDao.updateOrderDetailPODynamic(orderDetailPO);
+				
+				BaseUtil.objNullSetDefault(orderDetailPO);
+				
+				detailPO = new OrderDetailPO();
+				detailPO.setErpBilldtlId(orderDetailPO.getErpBilldtlId());
+				
+				if(null==syncOrderOmsDao.findOneOrderDetailPO(detailPO)) {
+					orderDetailPO.setOrderId(orderId);
+					syncOrderOmsDao.insertOrderDetailPO(orderDetailPO);
+				}else {
+					syncOrderOmsDao.updateOrderDetailPODynamic(orderDetailPO);
+				}
+				
 			}
 		}
+		
+		List<Integer> erpBilldtlIds = null;
+		if(null != orderRentDTO.getOrderDetailDataPO()) {
+			erpBilldtlIds = new ArrayList<Integer>();
+			List<OrderDetailDataPO> orderDetailDataPOs = orderRentDTO.getOrderDetailDataPO();
+			OrderDetailDataPO detailDataPO = null;
+			for (OrderDetailDataPO orderDetailDataPO : orderDetailDataPOs) {
+				erpBilldtlIds.add(orderDetailDataPO.getErpBilldtlId());
+				orderDetailDataPO.setOrderId(orderId);
+				
+				detailDataPO = new OrderDetailDataPO();
+				detailDataPO.setErpBilldtlId(orderDetailDataPO.getErpBilldtlId());
+				
+				if(null==syncOrderOmsDao.findOneOrderDetailDataPO(detailDataPO)) {
+					BaseUtil.objNullSetDefault(orderDetailDataPO);
+					syncOrderOmsDao.insertOrderDetailDataPO(orderDetailDataPO);
+				}else {
+					syncOrderOmsDao.updateOrderDetailDataPODynamic(orderDetailDataPO);
+				}
+			}
+		}
+		//更新订单详细数据表中 OMS 租赁订单明细ID
+		syncOrderOmsDao.updateOrderDtlOmsId(erpBilldtlIds);
+		
 	}
 	
 

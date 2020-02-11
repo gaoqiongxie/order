@@ -17,6 +17,7 @@ import com.oms.model.po.OrderRiskManagementPO;
 import com.oms.model.po.OrderSparePartsDetailPO;
 
 public interface SyncOrderErpDao {
+	/**----------------------ERP Service-----------------------*/
 
 	/**
 	 * 租赁订单基础
@@ -109,4 +110,6 @@ public interface SyncOrderErpDao {
 	 */
 	List<OrderContractRecoverReviewStatusPO> listOrderContractRecoverReviewStatusPOByOrderId(int orderId);
 	
+	
+	/**----------------------ERP Service-----------------------*/
 }

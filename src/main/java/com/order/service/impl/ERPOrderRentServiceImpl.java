@@ -27,7 +27,6 @@ import com.oms.model.po.OrderSparePartsDetailPO;
 import com.order.annotation.DataSourceType;
 import com.order.constants.DataSourceConstants;
 import com.order.dao.SyncOrderErpDao;
-import com.order.dao.SyncOrderOmsDao;
 import com.order.service.ERPOrderRentService;
 
 
@@ -36,8 +35,6 @@ import com.order.service.ERPOrderRentService;
 @DataSourceType(value = DataSourceConstants.DATASOURCE_ORACLE)
 public class ERPOrderRentServiceImpl implements ERPOrderRentService {
 	
-	@Autowired
-	SyncOrderOmsDao syncOrderOmsDao;
 	@Autowired
 	SyncOrderErpDao syncOrderErpDao;
 

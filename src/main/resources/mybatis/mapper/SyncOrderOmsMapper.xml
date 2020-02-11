@@ -232,7 +232,7 @@
 	</update>
 	
 	<insert id="insertOrderRentDTO" parameterType="com.oms.model.po.OrderBasePO" useGeneratedKeys="true" keyProperty="id" >
-        <selectKey resultType="long" keyProperty="id" order="AFTER">
+        <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
             SELECT LAST_INSERT_ID() AS id
         </selectKey>
         INSERT INTO order_base(
@@ -441,7 +441,7 @@
 	</update>
     
     <insert id="insertOrderDetailPO" parameterType="com.oms.model.po.OrderDetailPO" useGeneratedKeys="true" keyProperty="id" >
-        <selectKey resultType="long" keyProperty="id" order="AFTER">
+        <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
             SELECT LAST_INSERT_ID() AS id
         </selectKey>
         INSERT INTO order_detail(
@@ -572,4 +572,169 @@
 			#{totalAdvance}
         )
         </insert>
+        
+        <sql id="order_detail_all_column_fields">
+		 id,erp_billdtl_id,erp_id,order_id,line_number,order_no,item_type,item_id,item_no,item_name,item_type_code,item_type_name,item_model,item_brand,item_brand_name,item_quantity,item_unit,approach_date,lease_term,lease_unit,settle_method,deposit_unit_price,price_mode,standard_rent,discount_rate,lease_term_price,remark,dtl_no,material_conversion_rate,tracking_id,credit_price,define_item,standard_rent_amount,discount_rent_amount,standard_amount_id,credit_price_id,deposit_amount,lease_term_price_unit,standard_rent_unit,deposit_unit,credit_price_unit,init_data,init_data_time,rantal_price,rantal_price_unit,original_quantity,waring_message,dtl_chkChange,inner_settle_standard_amount,inner_settle_discount,sign_item_id,min_lease_cycle,min_rent_amount,source_dtlId,has_step_price,supplement_quantity,supplement_lease_term,supplement_lease_price,delivery_date_end,advance_price,advance_price_unit,total_advance
+		</sql>
+		<sql id="order_detail_dynamic_where_fields">
+			<where>
+			<if test="erpBilldtlId != null "> AND erp_billdtl_id=#{erpBilldtlId} </if>
+			<if test="erpId != null "> AND erp_id=#{erpId} </if>
+			<if test="orderId != null "> AND order_id=#{orderId} </if>
+			<if test="lineNumber != null "> AND line_number=#{lineNumber} </if>
+			<if test="orderNo != null  and orderNo != '' "> AND order_no=#{orderNo} </if>
+			<if test="itemType != null "> AND item_type=#{itemType} </if>
+			<if test="itemId != null "> AND item_id=#{itemId} </if>
+			<if test="itemNo != null  and itemNo != '' "> AND item_no=#{itemNo} </if>
+			<if test="itemName != null  and itemName != '' "> AND item_name=#{itemName} </if>
+			<if test="itemTypeCode != null  and itemTypeCode != '' "> AND item_type_code=#{itemTypeCode} </if>
+			<if test="itemTypeName != null  and itemTypeName != '' "> AND item_type_name=#{itemTypeName} </if>
+			<if test="itemModel != null  and itemModel != '' "> AND item_model=#{itemModel} </if>
+			<if test="itemBrand != null  and itemBrand != '' "> AND item_brand=#{itemBrand} </if>
+			<if test="itemBrandName != null  and itemBrandName != '' "> AND item_brand_name=#{itemBrandName} </if>
+			<if test="itemQuantity != null "> AND item_quantity=#{itemQuantity} </if>
+			<if test="itemUnit != null "> AND item_unit=#{itemUnit} </if>
+			<if test="leaseTerm != null "> AND lease_term=#{leaseTerm} </if>
+			<if test="leaseUnit != null "> AND lease_unit=#{leaseUnit} </if>
+			<if test="settleMethod != null "> AND settle_method=#{settleMethod} </if>
+			<if test="depositUnitPrice != null "> AND deposit_unit_price=#{depositUnitPrice} </if>
+			<if test="priceMode != null "> AND price_mode=#{priceMode} </if>
+			<if test="standardRent != null "> AND standard_rent=#{standardRent} </if>
+			<if test="discountRate != null "> AND discount_rate=#{discountRate} </if>
+			<if test="leaseTermPrice != null "> AND lease_term_price=#{leaseTermPrice} </if>
+			<if test="remark != null  and remark != '' "> AND remark=#{remark} </if>
+			<if test="dtlNo != null "> AND dtl_no=#{dtlNo} </if>
+			<if test="materialConversionRate != null  and materialConversionRate != '' "> AND material_conversion_rate=#{materialConversionRate} </if>
+			<if test="trackingId != null "> AND tracking_id=#{trackingId} </if>
+			<if test="creditPrice != null "> AND credit_price=#{creditPrice} </if>
+			<if test="defineItem != null  and defineItem != '' "> AND define_item=#{defineItem} </if>
+			<if test="standardRentAmount != null "> AND standard_rent_amount=#{standardRentAmount} </if>
+			<if test="discountRentAmount != null "> AND discount_rent_amount=#{discountRentAmount} </if>
+			<if test="standardAmountId != null "> AND standard_amount_id=#{standardAmountId} </if>
+			<if test="creditPriceId != null "> AND credit_price_id=#{creditPriceId} </if>
+			<if test="depositAmount != null "> AND deposit_amount=#{depositAmount} </if>
+			<if test="leaseTermPriceUnit != null  and leaseTermPriceUnit != '' "> AND lease_term_price_unit=#{leaseTermPriceUnit} </if>
+			<if test="standardRentUnit != null  and standardRentUnit != '' "> AND standard_rent_unit=#{standardRentUnit} </if>
+			<if test="depositUnit != null  and depositUnit != '' "> AND deposit_unit=#{depositUnit} </if>
+			<if test="creditPriceUnit != null  and creditPriceUnit != '' "> AND credit_price_unit=#{creditPriceUnit} </if>
+			<if test="initData != null  and initData != '' "> AND init_data=#{initData} </if>
+			<if test="rantalPrice != null "> AND rantal_price=#{rantalPrice} </if>
+			<if test="rantalPriceUnit != null  and rantalPriceUnit != '' "> AND rantal_price_unit=#{rantalPriceUnit} </if>
+			<if test="originalQuantity != null "> AND original_quantity=#{originalQuantity} </if>
+			<if test="waringMessage != null  and waringMessage != '' "> AND waring_message=#{waringMessage} </if>
+			<if test="dtlChkChange != null "> AND dtl_chkChange=#{dtlChkChange} </if>
+			<if test="innerSettleStandardAmount != null "> AND inner_settle_standard_amount=#{innerSettleStandardAmount} </if>
+			<if test="innerSettleDiscount != null "> AND inner_settle_discount=#{innerSettleDiscount} </if>
+			<if test="signItemId != null "> AND sign_item_id=#{signItemId} </if>
+			<if test="minLeaseCycle != null "> AND min_lease_cycle=#{minLeaseCycle} </if>
+			<if test="minRentAmount != null "> AND min_rent_amount=#{minRentAmount} </if>
+			<if test="sourceDtlId != null "> AND source_dtlId=#{sourceDtlId} </if>
+			<if test="hasStepPrice != null "> AND has_step_price=#{hasStepPrice} </if>
+			<if test="supplementQuantity != null "> AND supplement_quantity=#{supplementQuantity} </if>
+			<if test="supplementLeaseTerm != null "> AND supplement_lease_term=#{supplementLeaseTerm} </if>
+			<if test="supplementLeasePrice != null "> AND supplement_lease_price=#{supplementLeasePrice} </if>
+			<if test="advancePrice != null "> AND advance_price=#{advancePrice} </if>
+			<if test="advancePriceUnit != null  and advancePriceUnit != '' "> AND advance_price_unit=#{advancePriceUnit} </if>
+			<if test="totalAdvance != null "> AND total_advance=#{totalAdvance} </if>
+			</where>
+		</sql>
+		
+       <select id="findOneOrderDetailPO" parameterType="com.oms.model.po.OrderDetailPO" resultType="com.oms.model.po.OrderDetailPO">
+       	SELECT
+        <include refid="order_detail_all_column_fields" />
+        FROM
+        order_detail
+        <include refid="order_detail_dynamic_where_fields" />
+        <include refid="orders" />
+        limit 1
+       </select>
+       
+       <insert id="insertOrderDetailDataPO" parameterType="com.oms.model.po.OrderDetailPO" useGeneratedKeys="true" keyProperty="id" >
+       <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
+           SELECT LAST_INSERT_ID() AS id
+       </selectKey>
+       INSERT INTO order_detail_data(
+                   id,
+                   erp_billdtl_id,
+                   erp_id,
+                   order_detail_id,
+                   order_id,
+                   step_price,
+                   step_price_data,
+                   additional_clause,
+                   additional_clause_data,
+                   material_conversion_rate_data,
+                   step_price_desc
+       )values(
+		#{id},
+		#{erpBilldtlId},
+		#{erpId},
+		#{orderDetailId},
+		#{orderId},
+		#{stepPrice},
+		#{stepPriceData},
+		#{additionalClause},
+		#{additionalClauseData},
+		#{materialConversionRateData},
+		#{stepPriceDesc}
+       )
+       </insert>
+       
+    <sql id="order_detail_data_all_column_fields">
+		 id,erp_billdtl_id,erp_id,order_detail_id,order_id,step_price,step_price_data,additional_clause,additional_clause_data,material_conversion_rate_data,step_price_desc
+	</sql>
+	
+	<sql id="order_detail_data_dynamic_where_fields">
+		<where>
+			<if test="erpBilldtlId != null "> AND erp_billdtl_id=#{erpBilldtlId} </if>
+			<if test="erpId != null "> AND erp_id=#{erpId} </if>
+			<if test="orderDetailId != null "> AND order_detail_id=#{orderDetailId} </if>
+			<if test="orderId != null "> AND order_id=#{orderId} </if>
+			<if test="stepPrice != null  and stepPrice != '' "> AND step_price=#{stepPrice} </if>
+			<if test="stepPriceData != null  and stepPriceData != '' "> AND step_price_data=#{stepPriceData} </if>
+			<if test="additionalClause != null  and additionalClause != '' "> AND additional_clause=#{additionalClause} </if>
+			<if test="additionalClauseData != null  and additionalClauseData != '' "> AND additional_clause_data=#{additionalClauseData} </if>
+			<if test="materialConversionRateData != null  and materialConversionRateData != '' "> AND material_conversion_rate_data=#{materialConversionRateData} </if>
+			<if test="stepPriceDesc != null  and stepPriceDesc != '' "> AND step_price_desc=#{stepPriceDesc} </if>
+		</where>
+	</sql>
+	
+     <select id="findOneOrderDetailDataPO" resultType="com.oms.model.po.OrderDetailDataPO" parameterType="com.oms.model.po.OrderDetailDataPO">
+        SELECT
+        <include refid="order_detail_data_all_column_fields" />
+        FROM
+        order_detail_data
+        <include refid="order_detail_data_dynamic_where_fields" />
+        <include refid="orders" />
+        limit 1
+    </select>
+       
+       <update id="updateOrderDetailDataPODynamic" parameterType="com.oms.model.po.OrderDetailDataPO">
+		UPDATE order_detail_data
+		<set>
+			<if test="erpBilldtlId != null ">erp_billdtl_id=#{erpBilldtlId},</if>
+			<if test="erpId != null ">erp_id=#{erpId},</if>
+			<if test="orderDetailId != null ">order_detail_id=#{orderDetailId},</if>
+			<if test="orderId != null ">order_id=#{orderId},</if>
+			<if test="stepPrice != null  and stepPrice != '' ">step_price=#{stepPrice},</if>
+			<if test="stepPriceData != null  and stepPriceData != '' ">step_price_data=#{stepPriceData},</if>
+			<if test="additionalClause != null  and additionalClause != '' ">additional_clause=#{additionalClause},</if>
+			<if test="additionalClauseData != null  and additionalClauseData != '' ">additional_clause_data=#{additionalClauseData},</if>
+			<if test="materialConversionRateData != null  and materialConversionRateData != '' ">material_conversion_rate_data=#{materialConversionRateData},</if>
+			<if test="stepPriceDesc != null  and stepPriceDesc != '' ">step_price_desc=#{stepPriceDesc},</if>
+		</set>
+		WHERE id = #{id}
+	</update>
+       
+       <update id="updateOrderDtlOmsId" >
+        update order_detail_data d, order_detail d1
+		set d.order_detail_id=d1.id
+		where d.erp_billdtl_id=d1.erp_billdtl_id
+		and d.erp_billdtl_id in 
+		<foreach item="item" collection="list" separator="," open="(" close=")" index=""> 
+			#{item}  
+		</foreach>  
+       </update>
+       
+       
 </mapper>
