@@ -1,7 +1,7 @@
-package com.oms.model.po;
+package com.oms.model.dto;
 
 
-import com.base.QueryPageExt;
+import java.io.Serializable;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Builder;
@@ -17,7 +17,7 @@ import lombok.experimental.Tolerate;
 @Getter
 @Setter
 @Builder
-public class OrderBaseAddressPO extends QueryPageExt {
+public class OrderBaseAddressDTO extends BaseDTO{
 
 	private static final long serialVersionUID = 833565899252617216L;
 
@@ -76,6 +76,6 @@ public class OrderBaseAddressPO extends QueryPageExt {
 	private Integer useAddrType;
 
 	@Tolerate
-	public OrderBaseAddressPO(){
+	public OrderBaseAddressDTO(){
 	}
 }

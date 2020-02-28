@@ -1,7 +1,5 @@
-package com.oms.model.po;
+package com.oms.model.dto;
 
-
-import com.base.QueryPageExt;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Builder;
@@ -17,7 +15,7 @@ import lombok.experimental.Tolerate;
 @Getter
 @Setter
 @Builder
-public class OrderRiskManagementPO extends QueryPageExt {
+public class OrderRiskManagementDTO extends BaseDTO{
 
 	private static final long serialVersionUID = 3279115637748154368L;
 
@@ -82,6 +80,6 @@ public class OrderRiskManagementPO extends QueryPageExt {
 	private String riSystemFirstTrial;
 
 	@Tolerate
-	public OrderRiskManagementPO(){
+	public OrderRiskManagementDTO(){
 	}
 }

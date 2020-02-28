@@ -3,7 +3,6 @@ package order;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,26 +13,27 @@ import com.alibaba.fastjson.JSON;
 import com.order.service.OrderOracleService;
 import com.order.service.OrderService;
 
+import lombok.extern.slf4j.Slf4j;
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:spring/spring.xml" })
+@Slf4j
 public class OrderTest {
 	
 	@Autowired
 	OrderService orderService;
 	@Autowired
 	OrderOracleService orderOracleService;
-	
-	private static Logger logger = Logger.getLogger(OrderTest.class);
 
 	@Test
 	public void testSelectById() {
-		logger.info(JSON.toJSON(orderService.getOrderDetail(1)));
+		log.info("testSelectById: " + JSON.toJSON(orderService.getOrderDetail(1)));
 	}
 	
 	@Test
 	public void testListOrderDetail() {
 		Map<String, Object> map = new HashMap<String, Object>();
-		logger.info(JSON.toJSON(orderOracleService.listOrderDetail(map)));
+		log.info("testListOrderDetail" + JSON.toJSON(orderOracleService.listOrderDetail(map)));
 	}
 	
 	@Test
@@ -44,6 +44,6 @@ public class OrderTest {
 	
 	@Test
 	public void hello() {
-		logger.info("hello");
+		log.info("hello");
 	}
 }

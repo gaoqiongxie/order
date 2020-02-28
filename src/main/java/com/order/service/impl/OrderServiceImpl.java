@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
@@ -15,16 +14,17 @@ import com.order.entity.OrderDetail;
 import com.order.service.OrderOracleService;
 import com.order.service.OrderService;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Service
 @Component("orderService")
+@Slf4j
 public class OrderServiceImpl implements OrderService {
 
 	@Autowired
 	OrderDetailMapper orderDetailMapper;
 	@Autowired
 	OrderOracleService orderOracleService;
-
-	private static Logger logger = Logger.getLogger(OrderServiceImpl.class);
 
 	@Override
 	public OrderDetail getOrderDetail(int id) {
@@ -36,16 +36,16 @@ public class OrderServiceImpl implements OrderService {
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<OrderDetail> list = orderOracleService.listOrderDetail(map);
 		if (list.isEmpty()) {
-			logger.info("data from oracle is null");
+			log.info("data from oracle is null");
 			return 0;
 		}
-		logger.info("data from oracle count is " + list.size());
+		log.info("data from oracle count is " + list.size());
 		int i = 0;
 		for (OrderDetail record : list) {
 			setFeidValueNotNull(record);
 			i += orderDetailMapper.insert(record);
 		}
-		logger.info("sycn count is " + i);
+		log.info("sycn count is " + i);
 		return i;
 	}
 

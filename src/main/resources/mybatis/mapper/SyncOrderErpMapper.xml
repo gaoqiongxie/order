@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.order.dao.SyncOrderErpDao">
  
- 	<resultMap type="com.oms.model.po.OrderBasePO" id="OrderBasePOResultMap">
+ 	<resultMap type="com.oms.model.dto.OrderBaseDTO" id="OrderBaseDTOResultMap">
 		<id column="id" property="id" />
 		<result column="approval_shop_name" property="approvalShopName"/>
 		<result column="approval_shop_number" property="approvalShopNumber"/>
@@ -71,7 +71,7 @@
 		<result column="overdue" property="overdue"/>
 	</resultMap>
 
-	<resultMap type="com.oms.model.po.OrderDetailPO" id="OrderDetailPOResultMap">
+	<resultMap type="com.oms.model.dto.OrderDetailDTO" id="OrderDetailDTOResultMap">
 		<id column="id" property="id" />
 		<result column="erp_billdtl_id" property="erpBilldtlId"/>
 		<result column="erp_id" property="erpId"/>
@@ -136,7 +136,7 @@
 		<result column="total_advance" property="totalAdvance"/>
 	</resultMap>
 	
-	<resultMap type="com.oms.model.po.OrderDetailDataPO" id="OrderDetailDataPOResultMap">
+	<resultMap type="com.oms.model.dto.OrderDetailDataDTO" id="OrderDetailDataDTOResultMap">
 		<id column="id" property="id" />
 		<result column="erp_billdtl_id" property="erpBilldtlId"/>
 		<result column="erp_id" property="erpId"/>
@@ -150,7 +150,7 @@
 		<result column="step_price_desc" property="stepPriceDesc"/>
 	</resultMap>
 	
-	<resultMap type="com.oms.model.po.OrderSparePartsDetailPO" id="OrderSparePartsDetailPOResultMap">
+	<resultMap type="com.oms.model.dto.OrderSparePartsDetailDTO" id="OrderSparePartsDetailDTOResultMap">
 		<id column="id" property="id" />
 		<result column="erp_billdtl_id" property="erpBilldtlId"/>
 		<result column="erp_id" property="erpId"/>
@@ -165,7 +165,7 @@
 		<result column="sp_amount" property="spAmount"/>
 	</resultMap>
 	
-	<resultMap type="com.oms.model.po.OrderContactPO" id="OrderContactPOResultMap">
+	<resultMap type="com.oms.model.dto.OrderContactDTO" id="OrderContactDTOResultMap">
 		<id column="id" property="id" />
 		<result column="erp_billdtl_id" property="erpBilldtlId"/>
 		<result column="erp_id" property="erpId"/>
@@ -197,7 +197,7 @@
 		<result column="open_sign_empower" property="openSignEmpower"/>
 	</resultMap>
 	
-	<resultMap type="com.oms.model.po.OrderCustomerCreditPO" id="OrderCustomerCreditPOResultMap">
+	<resultMap type="com.oms.model.dto.OrderCustomerCreditDTO" id="OrderCustomerCreditDTOResultMap">
 		<id column="id" property="id" />
 		<result column="erp_billdtl_id" property="erpBilldtlId"/>
 		<result column="erp_id" property="erpId"/>
@@ -214,7 +214,7 @@
 		<result column="customer_init_level" property="customerInitLevel"/>
 	</resultMap>
 	
-	<resultMap type="com.oms.model.po.OrderRiskManagementPO" id="OrderRiskManagementPOResultMap">
+	<resultMap type="com.oms.model.dto.OrderRiskManagementDTO" id="OrderRiskManagementDTOResultMap">
 		<id column="id" property="id" />
 		<result column="erp_billdtl_id" property="erpBilldtlId"/>
 		<result column="erp_id" property="erpId"/>
@@ -237,7 +237,7 @@
 		<result column="ri_system_first_trial" property="riSystemFirstTrial"/>
 	</resultMap>
 	
-	<resultMap type="com.oms.model.po.OrderContactAntiFraudPO" id="OrderContactAntiFraudPOResultMap">
+	<resultMap type="com.oms.model.dto.OrderContactAntiFraudDTO" id="OrderContactAntiFraudDTOResultMap">
 		<id column="id" property="id" />
 		<result column="erp_billdtl_id" property="erpBilldtlId"/>
 		<result column="erp_id" property="erpId"/>
@@ -260,7 +260,7 @@
 		<result column="af_staff_name" property="afStaffName"/>
 	</resultMap>
 	
-	<resultMap type="com.oms.model.po.OrderOtherCostPO" id="OrderOtherCostPOResultMap">
+	<resultMap type="com.oms.model.dto.OrderOtherCostDTO" id="OrderOtherCostDTOResultMap">
 		<id column="id" property="id" />
 		<result column="erp_billdtl_id" property="erpBilldtlId"/>
 		<result column="erp_id" property="erpId"/>
@@ -284,7 +284,7 @@
 		<result column="include_freight" property="includeFreight"/>
 	</resultMap>
 	
-	<resultMap type="com.oms.model.po.OrderPaySchedulePO" id="OrderPaySchedulePOResultMap">
+	<resultMap type="com.oms.model.dto.OrderPayScheduleDTO" id="OrderPayScheduleDTOResultMap">
 		<id column="id" property="id" />
 		<result column="erp_billdtl_id" property="erpBilldtlId"/>
 		<result column="erp_id" property="erpId"/>
@@ -303,7 +303,7 @@
 		<result column="pay_dtlId" property="payDtlId"/>
 	</resultMap>
 	
-	<resultMap type="com.oms.model.po.OrderCashCouponPO" id="OrderCashCouponPOResultMap">
+	<resultMap type="com.oms.model.dto.OrderCashCouponDTO" id="OrderCashCouponDTOResultMap">
 		<id column="id" property="id" />
 		<result column="erp_billdtl_id" property="erpBilldtlId"/>
 		<result column="erp_id" property="erpId"/>
@@ -317,7 +317,7 @@
 		<result column="cash_coupon_over_amount" property="cashCouponOverAmount"/>
 	</resultMap>
 
-	<resultMap type="com.oms.model.po.OrderChangeInfoPO" id="OrderChangeInfoPOResultMap">
+	<resultMap type="com.oms.model.dto.OrderChangeInfoDTO" id="OrderChangeInfoDTOResultMap">
 		<id column="id" property="id" />
 		<result column="erp_billdtl_id" property="erpBilldtlId"/>
 		<result column="erp_id" property="erpId"/>
@@ -335,7 +335,7 @@
 		<result column="change_review_status" property="changeReviewStatus"/>
 	</resultMap>
 	
-	<resultMap type="com.oms.model.po.OrderContractRecoverReviewStatusPO" id="OrderContractRecoverReviewStatusPOResultMap">
+	<resultMap type="com.oms.model.dto.OrderContractRecoverReviewStatusDTO" id="OrderContractRecoverReviewStatusDTOResultMap">
 		<id column="id" property="id" />
 		<result column="erp_billdtl_id" property="erpBilldtlId"/>
 		<result column="erp_id" property="erpId"/>
@@ -356,13 +356,13 @@
 		 id,approval_shop_name,approval_shop_number,arrival_logistics_arrangement,attach_business,bottom_line_changes,business_model,check_contract_recovery_status,company_name,company_number,connect_salesman_name,connect_salesman_number,connect_shop_name,connect_shop_number,construction_end_date,construction_period,contract_amount,contract_cus_name,contract_cus_number,contract_price_coefficient,contract_recovery_status,contract_version,contribute_rate,credit_cus_name,credit_cus_number,deposit_payable,division_name,division_number,down_payment_ratio,engineering_mode,estimate_finished_date,exit_logistics_arrangements,fuel_bearer,fuel_provider,handover_premise,internal_approval_notes,labor_service,leasing_method,leasing_purpose,lessee_cus_name,lessee_cus_number,no,order_date,erp_id,payment_desc,payment_method,payment_term_day,performance_bond,prepayment_payable,product_class_name,product_class_number,project_class_name,project_class_number,project_name,related_main_contract,related_main_contract_no,salesman_name,salesman_number,settlement_date,shop_name,shop_number,show_cus_notes,status,trans_regional,unit_basic_business_model,overdue
 	</sql>
  
-	<select id="getOrderBaseByOrderId" resultMap="OrderBasePOResultMap">
+	<select id="getOrderBaseByOrderId" resultMap="OrderBaseDTOResultMap">
 		select billid erp_id, no no, DELIVERYTRANSFERTYPE arrival_logistics_arrangement
 		from scm_hx03_rohead
 		where billid=#{orderId}
 	</select>
 	
-	<select id="listOrderDetailByOrderId" resultMap="OrderDetailPOResultMap">
+	<select id="listOrderDetailByOrderId" resultMap="OrderDetailDTOResultMap">
 		select 
 		  r.billdtlid as erp_billdtl_id, 
 		  r.billid as erp_id,  
@@ -460,7 +460,7 @@
 		and dtl_ItemDescr like '201%' -->
 	</select>
 	
-	<select id="listOrderDetailDataByOrderId" resultMap="OrderDetailDataPOResultMap">
+	<select id="listOrderDetailDataByOrderId" resultMap="OrderDetailDataDTOResultMap">
 		select 
 		  r.billdtlid as erp_billdtl_id, 
 		  r.billid as erp_id,   
@@ -474,7 +474,7 @@
 		where r.billid=#{orderId}
 	</select>
 	
-	<select id="listOrderSparePartsDetailByOrderId" resultMap="OrderSparePartsDetailPOResultMap">
+	<select id="listOrderSparePartsDetailByOrderId" resultMap="OrderSparePartsDetailDTOResultMap">
 		select 
 		  r.billdtlid as erp_billdtl_id, 
 		  r.billid as erp_id, 
@@ -492,7 +492,7 @@
 		where r.billid=#{orderId}
 	</select>
 	
-	<select id="listOrderContactByOrderId" resultMap="OrderContactPOResultMap">
+	<select id="listOrderContactByOrderId" resultMap="OrderContactDTOResultMap">
 		select 
 		  r.billdtlid as erp_billdtl_id, 
 		  r.billid as erp_id, 
@@ -526,7 +526,7 @@
 		where r.billid=#{orderId}
 	</select>
 	
-	<select id="listOrderCustomerCreditByOrderId" resultMap="OrderCustomerCreditPOResultMap">
+	<select id="listOrderCustomerCreditByOrderId" resultMap="OrderCustomerCreditDTOResultMap">
 		select 
 		  r.billdtlid as erp_billdtl_id, 
 		  r.billid as erp_id, 
@@ -546,7 +546,7 @@
 		where r.billid=#{orderId}
 	</select>
 	
-	<select id="listOrderRiskManagementByOrderId" resultMap="OrderRiskManagementPOResultMap">
+	<select id="listOrderRiskManagementByOrderId" resultMap="OrderRiskManagementDTOResultMap">
 		select 
 		  r.billdtlid as erp_billdtl_id, 
 		  r.billid as erp_id, 
@@ -572,7 +572,7 @@
 		where r.billid=#{orderId}
 	</select>
 	
-	<select id="listOrderContactAntiFraudByOrderId" resultMap="OrderContactAntiFraudPOResultMap">
+	<select id="listOrderContactAntiFraudByOrderId" resultMap="OrderContactAntiFraudDTOResultMap">
 		select
 		  r.billdtlid as erp_billdtl_id, 
 		  r.billid as erp_id, 
@@ -602,7 +602,7 @@
 		where r.billid=#{orderId}
 	</select>
 	
-	<select id="listOrderOtherCostByOrderId" resultMap="OrderOtherCostPOResultMap">
+	<select id="listOrderOtherCostByOrderId" resultMap="OrderOtherCostDTOResultMap">
 		select 
 		  r.billdtlid as erp_billdtl_id, 
 		  r.billid as erp_id,  
@@ -629,7 +629,7 @@
 		where r.billid=#{orderId}
 	</select>
 	
-	<select id="listOrderPaySchedulePOByOrderId" resultMap="OrderPaySchedulePOResultMap">
+	<select id="listOrderPayScheduleDTOByOrderId" resultMap="OrderPayScheduleDTOResultMap">
 		select 
 		  r.billdtlid as erp_billdtl_id, 
 		  r.billid as erp_id, 
@@ -650,7 +650,7 @@
 		where r.billid=#{orderId}
 	</select>
 	
-	<select id="listOrderCashCouponPOByOrderId" resultMap="OrderCashCouponPOResultMap">
+	<select id="listOrderCashCouponDTOByOrderId" resultMap="OrderCashCouponDTOResultMap">
 		select 
 		  r.billdtlid as erp_billdtl_id, 
 		  r.billid as erp_id, 
@@ -666,7 +666,7 @@
 		where r.billid=#{orderId}
 	</select>
 	
-	<select id="listOrderChangeInfoPOByOrderId" resultMap="OrderChangeInfoPOResultMap">
+	<select id="listOrderChangeInfoDTOByOrderId" resultMap="OrderChangeInfoDTOResultMap">
 		select * from(
 			select r.billdtlid as erp_billdtl_id, r.billid as erp_id,  row_number() over(partition by r.billid order by r.billdtlid) as line_number,
 			  ro.no as order_no, 10 as change_type, r.rc_RO_NewStaffID as change_before, r.rc_ChangeDate as change_date,
@@ -694,7 +694,7 @@
 		)a where erp_id = #{orderId}
 	</select>
 	
-	<select id="listOrderContractRecoverReviewStatusPOByOrderId" resultMap="OrderContractRecoverReviewStatusPOResultMap">
+	<select id="listOrderContractRecoverReviewStatusDTOByOrderId" resultMap="OrderContractRecoverReviewStatusDTOResultMap">
 		select 
 			r.billdtlid as erp_billdtl_id, 
 			r.billid as erp_id, 

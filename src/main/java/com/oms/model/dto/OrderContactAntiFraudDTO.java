@@ -1,9 +1,7 @@
-package com.oms.model.po;
+package com.oms.model.dto;
 
 
 import java.math.BigDecimal;
-
-import com.base.QueryPageExt;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Builder;
@@ -19,7 +17,7 @@ import lombok.experimental.Tolerate;
 @Getter
 @Setter
 @Builder
-public class OrderContactAntiFraudPO extends QueryPageExt {
+public class OrderContactAntiFraudDTO extends BaseDTO {
 
 	private static final long serialVersionUID = 1628079249276297216L;
 
@@ -84,6 +82,6 @@ public class OrderContactAntiFraudPO extends QueryPageExt {
 	private String afStaffName;
 
 	@Tolerate
-	public OrderContactAntiFraudPO(){
+	public OrderContactAntiFraudDTO(){
 	}
 }

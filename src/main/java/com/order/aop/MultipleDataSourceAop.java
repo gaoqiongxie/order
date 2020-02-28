@@ -2,7 +2,6 @@ package com.order.aop;
 
 import java.lang.reflect.Method;
 
-import org.apache.log4j.Logger;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
@@ -13,6 +12,8 @@ import org.springframework.stereotype.Component;
 
 import com.base.MultipleDataSource;
 import com.order.annotation.DataSourceType;
+
+import lombok.extern.slf4j.Slf4j;
 /**
  * 
  * @author xiegaoqiong
@@ -21,8 +22,8 @@ import com.order.annotation.DataSourceType;
 @Aspect    // for aop
 @Component // for auto scan
 @Order(0)  // execute before @Transactional
+@Slf4j
 public class MultipleDataSourceAop {
-	private final Logger logger = Logger.getLogger(MultipleDataSourceAop.class);
 
     /**
      * 拦截 com.**.servicee中所有的方法，根据配置情况进行数据源切换
@@ -42,14 +43,14 @@ public class MultipleDataSourceAop {
             if (clazz.isAnnotationPresent(DataSourceType.class)) {
                 DataSourceType source = clazz.getAnnotation(DataSourceType.class);
                 MultipleDataSource.setDataSource(source.value());
-                logger.info("Service Class 数据源切换至--->" + source.value());
+                log.info("Service Class 数据源切换至--->" + source.value());
             }
 
             Method m = clazz.getMethod(method.getName(), types);
             if (m != null && m.isAnnotationPresent(DataSourceType.class)) {
                 DataSourceType source = m.getAnnotation(DataSourceType.class);
                 MultipleDataSource.setDataSource(source.value());
-                logger.info("Service Method 数据源切换至--->" + source.value());
+                log.info("Service Method 数据源切换至--->" + source.value());
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -63,10 +64,10 @@ public class MultipleDataSourceAop {
     public void afterReturning() throws Throwable {
         try {
             MultipleDataSource.clearDataSource();
-            logger.debug("数据源已移除！");
+            log.debug("数据源已移除！");
         } catch (Exception e) {
             e.printStackTrace();
-            logger.debug("数据源移除报错！");
+            log.debug("数据源移除报错！");
         }
 
     }

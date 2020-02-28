@@ -1,7 +1,5 @@
-package com.oms.model.po;
+package com.oms.model.dto;
 
-
-import com.base.QueryPageExt;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Builder;
@@ -17,7 +15,7 @@ import lombok.experimental.Tolerate;
 @Getter
 @Setter
 @Builder
-public class OrderDetailDataPO extends QueryPageExt {
+public class OrderDetailDataDTO extends BaseDTO {
 
 	private static final long serialVersionUID = 8862215571571040256L;
 
@@ -55,6 +53,6 @@ public class OrderDetailDataPO extends QueryPageExt {
 	private String stepPriceDesc;
 
 	@Tolerate
-	public OrderDetailDataPO(){
+	public OrderDetailDataDTO(){
 	}
 }

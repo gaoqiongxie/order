@@ -1,9 +1,7 @@
-package com.oms.model.po;
+package com.oms.model.dto;
 
 
 import java.math.BigDecimal;
-
-import com.base.QueryPageExt;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Builder;
@@ -19,7 +17,7 @@ import lombok.experimental.Tolerate;
 @Getter
 @Setter
 @Builder
-public class OrderCustomerCreditPO extends QueryPageExt {
+public class OrderCustomerCreditDTO extends BaseDTO{
 
 	private static final long serialVersionUID = 3953371769387899904L;
 
@@ -66,6 +64,6 @@ public class OrderCustomerCreditPO extends QueryPageExt {
 	private Integer customerInitLevel;
 
 	@Tolerate
-	public OrderCustomerCreditPO(){
+	public OrderCustomerCreditDTO(){
 	}
 }

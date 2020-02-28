@@ -1,9 +1,8 @@
-package com.oms.model.po;
+package com.oms.model.dto;
 
 
 import java.util.Date;
 
-import com.base.QueryPageExt;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import io.swagger.annotations.ApiModelProperty;
@@ -20,7 +19,7 @@ import lombok.experimental.Tolerate;
 @Getter
 @Setter
 @Builder
-public class OrderOmsSyncPO extends QueryPageExt {
+public class OrderOmsSyncDTO extends BaseDTO{
 
 	private static final long serialVersionUID = 7974274169840706560L;
 
@@ -48,6 +47,6 @@ public class OrderOmsSyncPO extends QueryPageExt {
 	private Date updateTime;
 
 	@Tolerate
-	public OrderOmsSyncPO(){
+	public OrderOmsSyncDTO(){
 	}
 }

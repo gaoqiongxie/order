@@ -5,7 +5,6 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-import org.apache.log4j.Logger;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -13,8 +12,10 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 public class ExcelUtil {
-	private static Logger logger = Logger.getLogger(ExcelUtil.class);
 	private static Workbook wb;
 
 	/**
@@ -65,7 +66,7 @@ public class ExcelUtil {
 		StringBuilder uniqueStr = new StringBuilder();
 		for (int rIndex = 3; rIndex <= lastRowIndex; rIndex++) { // 遍历行 从第3行开始
 			Row row = sheet.getRow(rIndex);
-			logger.info("sheet: " + sheet.getSheetName() + " rIndex:" + rIndex);
+			log.info("sheet: " + sheet.getSheetName() + " rIndex:" + rIndex);
 			if (null == row)
 				continue;
 			try {
@@ -105,10 +106,10 @@ public class ExcelUtil {
 				if (!row.getCell(4).toString().isEmpty()) {
 					sb.append(" COMMENT ").append("'").append(row.getCell(4).toString()).append("'").append(",");
 				} else {
-					logger.error("ERROR! COMMENT is null! field is:" + field);
+					log.error("ERROR! COMMENT is null! field is:" + field);
 				}
 			} catch (Exception e) {
-				logger.error("ERROR! sheet is:" + sheet.getSheetName() + " msg:" + e.getMessage());
+				log.error("ERROR! sheet is:" + sheet.getSheetName() + " msg:" + e.getMessage());
 			}
 
 			sb.append("\n");
@@ -131,7 +132,7 @@ public class ExcelUtil {
 		sb.append("\n");
 		sb.append(") ENGINE=InnoDB COMMENT='").append(tableNameDesc).append("';");
 		sb.append("\n");
-		logger.info(sb);
+		log.info(""+ sb);
 		toSQL(sb, toPathUri);
 	}
 	

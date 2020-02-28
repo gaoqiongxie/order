@@ -1,7 +1,5 @@
-package com.oms.model.po;
+package com.oms.model.dto;
 
-
-import com.base.QueryPageExt;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Builder;
@@ -17,7 +15,7 @@ import lombok.experimental.Tolerate;
 @Getter
 @Setter
 @Builder
-public class OrderContactPO extends QueryPageExt {
+public class OrderContactDTO extends BaseDTO{
 
 	private static final long serialVersionUID = 6913660882388199424L;
 
@@ -109,6 +107,6 @@ public class OrderContactPO extends QueryPageExt {
 	private String openSignEmpower;
 
 	@Tolerate
-	public OrderContactPO(){
+	public OrderContactDTO(){
 	}
 }

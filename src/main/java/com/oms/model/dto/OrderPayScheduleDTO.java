@@ -1,10 +1,9 @@
-package com.oms.model.po;
+package com.oms.model.dto;
 
 
 import java.math.BigDecimal;
 import java.util.Date;
 
-import com.base.QueryPageExt;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import io.swagger.annotations.ApiModelProperty;
@@ -21,7 +20,7 @@ import lombok.experimental.Tolerate;
 @Getter
 @Setter
 @Builder
-public class OrderPaySchedulePO extends QueryPageExt {
+public class OrderPayScheduleDTO extends BaseDTO{
 
 	private static final long serialVersionUID = 5057123152574118912L;
 
@@ -75,6 +74,6 @@ public class OrderPaySchedulePO extends QueryPageExt {
 	private Integer payDtlId;
 
 	@Tolerate
-	public OrderPaySchedulePO(){
+	public OrderPayScheduleDTO(){
 	}
 }

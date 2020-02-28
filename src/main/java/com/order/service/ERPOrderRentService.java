@@ -4,6 +4,6 @@ import com.oms.model.dto.OrderRentDTO;
 
 public interface ERPOrderRentService {
 
-	OrderRentDTO getDTOByOrderId(int orderId);
+	OrderRentDTO getDTOByOrderId(int orderId) throws InterruptedException;
 
 }

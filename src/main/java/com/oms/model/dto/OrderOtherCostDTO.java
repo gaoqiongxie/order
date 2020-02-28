@@ -1,9 +1,7 @@
-package com.oms.model.po;
+package com.oms.model.dto;
 
 
 import java.math.BigDecimal;
-
-import com.base.QueryPageExt;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Builder;
@@ -19,7 +17,7 @@ import lombok.experimental.Tolerate;
 @Getter
 @Setter
 @Builder
-public class OrderOtherCostPO extends QueryPageExt {
+public class OrderOtherCostDTO extends BaseDTO {
 
 	private static final long serialVersionUID = 8944072986659602432L;
 
@@ -87,6 +85,6 @@ public class OrderOtherCostPO extends QueryPageExt {
 	private Integer includeFreight;
 
 	@Tolerate
-	public OrderOtherCostPO(){
+	public OrderOtherCostDTO(){
 	}
 }

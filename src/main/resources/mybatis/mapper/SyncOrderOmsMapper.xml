@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.order.dao.SyncOrderOmsDao">
  
- <resultMap type="com.oms.model.po.OrderBasePO" id="OrderBasePOResultMap">
+ <resultMap type="com.oms.model.dto.OrderBaseDTO" id="OrderBaseDTOResultMap">
 		<id column="id" property="id" />
 		<result column="approval_shop_name" property="approvalShopName"/>
 		<result column="approval_shop_number" property="approvalShopNumber"/>
@@ -149,7 +149,7 @@
 			<if test="overdue != null "> AND overdue=#{overdue} </if>
 		</where>
 	</sql>
-    <select id="findOrderBasePODynamic" resultMap="OrderBasePOResultMap" parameterType="java.util.Map">
+    <select id="findOrderBasePODynamic" resultMap="OrderBaseDTOResultMap" parameterType="java.util.Map">
         SELECT
         <include refid="order_base_all_column_fields" />
         FROM
@@ -159,7 +159,7 @@
         <include refid="limits" />
     </select>
  
-	<update id="updateOrderBasePODynamic" parameterType="com.oms.model.po.OrderBasePO">
+	<update id="updateOrderBasePODynamic" parameterType="com.oms.model.dto.OrderBaseDTO">
 		UPDATE order_base
 		<set>
 			<if test="approvalShopName != null  and approvalShopName != '' ">approval_shop_name=#{approvalShopName},</if>
@@ -231,7 +231,7 @@
 		WHERE id = #{id}
 	</update>
 	
-	<insert id="insertOrderRentDTO" parameterType="com.oms.model.po.OrderBasePO" useGeneratedKeys="true" keyProperty="id" >
+	<insert id="insertOrderBaseDTO" parameterType="com.oms.model.dto.OrderBaseDTO" useGeneratedKeys="true" keyProperty="id" >
         <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
             SELECT LAST_INSERT_ID() AS id
         </selectKey>
@@ -372,7 +372,7 @@
         )
     </insert>
     
-     <update id="updateOrderDetailPODynamic" parameterType="com.oms.model.po.OrderDetailPO">
+     <update id="updateOrderDetailPODynamic" parameterType="com.oms.model.dto.OrderDetailDTO">
 		UPDATE order_detail
 		<set>
 			<if test="erpBilldtlId != null ">erp_billdtl_id=#{erpBilldtlId},</if>
@@ -440,7 +440,7 @@
 		WHERE id = #{id}
 	</update>
     
-    <insert id="insertOrderDetailPO" parameterType="com.oms.model.po.OrderDetailPO" useGeneratedKeys="true" keyProperty="id" >
+    <insert id="insertOrderDetailDTO" parameterType="com.oms.model.dto.OrderDetailDTO" useGeneratedKeys="true" keyProperty="id" >
         <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
             SELECT LAST_INSERT_ID() AS id
         </selectKey>
@@ -639,7 +639,7 @@
 			</where>
 		</sql>
 		
-       <select id="findOneOrderDetailPO" parameterType="com.oms.model.po.OrderDetailPO" resultType="com.oms.model.po.OrderDetailPO">
+       <select id="findOneOrderDetailDTO" parameterType="com.oms.model.dto.OrderDetailDTO" resultType="com.oms.model.dto.OrderDetailDTO">
        	SELECT
         <include refid="order_detail_all_column_fields" />
         FROM
@@ -649,7 +649,7 @@
         limit 1
        </select>
        
-       <insert id="insertOrderDetailDataPO" parameterType="com.oms.model.po.OrderDetailPO" useGeneratedKeys="true" keyProperty="id" >
+       <insert id="insertOrderDetailDataDTO" parameterType="com.oms.model.dto.OrderDetailDTO" useGeneratedKeys="true" keyProperty="id" >
        <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
            SELECT LAST_INSERT_ID() AS id
        </selectKey>
@@ -699,7 +699,7 @@
 		</where>
 	</sql>
 	
-     <select id="findOneOrderDetailDataPO" resultType="com.oms.model.po.OrderDetailDataPO" parameterType="com.oms.model.po.OrderDetailDataPO">
+     <select id="findOneOrderDetailDataDTO" resultType="com.oms.model.dto.OrderDetailDataDTO" parameterType="com.oms.model.dto.OrderDetailDataDTO">
         SELECT
         <include refid="order_detail_data_all_column_fields" />
         FROM
@@ -709,7 +709,7 @@
         limit 1
     </select>
        
-       <update id="updateOrderDetailDataPODynamic" parameterType="com.oms.model.po.OrderDetailDataPO">
+       <update id="updateOrderDetailDataPODynamic" parameterType="com.oms.model.dto.OrderDetailDataDTO">
 		UPDATE order_detail_data
 		<set>
 			<if test="erpBilldtlId != null ">erp_billdtl_id=#{erpBilldtlId},</if>
@@ -736,5 +736,17 @@
 		</foreach>  
        </update>
        
+   <!-- order_detail start -->
+    <select id="getErpBilldtlIds" resultType="java.lang.Integer">
+    	select erp_billdtl_id from order_detail where order_id=#{orderId}
+    </select>
+    
+    <delete id="deleteByErpBilldtlIds"  parameterType = "java.lang.Integer">
+    	delete from order_detail where erp_billdtl_id in
+	      <foreach collection="list"  item="item" open="(" separator="," close=")"  >
+	      	#{item}
+	      </foreach>
+    </delete>
+   <!-- order_detail end -->
        
 </mapper>

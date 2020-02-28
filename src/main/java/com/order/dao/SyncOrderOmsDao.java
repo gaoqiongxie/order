@@ -3,31 +3,35 @@ package com.order.dao;
 import java.util.List;
 import java.util.Map;
 
-import com.oms.model.po.OrderBasePO;
-import com.oms.model.po.OrderDetailDataPO;
-import com.oms.model.po.OrderDetailPO;
+import com.oms.model.dto.OrderBaseDTO;
+import com.oms.model.dto.OrderDetailDTO;
+import com.oms.model.dto.OrderDetailDataDTO;
 
 public interface SyncOrderOmsDao {
 
 	/**----------------------OMS Service-----------------------*/
-	OrderBasePO findOrderBasePODynamic(Map<String, Object> map);
+	OrderBaseDTO findOrderBasePODynamic(Map<String, Object> map);
 
-	int insertOrderRentDTO(OrderBasePO orderBasePO);
-	int updateOrderBasePODynamic(OrderBasePO basePO);
+	int insertOrderBaseDTO(OrderBaseDTO orderBaseDTO);
+	int updateOrderBasePODynamic(OrderBaseDTO baseDTO);
 
-	int insertOrderDetailPO(OrderDetailPO orderDetailPO);
-	OrderDetailPO findOneOrderDetailPO(OrderDetailPO orderDetailPO);
-	int updateOrderDetailPODynamic(OrderDetailPO orderDetailPO);
+	List<Integer> getErpBilldtlIds(Integer orderId);
+	int deleteByErpBilldtlIds(List<Integer> reduceIds);
+	int insertOrderDetailPO(OrderDetailDTO orderDetailDTO);
+	OrderDetailDTO findOneOrderDetailPO(OrderDetailDTO orderDetailDTO);
+	int updateOrderDetailPODynamic(OrderDetailDTO orderDetailDTO);
 
-	int insertOrderDetailDataPO(OrderDetailDataPO orderDetailDataPO);
-	OrderDetailDataPO findOneOrderDetailDataPO(OrderDetailDataPO orderDetailDataPO);
-	int updateOrderDetailDataPODynamic(OrderDetailDataPO orderDetailDataPO);
+	int insertOrderDetailDataPO(OrderDetailDataDTO orderDetailDataDTO);
+	OrderDetailDataDTO findOneOrderDetailDataPO(OrderDetailDataDTO orderDetailDataDTO);
+	int updateOrderDetailDataPODynamic(OrderDetailDataDTO orderDetailDataDTO);
 
 	/**----------------------OMS Service-----------------------*/
 	
 	/**----------------------new build-----------------------*/
 	
 	int updateOrderDtlOmsId(List<Integer> erpBilldtlIds);
+
+	
 
 	
 
