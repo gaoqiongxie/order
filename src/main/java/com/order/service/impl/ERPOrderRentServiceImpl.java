@@ -221,6 +221,8 @@ public class ERPOrderRentServiceImpl implements ERPOrderRentService {
 		});
 		
 		count.await(5, TimeUnit.SECONDS);
+		
+		executorService.shutdown();
 		return orderRentDTO;
 	}
 

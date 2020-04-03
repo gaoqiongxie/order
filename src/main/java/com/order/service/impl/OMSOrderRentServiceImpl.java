@@ -15,7 +15,6 @@ import com.base.BaseUtil;
 import com.oms.model.dto.OrderBaseDTO;
 import com.oms.model.dto.OrderDetailDTO;
 import com.oms.model.dto.OrderDetailDataDTO;
-import com.oms.model.dto.OrderOmsSyncDTO;
 import com.oms.model.dto.OrderRentDTO;
 import com.order.dao.SyncOrderOmsDao;
 import com.order.service.ERPOrderRentService;
@@ -33,8 +32,6 @@ public class OMSOrderRentServiceImpl implements OMSOrderRentService {
 	@Autowired
 	ERPOrderRentService erpOrderRentService;
 
-	private static final int order_base_del_status = -1;
-	private static final int order_base_disuse_status = 100;
 	private static final int resp_sucess_status = 1;
 	/** ERP订单变更同步状态 0-待抽取 */
 	@SuppressWarnings("unused")
@@ -47,66 +44,43 @@ public class OMSOrderRentServiceImpl implements OMSOrderRentService {
 	public int sync(int erpId, int orderStatus) throws Exception {
 		// 调用 ERP 获取 orderRent 数据
 		OrderRentDTO orderRentERP = erpOrderRentService.getDTOByOrderId(erpId);
-		if (null == orderRentERP || null == orderRentERP.getOrderBaseDTO()) {
+		if (isExceptionStatus(erpId, orderStatus, orderRentERP)) {
 			log.info("ERP 库中不存在该租赁订单，故无法同步，billId = " + erpId);
 			throw new Exception("ERP 库中不存在该租赁订单，故无法同步，billId = " + erpId);
 		}
-		log.info("OrderRentDTO： " + JSON.toJSON(orderRentERP));
 
-		/*
-		// 设置更新或者新增 flag
-		Boolean existFlag = false;
-		Integer omsId = null;
-		OrderBaseDTO orderBaseOMS = getOrderBaseByErpId(erpId);
-		if (null != orderBaseOMS) {
-			existFlag = true;
-			omsId = orderBaseOMS.getId();
+		OrderBaseDTO orderBase = getOrderBaseByErpId(erpId);
+		if(null==orderBase||null==orderBase.getId()) {
+			insertOrderData(orderRentERP);
+		}else {
+			orderRentERP.setId(orderBase.getId());
+			updateOrderData(orderRentERP);
 		}
-
-		// 根据 flag 进行OMS 数据库保存
-		if (existFlag) {
-			// 判断orderStatus，删除或者已废弃，直接更新Mysql中订单主表状态为已删除
-			if (orderStatus == order_base_del_status || orderStatus == order_base_disuse_status) {
-				// TODO 删除状态
-				OrderBaseDTO queryPO = OrderBaseDTO.builder().status(orderStatus).id(omsId).build();
-				updateOrderBasePODynamic(queryPO);
-			} else {
-				orderRentERP.setId(omsId);
-				updateOrderData(orderRentERP);
-			}
-		} else {
-			omsId = insertOrderData(orderRentERP);
-		}
-
-		insertSync(erpId, orderRentERP.getOrderBaseDTO().getNo());
-*/
+		
 		return resp_sucess_status;
 	}
 
 	/**
+	 * 异常判断
+	 * @param erpId
+	 * @param orderStatus
+	 * @param orderRentERP
+	 * @return
+	 */
+	private boolean isExceptionStatus(int erpId, int orderStatus, OrderRentDTO orderRentERP) {
+		return false;
+	}
+
+	/**
 	 * 同步信息记录
-	 * 
+	 * 待抽取-已抽取-异常
+	 * 用于定时任务
 	 * @param erpId
 	 * @param no
 	 */
+	@SuppressWarnings("unused")
 	private void insertSync(int erpId, String no) {
-
-		OrderOmsSyncDTO orderOmsSyncDTO = new OrderOmsSyncDTO();
-		orderOmsSyncDTO.setErpId(erpId);
-		orderOmsSyncDTO.setNo(no);
-//		OrderOmsSyncDTO po = syncOrderOmsDao.findOne(orderOmsSyncDTO);
-//		if (null == po) {
-//			orderOmsSyncDTO.setStatus(sync_done_status);
-//			orderOmsSyncDTO.setRemark("新增");
-//			syncOrderOmsDao.insertDynamic(orderOmsSyncDTO); //
-//			orderOmsSyncDao.insert(orderOmsSyncPO);
-//		} else {
-//			orderOmsSyncDTO.setRemark("更新");
-//			orderOmsSyncDTO.setStatus(sync_done_status);
-//			orderOmsSyncDTO.setId(po.getId());
-//			syncOrderOmsDao.updateDynamic(orderOmsSyncDTO);
-//		}
-
+		//TODO 记录同步信息
 	}
 
 	/**
@@ -119,10 +93,6 @@ public class OMSOrderRentServiceImpl implements OMSOrderRentService {
 		log.info("新增表数据, order_base erp_id: " + orderRentDTO.getOrderBaseDTO().getErpId());
 		// 更新基础表，返回主键Id
 		OrderBaseDTO orderBasePO = orderRentDTO.getOrderBaseDTO();
-		// TODO 有无逾期
-		orderBasePO.setOverdue(0);
-		BaseUtil.objNullSetDefault(orderBasePO);
-
 		syncOrderOmsDao.insertOrderBaseDTO(orderBasePO);
 
 		orderRentDTO.setId(orderBasePO.getId());
@@ -141,7 +111,6 @@ public class OMSOrderRentServiceImpl implements OMSOrderRentService {
 	private void updateOrderData(OrderRentDTO orderRentDTO) {
 		// 更新表数据
 		log.info("全量更新表数据, orderRentDTO:" + JSON.toJSON(orderRentDTO));
-		// oms:mysql rder_base id
 		Integer orderId = orderRentDTO.getId();
 		/** ----------------- order base start ----------------- */
 		if (null != orderRentDTO.getOrderBaseDTO()) {
@@ -170,16 +139,18 @@ public class OMSOrderRentServiceImpl implements OMSOrderRentService {
 	 * @param orderDetailDataList
 	 */
 	private void saveOrUpdateOrderDetailDataPO(Integer orderId, List<OrderDetailDataDTO> orderDetailDataList) {
-		// 根据 orderId 查询存在的 oms 中 存在erpBilldtlId
+		/*
+		 *  根据 orderId 查询存在的 oms 中 存在erpBilldtlId
+		 *  对比 orderDetialPOs 中的 erpBilldtlId
+		 *   删除 oms 中 不存在的数据(erpBilldtlIdOMS - erpBilldtlIdERP)
+		 */
 		List<Integer> erpBilldtlIdOMS = syncOrderOmsDao.getErpBilldtlIds(orderId);
-		// 对比 orderDetialPOs 中的 erpBilldtlId
 		List<Integer> erpBilldtlIdERP = orderDetailDataList.stream().map(OrderDetailDataDTO::getErpBilldtlId)
 				.collect(Collectors.toList());
-		// 删除 oms 中 不存在的数据(erpBilldtlIdOMS - erpBilldtlIdERP)
 		List<Integer> reduceIds = erpBilldtlIdOMS.stream().filter(item -> !erpBilldtlIdERP.contains(item))
 				.collect(Collectors.toList());
 		if (CollectionUtils.isNotEmpty(reduceIds)) {
-			// 删除
+			// 数据库删除数据
 		}
 
 		// 有则更新无则新增
@@ -195,12 +166,14 @@ public class OMSOrderRentServiceImpl implements OMSOrderRentService {
 	 * @param orderDetailList
 	 */
 	private void saveOrUpdateOrderDetailPO(Integer orderId, List<OrderDetailDTO> orderDetailList) {
-		// 根据 orderId 查询存在的 oms 中 存在erpBilldtlId
+		/*
+		 *  根据 orderId 查询存在的 oms 中 存在erpBilldtlId
+		 *  对比 orderDetialPOs 中的 erpBilldtlId
+		 *   删除 oms 中 不存在的数据(erpBilldtlIdOMS - erpBilldtlIdERP)
+		 */
 		List<Integer> erpBilldtlIdOMS = syncOrderOmsDao.getErpBilldtlIds(orderId);
-		// 对比 orderDetialPOs 中的 erpBilldtlId
 		List<Integer> erpBilldtlIdERP = orderDetailList.stream().map(OrderDetailDTO::getErpBilldtlId)
 				.collect(Collectors.toList());
-		// 删除 oms 中 不存在的数据(erpBilldtlIdOMS - erpBilldtlIdERP)
 		List<Integer> reduceIds = erpBilldtlIdOMS.stream().filter(item -> !erpBilldtlIdERP.contains(item))
 				.collect(Collectors.toList());
 		if (CollectionUtils.isNotEmpty(reduceIds)) {
@@ -239,6 +212,13 @@ public class OMSOrderRentServiceImpl implements OMSOrderRentService {
 		return orderBasePO;
 	}
 
+	/**
+	 * 特殊状态不需要获取数据
+	 * 比如：删除
+	 * @param basePO
+	 * @return
+	 */
+	@SuppressWarnings("unused")
 	private int updateOrderBasePODynamic(OrderBaseDTO basePO) {
 		return syncOrderOmsDao.updateOrderBasePODynamic(basePO);
 	}
