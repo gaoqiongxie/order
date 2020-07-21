@@ -1,11 +1,13 @@
 package com.order.service.impl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.collections4.ListUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
@@ -120,13 +122,9 @@ public class OMSOrderRentServiceImpl implements OMSOrderRentService {
 		/** ----------------- order base end ----------------- */
 
 		/** ----------------- order other start ----------------- */
-		if (CollectionUtils.isNotEmpty(orderRentDTO.getOrderDetailList())) {
-			saveOrUpdateOrderDetailPO(orderId, orderRentDTO.getOrderDetailList());
-		}
+		saveOrUpdateOrderDetailPO(orderId, orderRentDTO.getOrderDetailList());
 
-		if (CollectionUtils.isNotEmpty(orderRentDTO.getOrderDetailDataList())) {
-			saveOrUpdateOrderDetailDataPO(orderId, orderRentDTO.getOrderDetailDataList());
-		}
+		saveOrUpdateOrderDetailDataPO(orderId, orderRentDTO.getOrderDetailDataList());
 
 		/** ----------------- order other end ----------------- */
 
@@ -139,24 +137,6 @@ public class OMSOrderRentServiceImpl implements OMSOrderRentService {
 	 * @param orderDetailDataList
 	 */
 	private void saveOrUpdateOrderDetailDataPO(Integer orderId, List<OrderDetailDataDTO> orderDetailDataList) {
-		/*
-		 *  根据 orderId 查询存在的 oms 中 存在erpBilldtlId
-		 *  对比 orderDetialPOs 中的 erpBilldtlId
-		 *   删除 oms 中 不存在的数据(erpBilldtlIdOMS - erpBilldtlIdERP)
-		 */
-		List<Integer> erpBilldtlIdOMS = syncOrderOmsDao.getErpBilldtlIds(orderId);
-		List<Integer> erpBilldtlIdERP = orderDetailDataList.stream().map(OrderDetailDataDTO::getErpBilldtlId)
-				.collect(Collectors.toList());
-		List<Integer> reduceIds = erpBilldtlIdOMS.stream().filter(item -> !erpBilldtlIdERP.contains(item))
-				.collect(Collectors.toList());
-		if (CollectionUtils.isNotEmpty(reduceIds)) {
-			// 数据库删除数据
-		}
-
-		// 有则更新无则新增
-
-		// 更新订单详细数据表中 OMS 租赁订单明细ID
-		syncOrderOmsDao.updateOrderDtlOmsId(erpBilldtlIdERP);
 	}
 
 	/**
@@ -166,31 +146,26 @@ public class OMSOrderRentServiceImpl implements OMSOrderRentService {
 	 * @param orderDetailList
 	 */
 	private void saveOrUpdateOrderDetailPO(Integer orderId, List<OrderDetailDTO> orderDetailList) {
-		/*
-		 *  根据 orderId 查询存在的 oms 中 存在erpBilldtlId
-		 *  对比 orderDetialPOs 中的 erpBilldtlId
-		 *   删除 oms 中 不存在的数据(erpBilldtlIdOMS - erpBilldtlIdERP)
-		 */
-		List<Integer> erpBilldtlIdOMS = syncOrderOmsDao.getErpBilldtlIds(orderId);
-		List<Integer> erpBilldtlIdERP = orderDetailList.stream().map(OrderDetailDTO::getErpBilldtlId)
-				.collect(Collectors.toList());
-		List<Integer> reduceIds = erpBilldtlIdOMS.stream().filter(item -> !erpBilldtlIdERP.contains(item))
-				.collect(Collectors.toList());
-		if (CollectionUtils.isNotEmpty(reduceIds)) {
-			syncOrderOmsDao.deleteByErpBilldtlIds(reduceIds);
+		List<Integer> erpBilldtlIdOMS = ListUtils.defaultIfNull(syncOrderOmsDao.getErpBilldtlIds(orderId),new ArrayList<>());
+		List<Integer> erpBilldtlIdERP = orderDetailList.stream().map(OrderDetailDTO::getErpBilldtlId).collect(Collectors.toList());
+		log.info("订单明细, orderId:{}, erpBilldtlIdOMS:{}, erpBilldtlIdERP:{}", orderId, erpBilldtlIdOMS, erpBilldtlIdERP);
+		//ERP-OMS：ERP对OMS的差集，erp中存在但oms不存在，需要删除
+		List<Integer> erpDeletedIds = erpBilldtlIdOMS.stream().filter(item -> !erpBilldtlIdERP.contains(item)).collect(Collectors.toList());
+		//ERP ∩ OMS：ERP和OMS的交集，需要修改
+		List<Integer> omsExistingIds = erpBilldtlIdOMS.stream().filter(item -> erpBilldtlIdERP.contains(item)).collect(Collectors.toList());
+		log.info("订单明细, 需删除id集合：{}, 需更新的id集合:{}", erpDeletedIds, omsExistingIds);
+		
+		if(CollectionUtils.isNotEmpty(erpDeletedIds)) {
+			syncOrderOmsDao.deleteByErpBilldtlIds(erpDeletedIds);
 		}
-		OrderDetailDTO queryDTO = null;
-		for (OrderDetailDTO orderDetailDTO : orderDetailList) {
-			orderDetailDTO.setOrderId(orderId);
-			BaseUtil.objNullSetDefault(orderDetailDTO);
-
-			queryDTO = syncOrderOmsDao.findOneOrderDetailPO(
-					OrderDetailDTO.builder().erpBilldtlId(orderDetailDTO.getErpBilldtlId()).build());
-			if (null == queryDTO) {
-				syncOrderOmsDao.insertOrderDetailPO(orderDetailDTO);
-			} else {
-				orderDetailDTO.setId(queryDTO.getId());
-				syncOrderOmsDao.updateOrderDetailPODynamic(orderDetailDTO);
+		for (OrderDetailDTO orderDetailPO : orderDetailList) {
+			orderDetailPO.setOrderId(orderId);
+//			OmsUtil.objNullSetDefault(orderDetailPO);
+			
+			if(omsExistingIds.contains(orderDetailPO.getErpBilldtlId())) {
+				syncOrderOmsDao.updateOrderDetailPODynamic(orderDetailPO);
+			}else {
+				syncOrderOmsDao.insertOrderDetailPO(orderDetailPO);
 			}
 		}
 	}
