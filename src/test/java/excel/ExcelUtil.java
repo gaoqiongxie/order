@@ -19,7 +19,7 @@ public class ExcelUtil {
 	private static Workbook wb;
 
 	/**
-	 * 整张表
+	 * 从Excel中读取生成表结构
 	 * @param fromPath
 	 * @param toPath
 	 * @throws Exception
